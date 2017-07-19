@@ -22,6 +22,16 @@ tea_data
 tea_bump<-na.omit(tea_data[,c("State","Yield","Ratio")])
 tea_bump
 
+tea_bump<-arrange(tea_bump,-Yield)
+
+other_Ratio<-1-sum(tea_bump$Ratio)
+other_Ratio
+
+other_Yield<-sum(tea_bump$Yield)/sum(tea_bump$Ratio)-
+  sum(tea_bump$Yield)
+other_Yield
+
+
 
 
 
