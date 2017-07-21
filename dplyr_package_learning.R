@@ -99,9 +99,12 @@ mydata10=filter(mydata,State %in% c("中国","韩国"))
 #Suppose you need to apply 'AND' condition.
 #In this case,we are picking data for 'A' and 'C' 
 #in the column 'Index' and income greater than 1.3 million in Year 2002
-mydata11=filter(mydata,State %in% c("中国","韩国","土耳其") & Consum>200)
+mydata11=filter(mydata,State %in% c("中国","韩国","土耳其") & Consum>=200)
 
-
+#Example 15:'OR' Condition in Selection Criteria
+#The '|' denotes OR in the logical condition.
+#It means any of the two conditions.
+mydata12=filter(mydata,State %in% c("中国","韩国","土耳其") |Yield)
 
 
 
