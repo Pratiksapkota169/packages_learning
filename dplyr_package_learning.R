@@ -131,7 +131,39 @@ summarise(mydata,Consum_mean=mean(Consum),Yield=median(Yield))
 summarise_at(mydata,vars(Consum,Yield),funs(n(),mean,median))
 #each var---each fun
 
+#Example 20:Summarize with Custom Functions
+#We can also use custom function in the summarise function.
+#In this case,we are computing the number of records,number of missing values,
+#mean and median for variables Y2011 and Y2012.
+#The dot(.) denotes each variables specified in the second argument of the function.
+summarise_at(mydata,vars(Consum,Yield),
+             funs(n(),missing=sum(is.na(.)),
+                      mean(.,na.rm = TRUE),
+                      median(.,na.rm = TRUE)))
 
+#How to apply Non-Standard Functions
+#Suppose you want to subtract mean from its original value
+#and then calculate variance of it.
+set.seed(222)
+mydata15<-data.frame(X1=sample(1:100,100),X2=runif(100))
+summarise_at(mydata15,vars(X1,X2),function(x) var(x-mean(x)))
+
+#Example 21: Summarize all Numeric Variables
+#The summarise_if function allows you to summarise conditionally.
+summarise_if(mydata,is.numeric,funs(n(),mean,median))
+#===
+numdata=mydata[sample(mydata,is.numeric)]
+summarise_all(numdata,funs(n(),mean,median))
+
+#Example 22:Summarize Factor Variable
+#We are checking the number of levels/categories 
+#and count of missing observations in a categorical(factor) variable.
+summarise_all(mydata["Yield"],funs(nlevels(.),sum(is.na(.))))
+
+#arrange() function:
+#Use: Sort data
+#Syntax:
+#
 
 
 
