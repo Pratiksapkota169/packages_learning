@@ -1,3 +1,4 @@
+install.packages("dplyr")
 library(dplyr)
 # select()---select
 # filter()---where
@@ -105,6 +106,34 @@ mydata11=filter(mydata,State %in% c("中国","韩国","土耳其") & Consum>=200
 #The '|' denotes OR in the logical condition.
 #It means any of the two conditions.
 mydata12=filter(mydata,State %in% c("中国","韩国","土耳其") |Yield)
+
+#Example 16:NOT Condition
+#The "!" sign is used to reverse the logical condition.
+mydata13=filter(mydata,!State %in% c("中国","韩国"))
+
+#Example 17:Contains Condition
+#The grepl function is used to search for pattern matching.
+#In the following code,we are looking for records where in column state contains 'Ar' in their name.
+mydata14=filter(mydata,grepl("国",State))
+
+
+##summarise() Function
+#data:Data Frame
+
+#Example 18:Summarize selected variables
+#In the example below,we are calculting mean and median for the variable Y2015.
+summarise(mydata,Consum_mean=mean(Consum),Yield=median(Yield))
+
+#Example 19:Summarize Multiple Variables
+#In the following example,we are calculating number of records,
+#mean and median for variables Y2005 and Y2006.
+#The summarise_at function allow us to select multiplt variables by their names.
+summarise_at(mydata,vars(Consum,Yield),funs(n(),mean,median))
+#each var---each fun
+
+
+
+
 
 
 
