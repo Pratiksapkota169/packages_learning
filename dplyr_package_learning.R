@@ -163,55 +163,341 @@ summarise_all(mydata["Yield"],funs(nlevels(.),sum(is.na(.))))
 #arrange() function:
 #Use: Sort data
 #Syntax:
-#
+#arrange(data_frame,variable(s)_to_sort)
+#or
+#data_frame %>% arrange(variable(s)_to_sort)
+#To sort a variable in descending order,use desc(x).
 
 
+#Example 23: Sort Data by Multiple Variables
+#The default sorting order of arrange() function is ascending.
+#In this example,we are sorting data by multiple variables.
+arrange(mydata,Yield,Consum)
+
+#Suppose you need to sort one variable by descending order and other variable by ascending order.
+arrange(mydata,desc(Consum),Yield)
 
 
+#Pipe Operator %>%
+#It is important to understand the pipe(%>%) operator before knowing
+#the other function of dplyr package. dplyr utilizes pipe operator
+#from another package (magrittr).
+#It allows you to write sub-queries like we do it in sql.
+
+#Note:All the function in dplyr package can be used without the pipe operator.
+#The question arises "Why to use pipe operator %>%".
+#The answer is it lets to wrap multiple together with the use of %>%.
+
+#Syntax:
+#filter(data_frame,variable==value)
+#or
+#data %>% filter(variable==value)
+
+#The %>% is NOT restricted to filter function.
+#It can be used with any function.
+
+#Example:
+#The code below demonstates the usage of pipe %>% operator.
+#In this example,we are selecting 10 random observations of two variables
+#"Index" "State" from the data frame "mydata".
+
+dt=sample_n(select(mydata,Yield,Consum),10)
+#or
+dt=mydata %>% select(Yield,Consum) %>% sample_n(10)
 
 
+#group_by() function
+#Use:Group data by categorical variable
+#Syntax:
+#group_by(data,variables)
+#or
+#data %>%group_by(variabless)
+
+#Example 24: Summarise Data by Categorical Variable
+#We are calculating count and mean of variables Y2011 and Y2012 by variable Index.
+
+t=summarise_at(group_by(mydata,State),
+               vars(Yield,Consum),funs(n(),mean(.,na.rm = T)))
+
+#or
+t=mydata %>% group_by(State) %>% summarise_at(vars(Yield:Consum),funs(n(),mean(.,na.rm=TRUE)))
 
 
+#do() function
+#Use:Compute within groups
+#Syntax:
+#do(data_frame,expressions_to_apply_to_each_group)
+#Note:The dot(.) is required to refer to a data frame.
+
+#Example 25: Filter Data within a Categorical Variable
+#Suppose you need to pull top 2 rows from "A","C"and "I" categories of variables Index.
+t=mydata %>% filter(State %in% c("韩国","中国","美国")) %>% group_by(State) %>% do(head(.,2))
+
+#Example 26: Selecting 3rd Maximum Value by Categorical Variable
+#We are calculting third maximum value of variable Y2015 by variable Index.
+#The following code first selects only two variables Index and Y2015.
+#Then it filters the variable Index with "A","C" and "I" and then it groups
+#the same variable and sorts the variable Y2015 in descending order.
+#At last,it selects the third row.
+t=mydata %>% select(State,Yield,Consum) %>%
+  filter(State %in% c("中国","韩国","美国")) %>%
+  group_by(State) %>%
+  do(arrange(.,desc(Consum))) %>%
+  slice(1)
+#The slice() function is used to select rows by position.
+
+#Using Window Functions
+#Like SQL,dplyr uses window functions that are used to subset data within a group.
+#It returns a vector of values.We could use min_rank() function that
+#calculates rank in the preceding example.
+t=mydata %>% select(State,Yield,Consum) %>%
+  filter(State %in% c("中国","韩国","美国")) %>%
+  group_by(State) %>%
+  filter(min_rank(desc(Consum))==1)
+
+#Example 27: Summarize,Group and Sort Together
+#In this case,we are computing mean of variables Y2014 and Y2015 by variable Index.
+#Then sort the result by calculated mean variable Y2015.
+t=mydata %>% group_by(State) %>%
+  summarise(Mean_Yield=mean(Yield,na.rm=TRUE),
+            Mean_Consum=mean(Consum,na.rm=TRUE)) %>%
+  arrange(desc(Mean_Consum))
 
 
+#mutate() function
+#Use: Creates new variables
+#Syntax:
+#mutate(data_frame,expression(s))
+#or
+#data_frame %>% mutate(expression(s))
 
 
+#Example 28: Create a new variable
+#The following code calculates division of Y2015 by Y2014 and name it "change".
+mydata16=mutate(mydata,change=Yield/Consum)
+#mutate mean change
+
+#Example 29: Multiply all the variables by 1000
+#It creates new variables and name them with suffix "_new"
+mydata177<-select(mydata,-State)
+mydata17=mutate_all(mydata177,funs("new"=.*1000))
+
+#Note-The above code returns the following error messages.
+#Warning messages:
+#1: In Ops.factor(c(1L, 1L, 1L, 1L, 2L, 2L, 2L, 3L, 3L, 4L, 5L, 6L,  :
+#‘*’ not meaningful for factors
+#2: In Ops.factor(1:51, 1000) : ‘*’ not meaningful for factors
+
+#Solution : See Example 45 - Apply multiplication on only numeric variables
+
+#Example 30: Calculate Rank for Variables
+#Suppose you need to calculate rank for variables Y2008 to Y2010
+mydata18=mutate_at(mydata,vars(Yield:Consum),
+                   funs(Rank=min_rank(.)))
+
+#By default, min_rank() assigns 1 to the smallest value and high number
+#to the largest value.In case, you need to assign rank 1 to the largest
+#value of a variable, use min_rank(desc(.))
+mydata19=mutate_at(mydata,vars(Yield,Consum),
+                   funs(Rank=min_rank(desc(.))))
+
+#Example 31: Select State that generated highest income among the variable "Index"
+out=mydata %>% group_by(State) %>%
+  filter(min_rank(desc(Consum))==1) %>%
+  select(State,Yield)
+
+#Example 32:Cumulative Income of "Index" variable
+#The cumsum function calculates cumulative sum of a variable.
+#With mutate function, we insert a new variable called "Total" which contains 
+#which contains values of cumulative income of variable Index.
+out=mydata %>% group_by(State) %>%
+  mutate(Total=cumsum(Consum)) %>%
+  select(State,Consum,Total)
+
+#join() function
+#Use:Join two datasets
+#Syntax:
+# inner_join(x,y,by=)
+# left_join(x,y,by=)
+# right_join(x,y,by=)
+# full_join(x,y,by=)
+# semi_join(x,y,by=)
+# anti_join(x,y,by=)
 
 
+#Example 33: Common rows in both the tables
+#Let's create two data frames say df1 and df2
+df1<-data.frame(ID=c(1,2,3,4,5),
+                w=c("a","b","c","d","e"),
+                x=c(1,1,0,0,1),
+                y=rnorm(5),
+                z=letters[1:5])
+df2<-data.frame(ID=c(1,7,3,6,8),
+                w=c("z","b","k","d","l"),
+                x=c(1,2,3,0,4),
+                y=rnorm(5),
+                z=letters[2:6])
+#INNER JOIN return rows when there is a match in both tables.
+#In this example, we are merging df1 and df2 with ID as common variable(primary key).
+df3<-inner_join(df1,df2,by="ID")
+
+#If the primary key does not have same name in both the tables,
+#try the following way
+inner_join(df1,df2,by=c("ID"="ID1"))
 
 
+#Example 34:Applying LEFT JOIN
+#LEFT JOIN :It returns all rows from the left table,even if there are 
+#no matches in the right table.
+left_join(df1,df2,by="ID")
+
+#Combine Data Vertically
+#insersect(x,y)
+#Rows that appear in both x and y
+
+#union(x,y)
+#Rows that appear in either or both x and y
+
+#setdiff(x,y)
+#Rows that appear in x but not y
+
+#Example 35: Applying INTERSECT
+#Prepare Sample Data for Demonstration
+mtcars$model<-rownames(mtcars)
+first<-mtcars[1:20,]
+second<-mtcars[10:32,]
+
+#INTERSECT selects unique rows that are common to both the data frames.
+intersect(first,second)
 
 
+#Example 36: Applying UNION
+
+#UNION displays all rows from both the tables and removes duplicate records
+#from the combined dataset.By using union_all function,it allows duplicate
+#rows in the combined dataset.
+x=data.frame(ID=1:6,ID1=1:6)
+y=data.frame(ID=1:6,ID1=1:6)
+union(x,y) #unique
+union_all(x,y) #allow duplicate
 
 
+#Example 37: Rows appear in one table but not in other table
+setdiff(first,second) #in first but not in second
+
+#Example 38: IF ELSE Statement
+#Syntax:
+#if_else(condition,true,false,missing=NULL)
+df<-c(-10,2,NA)
+if_else(df<0,"negative","positive",missing = "missing value")
+
+#Create a new variable with IF_ELSE
+#If a value is less than 5,add it to 1 and if it is greater than or equal to 5,
+#add it to 2. Otherwise 0.
+df=data.frame(x=c(1,5,6,NA))
+df %>% mutate(newvar=if_else(x<5,x+1,x+2,0))
+
+#Nested IF ELSE
+#Multiple IF ELSE statement can be written using if_else() function.
+mydf=data.frame(x=c(1:5,NA))
+mydf %>% mutate(newvar=if_else(is.na(x),"I am missing",
+                               if_else(x==1,"I am one",
+                                if_else(x==2,"I am two",
+                                  if_else(x==3,"I am three","Others")))))
 
 
+#SQL-Style Case When Statement
+#We can use case_when() function to write nested if-else queries.
+#In case_when(), you cannot use variables directly within case_when()
+#wrapper so it should be writen like .$x which is equvalent to mydf$x.
+#TRUE refers to ELSE statement.
+mydf %>% mutate(flag=case_when(is.na(.$x) ~ "I am missing",
+                               .$x == 1 ~"I am one",
+                               .$x == 2 ~"I am two",
+                               .$x == 3 ~"I am three",
+                               TRUE ~ "Others"))
+
+#Important Point
+#Make sure you set is.na() condition at the beginning in nested ifelse.
+#Otherwise,it would not be executed.
+
+#Example 39: Apply Row Wise Operation
+#Suppose you want to find maxmum value in each row of variables
+#2012,2013,2014,2015.The rowwise() function allows you to apply functions to rows.
+df=mydata %>% rowwise() %>% mutate(Max=max(Y2012:Y2015)) %>%
+  select(Y2012:2015,Max)
 
 
+#Example 40: Combine Data Frames
+#Suppose you are asked to combine two data frames.
+#Let's first create two sample datasets.
+df1=data.frame(ID=1:6,x=letters[1:6])
+df2<-data.frame(ID=7:12,x=letters[7:12])
+
+#The bind_rows() function combine two datasets with rows.
+#So combined dataset would contain 12 rows(6+6) and 2 columns.
+xy=bind_rows(df1,df2)
+#It is equivalent to base R function rbind.
+xy=rbind(df1,df2)
+
+#The bind_cols() function combine two datasets with columns.
+#So combined dataset would contain 4 columns and 6 rows.
+xy=bind_cols(df1,df2)
+#or
+xy=cbind(df1,df2)
 
 
+#Example 41: Calculate Percentile Values
+#The quantile() function is used to determine Nth percentile value.
+mydata %>% group_by(State) %>%
+  summarise(Pecentile_25=quantile(Consum,probs=0.25),
+            Pecentile_50=quantile(Consum,probs=0.5),
+            Pecentile_75=quantile(Consum,probs=0.75),
+            Pecentile_99=quantile(Consum,prob=0.99))
+
+#The ntile() function is used to divide the data into N bins.
+x=data.frame(N=1:15)
+x=mutate(x,pos=ntile(x$N,3))
 
 
+#Example 42: Automate Model Building
+#This example explains the advanced usage of do() function.
+#In this example,we are building linear regression model for each
+#level of a categorical variable.There are 3 levels in variable cyl of dataset mtcars.
+length(unique(mtcars$cyl))#3:6/4/8
+
+by_cyl<-group_by(mtcars,cyl)
+models<-by_cyl %>% do(mod=lm(mpg~disp,data=.))
+summarise(models,rsq=summary(mod)$r.squared)
+models %>% do(data.frame(
+  var=names(coef(.$mod)),
+  coef(summary(.$mod))
+))
+
+#if() Family of Function
+#It includes functions like select_if,mutate_if,summarise_if.
+#They come into action only when logical condition meets.
+
+#Example 43: Select only numeric columns
+#The select_if() function returns only those columns where logical condition is TRUE.
+#The is.numeric refers to retain only numeric variables.
+mydata20<-select_if(mydata,is.numeric)
+#Similarly,you can use the following code for selecting factor columns
+mydata21<-select_if(mydata,is.factor)
 
 
+#Example 44: Number of levels in factor variables
+#Like select_if() function,summarise_if() function lets you to 
+#summarise only for variables where logical condition holds.
+summarise_if(mydata,is.factor,funs(nlevels(.)))
 
 
+#Example 45: Multiply by 1000 to numeric variables
+mydata22<-mutate_if(mydata,is.numeric,funs("new"=.*1000))
 
+#Example 46: Convert value to NA
+#In this example,we are converting "" to NA using na_if() function.
+k<-c("a","b","","d")
+na_if(k,"")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+########################END############################
