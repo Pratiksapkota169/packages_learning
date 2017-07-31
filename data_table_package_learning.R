@@ -1,3 +1,5 @@
+#learning from:http://www.listendata.com/2016/10/r-data-table.html
+
 #This data.table R package is considered as the fastest package for data manipulation.
 #Analysts generally call R programming not compatible with big datasets(>10GB)
 #as it is not memory efficient and loads everything into RAM.
