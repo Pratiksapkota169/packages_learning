@@ -121,24 +121,23 @@ dbDisconnect(con1)
   rename(`融资金额(万美元)`=iAmount) %>% 
   select(公司ID,融资日期,融资轮次,融资金额,`融资金额(万美元)`,投资机构,项目ID,公司全称,项目名称,一级行业,二级行业,三级行业)
 
+事实表_融资事件_correct_temp_1 <- filter(事实表_融资事件_correct,!is.na(`融资金额(万美元)`))
 
-事实表_融资事件_correct_temp_1<-filter(事实表_融资事件_correct,is.na(`融资金额(万美元)`)) %>% 
-  select(事实表_融资事件_correct,-`融资金额(万美元)`) %>% 
-  mutate(融资金额=str_replace(融资金额,"\\t","")) %>% 
+事实表_融资事件_correct_temp_2 <- filter(事实表_融资事件_correct,is.na(`融资金额(万美元)`)) %>% 
+  rename(`融资金额(万美元)_new`=`融资金额(万美元)`) %>% 
+  mutate(融资金额=str_trim(融资金额,side="both")) %>% 
   mutate(iAmount=case_when(str_detect(.$融资金额,"千万人民币")==TRUE ~ 526,
                            str_detect(.$融资金额,"百万人民币")==TRUE ~ 52,
                            str_detect(.$融资金额,"千万美元")==TRUE ~ 3500,
                            str_detect(.$融资金额,"亿人民币")==TRUE ~ as.numeric(str_match(.$融资金额,"[0-9\\.]*"))*1488,
                            str_detect(.$融资金额,"万人民")==TRUE ~ as.numeric(str_match(.$融资金额,"[0-9\\.]*"))*0.1488,
                            str_detect(.$融资金额,"人民币")==TRUE ~ 0,
-                           is.na(str_match(.$融资金额,"[0-9\\.]*")) ~ 0
+                           TRUE ~ 0
   )) %>% 
   rename(`融资金额(万美元)`=iAmount) %>% 
   select(公司ID,融资日期,融资轮次,融资金额,`融资金额(万美元)`,投资机构,项目ID,公司全称,项目名称,一级行业,二级行业,三级行业)
 
-union(事实表_融资事件_correct,事实表_融资事件_correct_temp)
-
-
+事实表_融资事件_correct <- union(事实表_融资事件_correct_temp_1,事实表_融资事件_correct_temp_2)
 
 
 
@@ -149,13 +148,4 @@ dbSendQuery(con2,'SET NAMES utf8')
 dbWriteTable(con2,"事实表_融资事件_correct",事实表_融资事件_correct,append=TRUE,row.names=FALSE,col.names=FALSE,overwrite=FALSE) 
 
 dbDisconnect(con2)
-
-
-
-test<-filter(事实表_融资事件_correct,is.na(`融资金额(万美元)`)) %>% 
-  mutate(融资金额=str_replace(融资金额,"\\t","")) %>% 
-  
-  
-  View(test)
-
 
