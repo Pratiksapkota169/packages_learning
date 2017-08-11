@@ -21,7 +21,7 @@ send.mail(
     host.name = "smtp.163.com",  
     port = 587,  
     user.name = sender,  
-    passwd = "19920702272xo",  #授权码，不是密码
+    passwd = "root123456",  #授权码，不是密码
     ssl = TRUE  
   ),  
   authenticate = TRUE,  
