@@ -74,9 +74,56 @@ library(rvest)
 #url<-"https://mp.weixin.qq.com/s?__biz=MjM5ODY0NTQ4Mg==&mid=2658746700&idx=1&sn=fc01cf3d5871731c262b4a298594afc8&chksm=bd4a7ac98a3df3dfffb303508b46fff94b8cf7018d9db1098835febf29fa4f34754beee437dd&mpshare=1&scene=1&srcid=0814MaEcDFPxe5PPwgbihMO4#rd"
 
 
+#行业无表头
+#6.17-6.23
+#url<-"https://mp.weixin.qq.com/s?__biz=MjM5ODY0NTQ4Mg==&mid=2658746689&idx=1&sn=ba55d78a850879cca1439ef67fd59e0f&chksm=bd4a7ac48a3df3d29cb7afecff61119ed05b6df4d0af4ab5591dcaa909551bab97d7de8726bb&mpshare=1&scene=1&srcid=0814oYNWMU9eIXFseeu8RmwK#rd"
+
+#部分有表头
+#6.10-6.16
+#url<-"https://mp.weixin.qq.com/s?__biz=MjM5ODY0NTQ4Mg==&mid=2658746655&idx=1&sn=0842b646610eb5f62cdcb32e87f14060&chksm=bd4a7a9a8a3df38c3fa6596e24d88dd2f71f6bb46f04e68a72f4f1534303da43db4ff0fb8314&mpshare=1&scene=1&srcid=0814AuCgI3o6jekwyhatYKdZ#rd"
+
+#有表头
+#6.3-6.9
+#url<-"https://mp.weixin.qq.com/s?__biz=MjM5ODY0NTQ4Mg==&mid=2658746645&idx=1&sn=35aeb3d0829790feb337841cc567d994&chksm=bd4a7a908a3df3861963853183b37f7fb254b7a38835847b68ea337faea47e124198c646a84d&mpshare=1&scene=1&srcid=0814VhXpYdfuj7dkNGHiBcC3#rd"
+
+#有空值
+#5.27-6.2
+#url<-"https://mp.weixin.qq.com/s?__biz=MjM5ODY0NTQ4Mg==&mid=2658746645&idx=1&sn=35aeb3d0829790feb337841cc567d994&chksm=bd4a7a908a3df3861963853183b37f7fb254b7a38835847b68ea337faea47e124198c646a84d&mpshare=1&scene=1&srcid=0814VhXpYdfuj7dkNGHiBcC3#rd"
+
+#5.20-5.26
+#url<-"https://mp.weixin.qq.com/s?__biz=MjM5ODY0NTQ4Mg==&mid=2658746632&idx=1&sn=63a00e7be1867bb90f757aa328e964f7&chksm=bd4a7a8d8a3df39b3061ed7b5351bde0a991392d7f0588526982fde27df47049f614df36d85d&mpshare=1&scene=1&srcid=0814ZF1vYWO4NJEUqcacUbz5#rd"
 
 
+#5.13-5.19
+#url<-"https://mp.weixin.qq.com/s?__biz=MjM5ODY0NTQ4Mg==&mid=2658746626&idx=1&sn=686a7bcbc0e472bf183fa9dc3213abf2&chksm=bd4a7a878a3df391e34adf567b8da67cab378b2bc15a4c937a4198c47a700ff5ebdb01760f45&mpshare=1&scene=1&srcid=0814cGYh2U65NL5zfvJnLx6G#rd"
 
+
+#5.6-5.12
+#url<-"https://mp.weixin.qq.com/s?__biz=MjM5ODY0NTQ4Mg==&mid=2658746619&idx=1&sn=ecf263c74f3e54f06cbb9dea2b1206d7&chksm=bd4a7b7e8a3df268119f19cc49fd1e001919553c080cf6a2131f5fff76c8685e14b3fcb248b4&mpshare=1&scene=1&srcid=0814JOIsFRADRoHzn21SfUG8#rd"
+
+
+#4.29-5.5
+#url<-"https://mp.weixin.qq.com/s?__biz=MjM5ODY0NTQ4Mg==&mid=2658746613&idx=1&sn=8de7b641d55f6764a771a1df2803c2a9&chksm=bd4a7b708a3df266494567be71339e31b778d666760e0354e6979f6227f4023e9cc743a73282&mpshare=1&scene=1&srcid=0814Df8Jupj40sWYaReXqvaO#rd"
+
+#4.8-4.14
+#url<-"https://mp.weixin.qq.com/s?__biz=MjM5ODY0NTQ4Mg==&mid=2658746607&idx=1&sn=52b52cb465fcb858964aac042aba5bf0&chksm=bd4a7b6a8a3df27cbf731311a36b0281ca0be8e845ccca61e2d723b86ec7424ecc1c61126ae4&mpshare=1&scene=1&srcid=0814LZNzAzOZfgbU2G4urutP#rd"
+
+#4.2-4.7
+#url<-"https://mp.weixin.qq.com/s?__biz=MjM5ODY0NTQ4Mg==&mid=2658746600&idx=1&sn=164754a9c97d234d8914351c8457f4c8&chksm=bd4a7b6d8a3df27bc24dc19246bcdb6acab2be2f10fc7541ecf7766fb8c42c19f7c714fdc87d&mpshare=1&scene=1&srcid=08149Mg0mK0QKpFgD5d6fyHo#rd"
+
+#3.25-4.1
+#url<-"https://mp.weixin.qq.com/s?__biz=MjM5ODY0NTQ4Mg==&mid=2658746595&idx=1&sn=1abe592019ab7522c80a21e30fa540eb&chksm=bd4a7b668a3df2701e96e7e5c2b9ff7f1c298c0c919adeaf96ed3ecdc5a36d2155233622d768&mpshare=1&scene=1&srcid=0814gZJmlvGAGvD4TvgxZD20#rd"
+
+
+#3.18-3.24
+#url<-"https://mp.weixin.qq.com/s?__biz=MjM5ODY0NTQ4Mg==&mid=2658746582&idx=1&sn=d5b01da5f952123850ffd308de8ce2ed&chksm=bd4a7b538a3df245cd1b14cef66a2e8f808644a1d8a8f7235998ddd1c2993363ec998404f95a&mpshare=1&scene=1&srcid=081462gf5eoqg4bhWhCFVW5S#rd"
+
+#3.11-3.17
+#url<-"https://mp.weixin.qq.com/s?__biz=MjM5ODY0NTQ4Mg==&mid=2658746569&idx=1&sn=e756241155d96a8232c36ec3c0f0a995&chksm=bd4a7b4c8a3df25ae74d027b4c8aa9f8ea8303cb6a8568746ae29a30c32c1b96528646c7f4cd&mpshare=1&scene=1&srcid=08149FoDEl9y5acTIuO5U7Kf#rd"
+
+#多了日期列
+#3.4-3.10
+#url<-"https://mp.weixin.qq.com/s?__biz=MjM5ODY0NTQ4Mg==&mid=2658746558&idx=1&sn=fc0809bd1ff020033dbdc94376aabbcd&chksm=bd4a7b3b8a3df22dc0a67e770d7b65a966ee08e1754d592c3f1696a84cafcc72c8c012c993eb&mpshare=1&scene=1&srcid=0814MJpXonbllKyYgU8A9Uc8#rd"
 
 
 
