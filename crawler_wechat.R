@@ -1,5 +1,4 @@
-rm(list = ls())
-gc()
+#
 
 library(rvest)
 
@@ -7,7 +6,20 @@ url<-"https://mp.weixin.qq.com/s?__biz=MjM5ODY0NTQ4Mg==&mid=2658746726&idx=1&sn=
 webpage<-read_html(url)
 
 data_html<-html_nodes(webpage,"td")
+title_html<-html_node(webpage,"#activity-name")
+
 data<-html_text(data_html)
+title<-html_text(title_html)
+
+library(stringr)
+title<-str_replace_all(title,"[\\r\\n ]","")
+title<-str_replace(title,"[～]","~")
+
+title<-str_split_fixed(title,"\\|",2)
+
+week<-title[,1]
+title<-title[,2]
+
 
 test<-as.list(data)
 
@@ -42,6 +54,7 @@ for(i in N){
 names(新三板定增)<-c(新三板定增$X1[1],新三板定增$X2[1],新三板定增$X3[1],新三板定增$X4[1])
 
 新三板定增<-新三板定增[-1,]
+新三板定增<-cbind(新三板定增,week)
 # View(新三板定增)
 
 
@@ -59,6 +72,7 @@ for(i in N){
 names(新三板挂牌)<-c(新三板挂牌$X1[1],新三板挂牌$X2[1],新三板挂牌$X3[1],新三板挂牌$X4[1])
 
 新三板挂牌<-新三板挂牌[-1,]
+新三板挂牌<-cbind(新三板挂牌,week)
 # View(新三板挂牌)
 
 
@@ -76,6 +90,7 @@ IPO事件<-data.frame(IPO事件)
 names(IPO事件)<-c(IPO事件$X1[1],IPO事件$X2[1],IPO事件$X3[1],IPO事件$X4[1])
 
 IPO事件<-IPO事件[-1,]
+IPO事件<-cbind(IPO事件,week)
 # View(IPO事件)
 
 
@@ -93,6 +108,7 @@ for(i in N){
 names(并购事件)<-c(并购事件$X1[1],并购事件$X2[1],并购事件$X3[1],并购事件$X4[1],并购事件$X5[1],并购事件$X6[1])
 
 并购事件<-并购事件[-1,]
+并购事件<-cbind(并购事件,week)
 # View(并购事件)
 
 
@@ -104,9 +120,9 @@ test<-test[1:(start_index_并购事件-1)]
 title_index_行业<-which(test=="轮次",arr.ind = TRUE)-4
 test<-test[-title_index_行业]
 
-title<-c("企业","主营业务","所在地","轮次","金额","投资人","所属行业")
+industry_title<-c("企业","主营业务","所在地","轮次","金额","投资人","所属行业")
 
-test<-test[-which(test %in% title)]
+test<-test[-which(test %in% industry_title)]
 
 行业<-list()
 N<-seq(1,length(test),by=7)
@@ -118,11 +134,12 @@ for(i in N){
 
 行业<-data.frame(行业)
 
-names(行业)<-title
+names(行业)<-industry_title
+行业<-cbind(行业,week)
 
 
 rm("data","data_html","end_index_IPO事件","end_index_并购事件",
    "end_index_新三板定增","end_index_新三板挂牌","i","N","start_index_IPO事件",
    "start_index_并购事件","start_index_新三板定增","start_index_新三板挂牌",
-   "temp","test","title","title_index_行业","url","webpage")
+   "temp","test","title_index_行业","url","webpage","title_html","week","industry_title")
 gc();gc();gc();gc();gc();gc();gc();gc();gc();gc()
