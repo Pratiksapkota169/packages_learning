@@ -106,6 +106,7 @@ test<-test[-title_index_行业]
 
 title<-c("企业","主营业务","所在地","轮次","金额","投资人","所属行业")
 
+test<-test[-which(test %in% title)]
 
 行业<-list()
 N<-seq(1,length(test),by=7)
@@ -119,6 +120,9 @@ for(i in N){
 
 names(行业)<-title
 
-行业<-filter(行业,企业!="企业")
 
-
+rm("data","data_html","end_index_IPO事件","end_index_并购事件",
+   "end_index_新三板定增","end_index_新三板挂牌","i","N","start_index_IPO事件",
+   "start_index_并购事件","start_index_新三板定增","start_index_新三板挂牌",
+   "temp","test","title","title_index_行业","url","webpage")
+gc();gc();gc();gc();gc();gc();gc();gc();gc();gc()
