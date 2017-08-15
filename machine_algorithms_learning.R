@@ -276,18 +276,27 @@ predicted=predict(fit,x_test)
 install.packages("knn")
 library(knn)
 
-
-
-
-
-
-
-
-
+x<-cbind(x_train,y_train)
+#Fitting model
+fit<-knn(y_train ~ .,data=x,k=5)
+summary(fit)
+#Predict Output
+predicted=predict(fit,x_test)
 
 
 
 #7.K-Means
+#It is a type of unsupervised algorithm which solves the clustering
+#problem.Its procedure follows a simple and easy
+
+
+
+
+
+
+
+
+
 
 #8.Random Forest
 
