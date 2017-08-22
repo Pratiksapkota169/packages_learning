@@ -115,11 +115,11 @@ MyFTable<-addHeaderRow(MyFTable,
               "Species"))
 
 
-
-
-
-
 #8.addFooterRow:add footer in a FlexTable
+
+
+
+
 #9.addColumnBreak:Add a column break into a section
 #10.addCodeBlock:Add code block into a document object
 #11.addPlot:Add a plot into a document object
