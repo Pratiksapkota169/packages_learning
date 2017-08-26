@@ -1,0 +1,144 @@
+---
+title: "Daily Report"
+author: "aboer"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,warning = FALSE,message = FALSE,results = FALSE,cache = TRUE)
+```
+
+<div style="background:red;" align="center"><font color="white" size=4 face="微软雅黑">投资事件</font></div>
+<br></br>
+
+<div align="center">
+```{r}
+library(RMySQL)
+
+con1 <- dbConnect(MySQL(), user = 'fin_huangying',password = 'huangying1231', host ='112.126.86.232', dbname='innotree_finance')
+
+dbSendQuery(con1,'SET NAMES GBK')
+
+scraper_新三板定增 <- dbGetQuery(conn = con1, statement = "SELECT * from scraper_新三板定增;")
+scraper_新三板挂牌 <- dbGetQuery(conn = con1, statement = "SELECT * from scraper_新三板挂牌;")
+scraper_IPO事件 <- dbGetQuery(conn = con1, statement = "SELECT * from scraper_IPO事件;")
+scraper_并购事件 <- dbGetQuery(conn = con1, statement = "SELECT * from scraper_并购事件;")
+scraper_行业_1 <- dbGetQuery(conn = con1, statement = "SELECT 轮次,count(*) as 笔数 from scraper_行业 group by 轮次;")
+scraper_行业_2 <- dbGetQuery(conn = con1, statement = "SELECT count(*) from scraper_行业 where 金额 LIKE '%亿%';")
+scraper_行业_3 <- dbGetQuery(conn = con1, statement = "SELECT * from scraper_行业;")
+
+dbDisconnect(con1)
+
+library(dplyr)
+lunci_num<-select(scraper_行业_1,轮次,笔数) %>% arrange(desc(笔数))
+money_guoyi<-scraper_行业_2
+
+library(stringr)
+#clean scraper_行业_3--->scraper_行业_3_correct
+scraper_行业_3_correct<-select(scraper_行业_3,企业,主营业务,所在地,轮次,金额,投资人,所属行业,week) %>% 
+  mutate(iAmount=case_when(
+                           str_detect(.$金额,"千万及以上人民币")==TRUE ~ 526,
+                           str_detect(.$金额,"亿元及以上人民币")==TRUE ~ 1503,
+                           str_detect(.$金额,"投资金额未透露")==TRUE ~ 0,
+                           str_detect(.$金额,"数百万元人民币")==TRUE ~ 52,
+                           str_detect(.$金额,"万数百万人民币")==TRUE ~ 52,
+                           str_detect(.$金额,"近千万元人民币")==TRUE ~ 526,
+                           str_detect(.$金额,"数千万级人民币")==TRUE ~ 526,
+                           str_detect(.$金额,"数千万万人民币")==TRUE ~ 526,
+                           str_detect(.$金额,"数千万元人民币")==TRUE ~ 526,
+                           str_detect(.$金额,"亿元及以上港元")==TRUE ~ 1290,
+                           str_detect(.$金额,"亿元及以上其他")==TRUE ~ 1503,
+                           str_detect(.$金额,"亿元及以上美元")==TRUE ~ 10000,
+                           str_detect(.$金额,"投资方未透露")==TRUE ~ 0,
+                           str_detect(.$金额,"数十万人民币")==TRUE ~ 5,
+                           str_detect(.$金额,"万澳大利亚元")==TRUE ~ 19,
+                           str_detect(.$金额,"近百万人民币")==TRUE ~ 52,
+                           str_detect(.$金额,"数百万人民币")==TRUE ~ 52,
+                           str_detect(.$金额,"数千万新台币")==TRUE ~ 108,
+                           str_detect(.$金额,"近千万人民币")==TRUE ~ 526,
+                           str_detect(.$金额,"千万级人民币")==TRUE ~ 526,
+                           str_detect(.$金额,"数千万人民币")==TRUE ~ 526,
+                           str_detect(.$金额,"近亿元人民币")==TRUE ~ 5263,
+                           str_detect(.$金额,"数亿元人民币")==TRUE ~ 5263,
+                           str_detect(.$金额,"数万人民币")==TRUE ~ 0.5,
+                           str_detect(.$金额,"数十万美元")==TRUE ~ 35,
+                           str_detect(.$金额,"数百万美元")==TRUE ~ 350,
+                           str_detect(.$金额,"数百万欧元")==TRUE ~ 393,
+                           str_detect(.$金额,"数千万港元")==TRUE ~ 451,
+                           str_detect(.$金额,"数百万英镑")==TRUE ~ 466,
+                           str_detect(.$金额,"数千万美元")==TRUE ~ 3500,
+                           str_detect(.$金额,"数千万其他")==TRUE ~ 3500,
+                           str_detect(.$金额,"近亿人民币")==TRUE ~ 5263,
+                           str_detect(.$金额,"数亿人民币")==TRUE ~ 5263,
+                           str_detect(.$金额,"一亿人民币")==TRUE ~ 5263,
+                           str_detect(.$金额,"千万欧元")==TRUE ~ 337,
+                           str_detect(.$金额,"近亿美元")==TRUE ~ 35000,
+                           str_detect(.$金额,"数亿美元")==TRUE ~ 35000,
+                           str_detect(.$金额,"万不详")==TRUE ~ 0,
+                           str_detect(.$金额,"未公开")==TRUE ~ 0,
+                           str_detect(.$金额,"未透漏")==TRUE ~ 0,
+                           str_detect(.$金额,"未透露")==TRUE ~ 0,
+                           str_detect(.$金额,"未披露")==TRUE ~ 0,
+                           str_detect(.$金额,"不详")==TRUE ~ 0,
+                           str_detect(.$金额,"多万人民币")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*0.1488,
+                           str_detect(.$金额,"万元人民币")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*0.1488,
+                           str_detect(.$金额,"万新加坡元")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*0.7379,
+                           str_detect(.$金额,"百万人民币")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*14.88,
+                           str_detect(.$金额,"千万人民币")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*148.8,
+                           str_detect(.$金额,"亿元人民币")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*1488,
+                           str_detect(.$金额,"万韩国元")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*0.0008,
+                           str_detect(.$金额,"万新台币")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*0.0331,
+                           str_detect(.$金额,"万人民币")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*0.1488,
+                           str_detect(.$金额,"千万美元")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*1000,
+                           str_detect(.$金额,"亿人民币")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*1488,
+                           str_detect(.$金额,"人民币")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*0.00001488,
+                           str_detect(.$金额,"万韩元")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*0.0008,
+                           str_detect(.$金额,"万日元")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*0.009,
+                           str_detect(.$金额,"万卢比")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*0.0156,
+                           str_detect(.$金额,"万港币")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*0.128,
+                           str_detect(.$金额,"万港元")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*0.128,
+                           str_detect(.$金额,"万其他")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*0.1488,
+                           str_detect(.$金额,"万人民")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*0.1488,
+                           str_detect(.$金额,"万澳元")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*0.7196,
+                           str_detect(.$金额,"万加元")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*0.8006,
+                           str_detect(.$金额,"万美金")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*1,
+                           str_detect(.$金额,"万美元")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*1,
+                           str_detect(.$金额,"万欧元")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*1.1829,
+                           str_detect(.$金额,"万英镑")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*1.3222,
+                           str_detect(.$金额,"亿美元")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*10000,
+                           str_detect(.$金额,"亿欧元")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*11829,
+                           str_detect(.$金额,"亿港币")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*1280,
+                           str_detect(.$金额,"亿港元")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*1280,
+                           str_detect(.$金额,"亿英镑")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*13222,
+                           str_detect(.$金额,"亿其他")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*1488,
+                           str_detect(.$金额,"亿卢比")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*156,
+                           str_detect(.$金额,"亿日元")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*90,
+                           str_detect(.$金额,"新元")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*0.00007379,
+                           str_detect(.$金额,"美元")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*0.0001,
+                           str_detect(.$金额,"万元")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*0.1488,
+                           str_detect(.$金额,"万美")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*1,
+                           str_detect(.$金额,"亿元")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*1488,
+                           str_detect(.$金额,"万")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*0.1488,
+                           str_detect(.$金额,"亿")==TRUE ~ as.numeric(str_match(.$金额,"[0-9\\.]*"))*1488,
+                           TRUE ~ 0
+                           
+  ))
+
+touzi_money_max<-select(scraper_行业_3_correct,企业,金额,投资人,轮次,iAmount) %>% arrange(desc(iAmount))
+
+library(ggplot2)
+library(ggthemes)
+dt = scraper_行业_1
+dt$轮次 = factor(dt$轮次, levels=c('种子','天使','Pre-A','Pre-A+','A','A+','B','B+','Pre-C','C','D','战略','战略融资'))   ## 设置柱条的顺序
+p = ggplot(dt, aes(x = 轮次, y = 笔数, fill = 轮次, group = factor(1))) + 
+    geom_bar(stat = "identity", width = 0.5 ,show.legend = FALSE) + ## 修改柱条的宽度
+    theme_economist()+
+    geom_text(aes(label = 笔数, vjust = -0.8, hjust = 0.5, color = 轮次), show_guide = FALSE) + ## 显示柱条上的数字
+    ylim(min(dt$笔数, 0)*1.1, max(dt$笔数)*1.1) ## 加大 Y 轴的范围，防止数字显示不齐全
+p
+```
+</div>
+
+<br></br>
+&emsp;&emsp;从融资轮次来看，本周**`r lunci_num[1,1]`轮**事件`r lunci_num[1,2]`起居首，`r lunci_num[2,1] `轮`r lunci_num[2,2]`起第二，`r lunci_num[3,1]`轮`r lunci_num[3,2]`起排第三。本周有近`r money_guoyi`起金额过亿的融资事件，其中金额最大的事件为**`r touzi_money_max$企业[1]`**获得`r touzi_money_max$投资人[1]`总计`r touzi_money_max$金额[1]`投资，正式完成`r touzi_money_max$轮次[1]`轮融资。

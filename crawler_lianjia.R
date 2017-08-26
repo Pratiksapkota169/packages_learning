@@ -14,6 +14,8 @@ for(i in 1:100){
   data<-html_text(data_html)
   
   total<-c(total,data)
+  
+  Sys.sleep(3)
 }
 
 test<-data.frame(total)

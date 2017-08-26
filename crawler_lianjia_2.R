@@ -8,7 +8,7 @@ library(rvest)
 url_0<-"https://bj.lianjia.com/chengjiao/pg"
 
 total<-list()
-for(i in 1:1){
+for(i in 1:100){
   url<-paste(url_0,i,sep = "")
   webpage<-read_html(url)
   
@@ -19,7 +19,7 @@ for(i in 1:1){
   data<-data[1:30]
   
   total<-c(total,data)
-  Sys.sleep(1)
+  Sys.sleep(3)
 }
 
 test<-data.frame(total)
@@ -40,7 +40,7 @@ for(url_2 in test){
   data_2<-c(data_2,url_2)
   total_2<-c(total_2,data_2)
   
-  Sys.sleep(1)
+  Sys.sleep(3)
 }
 
 test_2<-data.frame(total_2)
