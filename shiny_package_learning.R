@@ -1,5 +1,5 @@
 #Leaern Shiny
-
+#https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/
 #Lesson 1
 
 # install.packages("shiny")
@@ -15,13 +15,32 @@ runExample("07_widgets") #help text and submit buttons
 runExample("08_html") #shiny app build from html
 runExample("09_upload") #file upload wizard
 runExample("10_download") #file download wizard
-runExample("11_text")
+runExample("11_timer") #an automated timer
 
 #new directory named my_app
 #app.R contains ui and server two parts
 runApp("my_app")
 
 runApp("my_app",display.mode = "showcase")
+
+
+#Lession 2
+#Build a user interface
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
