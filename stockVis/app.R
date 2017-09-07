@@ -36,21 +36,22 @@ ui <- fluidPage(
 )
 
 # Server logic
-server <- function(input, output) {
-  
-  dataInput <- reactive({
-    getSymbols(input$symb, src = "google", 
-               from = input$dates[1],
-               to = input$dates[2],
+server<-function(input,output){
+  dataInput<-reactive({
+    getSymbols(input$symb,src="google",
+               from=input$dates[1],
+               to=input$dates[2],
                auto.assign = FALSE)
   })
   
-  output$plot <- renderPlot({
+  output$plot<-renderPlot({
+    data<-dataInput()
     
-    chartSeries(dataInput(), theme = chartTheme("white"), 
-                type = "line", log.scale = input$log, TA = NULL)
+    if(input$adjust)data<-adjust(dataInput())
+    
+    chartSeries(data,theme = chartTheme("white"),
+                type = "line",log.scale = input$log,TA=NULL)
   })
-  
 }
 
 # Run the app

@@ -292,12 +292,10 @@ comp_baseinfo_innotree <- dbGetQuery(conn = con1, statement = "SELECT * from dc_
 
 #comp_baseinfo_innotree table:extract ciry from officeaddr
 comp_baseinfo_innotree<-select(comp_baseinfo_innotree,name,ncid,cid,province,edate,registeno,legalrepr,orgainzetype,briefinfo,bussiness,regmoney,website,officeaddr,phone,logourl,hangye,hangye2,hangye3,tags,comp_scale,opreat_status,email,devep_stage,wechat_id,weibo_url,data_date) %>% 
-  mutate(city=case_when(str_detect(officeaddr,"北京")==TRUE~"北京市",
-                        str_detect(officeaddr,"天津")==TRUE~"天津市",
-                        str_detect(officeaddr,"上海")==TRUE~"上海市",
-                        str_detect(officeaddr,"重庆")==TRUE~"重庆市",
-                        str_detect(officeaddr,"香港")==TRUE~"香港市",
-                        str_detect(officeaddr,"澳门")==TRUE~"澳门市",
+  mutate(city=case_when(str_detect(officeaddr,"北京市")==TRUE~"北京市",
+                        str_detect(officeaddr,"天津市")==TRUE~"天津市",
+                        str_detect(officeaddr,"上海市")==TRUE~"上海市",
+                        str_detect(officeaddr,"重庆市")==TRUE~"重庆市",
                         str_detect(officeaddr,"哈尔滨市")==TRUE~"哈尔滨市",
                         str_detect(officeaddr,"阿城市")==TRUE~"阿城市",
                         str_detect(officeaddr,"双城市")==TRUE~"双城市",

@@ -485,19 +485,87 @@ ui<-fluidPage(
 
 
 #A more concise version of the server function
-server<-function(input,output){
-  output$map<-renderPlot({
-    args<-switch(input$var,
-                 "Percent White"=list(counties$white,"darkgreen","% White"),
-                 "Percent Black"=list(counties$black,"black","% Black"),
-                 "Percent Hispanic"=list(counties$hispanic,"darkorange","% Hispanic"),
-                 "Percent Asian"=list(counties$asian,"darkviolet","% Asian"))
-    args$min<-input$range[1]
-    args$max<-input$range[2]
-    
-    do.call(percent_map,args)
-  })
-}
+# server<-function(input,output){
+#   output$map<-renderPlot({
+#     args<-switch(input$var,
+#                  "Percent White"=list(counties$white,"darkgreen","% White"),
+#                  "Percent Black"=list(counties$black,"black","% Black"),
+#                  "Percent Hispanic"=list(counties$hispanic,"darkorange","% Hispanic"),
+#                  "Percent Asian"=list(counties$asian,"darkviolet","% Asian"))
+#     args$min<-input$range[1]
+#     args$max<-input$range[2]
+#     
+#     do.call(percent_map,args)
+#   })
+# }
+
+
+#Lesson 6
+#Use reactive expressions
+#install.packages("quantmod")
+
+#1.It uses getSymbols to download financial data straight into R from
+#websites like Google finance.
+#2.It uses chartSeries to display prices in an attractive chart.
+
+#Check boxes and date ranges
+#a date range selector,created with dateRangeInput
+#a couple of check boxes made with checkboxInput.return TRUE or FALSE
+
+#The check boxes are named log and adjust in the ui object,which means
+#you can look them up as input$log and input$adjust in the server function.
+
+
+#Streamline compution
+
+#A reactive expression saves its result the first time you run it.
+#The next time the reactive expression is called,it checks if the saved
+#value has become out of date
+#If the value is out of date,the reactive object will recalculate it
+#If the value is up-to-date,the reactive expression will return the saved
+#value without doing any computation.
+
+
+# server <- function(input, output) {
+#   
+#   dataInput <- reactive({
+#     getSymbols(input$symb, src = "google", 
+#                from = input$dates[1],
+#                to = input$dates[2],
+#                auto.assign = FALSE)
+#   })
+#   
+#   output$plot <- renderPlot({
+#     
+#     chartSeries(dataInput(), theme = chartTheme("white"), 
+#                 type = "line", log.scale = input$log, TA = NULL)
+#   })
+#   
+# }
+
+#1.renderPlot will call dataInput()
+#2.dataInput will check that the dates and symb widgets have not changed
+#3.dataInput will return its saved data set of stock prices without re-fetching
+#data from Google.
+#4.renderPlot will re-draw the chart with the correct axis.
+
+# server<-function(input,output){
+#   dataInput<-reactive({
+#     getSymbols(input$symb,src="google",
+#                from=input$dates[1],
+#                to=input$dates[2],
+#                auto.assign = FALSE)
+#   })
+#   
+#   output$plot<-renderPlot({
+#     data<-dataInput()
+#     
+#     if(input$adjust)data<-adjust(dataInput())
+#     
+#     chartSeries(data,theme = chartTheme("white"),
+#                 type = "line",log.scale = input$log,TA=NULL)
+#   })
+# }
 
 
 
