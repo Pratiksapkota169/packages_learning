@@ -41,16 +41,17 @@ server<-function(input,output){
     getSymbols(input$symb,src="google",
                from=input$dates[1],
                to=input$dates[2],
-               auto.assign = FALSE)
+               auto.assign=FALSE)
+  })
+  
+  finalInput<-reactive({
+    if(!input$adjust) return (dataInput())
+    adjust(dataInput())
   })
   
   output$plot<-renderPlot({
-    data<-dataInput()
-    
-    if(input$adjust)data<-adjust(dataInput())
-    
-    chartSeries(data,theme = chartTheme("white"),
-                type = "line",log.scale = input$log,TA=NULL)
+    chartSeries(finalInput(),theme=chartTheme("white"),
+                type="line",log.scale=input$log,TA=NULL)
   })
 }
 

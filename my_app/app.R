@@ -568,13 +568,145 @@ ui<-fluidPage(
 # }
 
 
+#adjust is called inside renderPlot.If the adjust box is checked,
+#the app will readjust all of the prices each time you switch
+#from a normal y scale to a logged y scale.This readjustment is
+#unnessary work.
+
+#Fix this problem by adding a new reactive expression to the app.
+#The reactive expression should take the value of dataInput and
+#return an adjusted copy of the data.
+
+# server<-function(input,output){
+#   dataInput<-reactive({
+#     getSymbols(input$symb,src="google",
+#                from=input$dates[1],
+#                to=input$dates[2],
+#                auto.assign=FALSE)
+#   })
+#   
+#   finalInput<-reactive({
+#     if(!input$adjust) return (dataInput())
+#     adjust(dataInput())
+#   })
+#   
+#   output$plot<-renderPlot({
+#     chartSeries(finalInput(),theme=chartTheme("white"),
+#                 type="line",log.scale=input$log,TA=NULL)
+#   })
+# }
+
+
+#Now you have isolated each input in its own reactive expression
+#or render* function.If an input changes,only out of date expression
+#will re-run.
+
+#A user clicks "Plot y axis on the log scale."
+#renderPlot re-runs.
+#renderPlot calls finalInput.
+#finalInput checks with dataInput and input$adjust.
+#If neither has changed,finalInput returns its saved value
+#If either has changed,finalInput calculateds a new value
+#with the current inputs.It will pass the new value to renderPlot
+#and store the new value for future queries.
+
+
+#Lesson 7
+#Share your apps
+
+#When it comes to sharing Shiny apps,you have two basic options:
+#1.Share your Shiny app as R scripts.This is the simplest way to
+#share an app,but it works only if your users have R on their
+#own computer.Users can use these scripts to launch the app from
+#their own R session.
+
+#2.Share your Shiny app as a web page.This is definitely the
+#most user friendly way to share a Shiny app.Your users can
+#navigate to your app through the internet with a web browser.
+#They will find your app fully rendered,up to date,and ready to go.
+
+
+#Share as R scripts
+#runUrl:will download and launch a Shiny app straight from a weblink
+#To use runURL:
+#-Save your Shiny app's directory as a zip file
+#-Host that zip file at its own link on a web page.Anyone with
+#access to the link can launch the app from inside R by running.
+
+# runUrl("<the weblink>")
+
+
+#runGitHub
+# runGitHub("<your repository name>","<your user name>")
+
+
+#runGist
+#To share your app as gist:
+#-Copy and paste your app.R files to the gist web page.
+#-Note the URL that GitHub gives the gist.
+
+#Once you've made a gist,your users can launch the app with
+#runGist("<gist number>") where "<gist number>" is the number
+#that appears at the end of your Gist's web address.
+
+# runGist("eb3470beb1c0252bd0289cbc89bcf36f")
+
+
+#Share as a web page
+#All of the above methods share the same limitation.They require
+#your user to have R and Shiny installed on their computer.
+
+#However,Shiny creates the perfect opportunity to share output
+#with people who do not have R.If you host the app as its own
+#URL,users can visit the app and not need to worry about the code
+#that generates it.
+
+#RStudio offers four ways to host Shiny app as a web page:
+#1.shinyapps.io
+#2.Shiny Server
+#3.Shiny Server Pro
+#4.Rstudion Connect
+
+#Shinyapps.io
+#The easiest way to turn your Shiny app into a web page is to use
+#shinyapps.io,RStudio's hosting service for Shiny apps.
+
+#shinyapps.io lets you upload your app straight from your R session
+#to a server hosted by RStudio.You have complete control over your
+#app including server administration tools.
+#http://www.shinyapps.io/
+
+
+#Shiny Server
+#Shiny Server is a companion program to Shiny that builds a web
+#server designed to host Shiny apps.
+
+#Shiny Server is a server program that Linux servers can run to 
+#host a Shiny app as a web page.
+
+#You can host multiple Shiny application on multiple web pages 
+#with the same Shiny Server,and you can deploy the apps from
+#behind a firewall.
+
+#Shiny Server Pro
+#Shiny Server will get your app to the web and take care of all
+#of your Shiny publishing needs.However,if you use Shiny in a 
+#forprofit setting,you may want to give yourself the server tools
+#that come with most paid server program,such as
+#-Password authentification
+#-SSL support
+#-Administrator tools
+#-Priority support
+#-and more
+
+
+#RStudio Connect
+#RStudio Connect is a new publishing platform for the work your
+#team cerate in R.Share Shiny applications,R markdown reports,
+#dashboards,plots and more in one convenient place.With RStudio
+#Connect,you can publish from the RStudio IDE wiht the push of 
+#a button and schedule execution of reports and flexible security policies.
+
 
 #Run the app ----
 shinyApp(ui = ui,server = server)
-
-
-
-
-
-
-
