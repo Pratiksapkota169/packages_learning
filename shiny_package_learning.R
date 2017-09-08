@@ -26,25 +26,3 @@ runApp("my_app",display.mode = "showcase")
 
 #Lession 2
 #Build a user interface
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
