@@ -272,6 +272,128 @@ title("Regression of MPG on Weight")
 detach(mtcars)
 dev.off()
 
+dev.new()#create graph
+
+
+dose <- c(20, 30, 40, 45, 60)
+drugA <- c(16, 20, 27, 40, 60)
+drugB <- c(15, 18, 25, 31, 40)
+
+plot(dose,drugA,type = "b") #both points and lines should be plotted
+
+
+#Graphical parameters
+#customize many features of a graph (fonts,colors,axes,and labels)
+#through options called graphical parameters.One way is to specify
+#these options through the par() function.Values set in this manner
+#will be in effect for the rest of the session or until they're
+#changed.
+#par(optionname=value,optionname=value,...)
+#Adding the no readonly=TRUE option produces a list of current 
+#graphical settings that can be modified.
+
+opar<-par(no.readonly = TRUE)
+#makes a copy of the current settings
+par(lty=2,pch=7)
+#changes the default line type to dashed and the default symbol for
+#plotting points to a solid triangle
+plot(dose,drugB,type = "b")
+par(opar)
+
+plot(dose,drugA,type = "b",lty=2,pch=17)
+
+
+#pch:Specifies the symbol to use when plotting points
+#cex:Specifies the symbol size,cex is a number indicating the amount
+#by which plotting symbols should be scaled relative to the default.
+#1=default,1.5 is 50% larger,0.5 is 50% smaller,and so forth
+#lty:Specifies the line type
+#lwd:Specifies the line width,lwd is expressed relative to the default
+#1=default,lwd=2 generate a line twice as wide as the default
+
+#Colors
+#Parameters for specifying colors
+
+#col:Default plotting color.Some functions(such as lines and pie)
+#accept a vector of value that are recycled.For example,if col=
+#c("red","blue") and three lines are plotted,the first line will be
+#read,the second blue,and the third red.
+
+#col.axis:Color for axis text
+#col.lab:Color for axis labels
+#col.main:Color for titles
+#col.sub:Color for subtitles
+#fg:Color for the plot's foreground
+#bg:Color for the plot's background
+
+#col=1;col="white";col="#FFFFF";col=rgb(1,1,1);col=hsv(0,0,1)
+
+#colors()
+#create vectors of contiguous colors:
+#rainbow(),heat.colors(),terrain.colors(),topo.colors(),cm.colors()
+
+
+#The RColorBrewer package is particularly popular for creating
+#attractive color palettes.
+#install.packages("RColorBrewer")
+
+library(RColorBrewer)
+n<-7
+mycolors<-brewer.pal(n,"Set1")
+barplot(rep(1,n),col = mycolors)
+#return a vector of seven colors in hexadecimal format from the Set1 palette
+
+#gray(1:10/10):produces 10 gray levels
+n<-10
+mycolors<-rainbow(n)
+pie(rep(1,n),labels=mycolors,col=mycolors)
+mygrays<-gray(0:n/n)
+pie(rep(1,n),labels = mygrays,col = mygrays)
+
+
+#Text characteristics
+#Parameters specifying text size
+#cex:Number indicating the amount by which plotted text should be 
+#scaled relative to the default 1=default
+
+#cex.axis:Magnification of axis text relative to cex
+#cex.lab:Magnification of axis labels relative to cex
+#cex.main:Magnification of titles relative to cex
+#cex.sub:Magnification of subtitles relative to cex
+
+
+par(font.lab=3,cex.lab=1.5,font.main=4,cex.main=2)
+
+#Parameters specifying font family,size,and style
+#font:Integer specifying the font to use for plotted text.
+#1=plain,2=bold,3=italic,4=bold italic,5=symbol(in Adobe symbol encoding)
+
+#font.axis:Font for axis text
+#font.lab:Font for axis labels
+#font.main:Font for titles
+#font.sub:Font for subtitles
+#ps:Font point size(roughly 1/72 inch).The text size=ps*cex
+#family:Font family for drawing text.Standard values are serif,sans,and mono.
+
+
+#on Windows platforms:
+#mono is mapped to TT Courier New (TT stands for TrueType)
+#serif is mapped to TT Times New Roman
+#sans is mapped to TT Arial
+
+#On Windows,you can create this mapping via the windowsFont() function
+
+windowsFonts(
+  A=windowsFont("Arial Black"),
+  B=windowsFont("Bookman Old Style"),
+  C=windowsFont("Comic Sans MS")
+)
+
+#page 54
+
+
+
+
 
 
 
