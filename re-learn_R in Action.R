@@ -35,12 +35,12 @@
 # - 23.Advanced graphics with the lattice package
 
 #### Listing 1.1 A sample R session
-age<-c(1,3,4,2,11,9,3,9,12,3)
-weight<-c(4.4,5.3,7.2,5.2,8.5,7.3,6.0,10.4,10.2,6.1)
+age <- c(1, 3, 4, 2, 11, 9, 3, 9, 12, 3)
+weight <- c(4.4, 5.3, 7.2, 5.2, 8.5, 7.3, 6.0, 10.4, 10.2, 6.1)
 mean(weight)
 sd(weight)
-cor(age,weight)
-plot(age,weight)
+cor(age, weight)
+plot(age, weight)
 
 #### Listing 1.2 An example of commands used to manage the R workspace
 getwd()
@@ -50,7 +50,7 @@ history()#Displays your last commands (default=25)
 savehistory("myfile")#saves the commands history to myfile (default=.Rhistory)
 loadhistory("myfile")
 save.image("myfile")#saves the workspace to myfile (default=.RData)
-save(objectlist,file="myfile")
+save(objectlist, file = "myfile")
 load("myfile")#loads a workspace into the current session
 q()
 
@@ -64,7 +64,7 @@ svg("filename.svg")
 win.metafile("filename.wmf")
 
 
-sink("myoutput",append = TRUE,split = TRUE)
+sink("myoutput", append = TRUE, split = TRUE)
 pdf("mygraphs.pdf")
 source("script2.R")
 
@@ -83,11 +83,11 @@ help.start()
 #can't mix modes in the same vector.
 
 #"Scalars" are one-element vectors
-#You can refer to elements of a vector using a numeric vector of 
+#You can refer to elements of a vector using a numeric vector of
 #positions within brackets.
-a<-c("k","j","h","a","c","m")
+a <- c("k", "j", "h", "a", "c", "m")
 a[3]
-a[c(1,3,5)]
+a[c(1, 3, 5)]
 a[2:6]#contain two boundaries
 
 
@@ -100,27 +100,37 @@ a[2:6]#contain two boundaries
 
 
 #### Listing 2.1 Creating matrices
-y<-matrix(1:20,nrow=5,ncol=4)
+y <- matrix(1:20, nrow = 5, ncol = 4)
 y
-cells<-c(1,26,24,68)
-rnames<-c("R1","R2")
-cnames<-c("C1","C2")
-mymatrix<-matrix(cells,nrow = 2,ncol = 2,byrow = TRUE,
-                 dimnames = list(rnames,cnames))
+cells <- c(1, 26, 24, 68)
+rnames <- c("R1", "R2")
+cnames <- c("C1", "C2")
+mymatrix <- matrix(
+  cells,
+  nrow = 2,
+  ncol = 2,
+  byrow = TRUE,
+  dimnames = list(rnames, cnames)
+)
 mymatrix
 
-mymatrix<-matrix(cells,nrow = 2,ncol = 2,byrow = FALSE,
-                 dimnames = list(rnames,cnames))
+mymatrix <- matrix(
+  cells,
+  nrow = 2,
+  ncol = 2,
+  byrow = FALSE,
+  dimnames = list(rnames, cnames)
+)
 mymatrix
 
 
 #### Listing 2.2 Using matrix subscripts
-x<-matrix(1:10,nrow = 2)
+x <- matrix(1:10, nrow = 2)
 x
 x[2,]
-x[,2]
-x[1,4]
-x[1,c(4,5)]
+x[, 2]
+x[1, 4]
+x[1, c(4, 5)]
 
 
 #Arrays:are similar to matrices but can have more than two dimensions.
@@ -129,10 +139,11 @@ x[1,c(4,5)]
 
 
 #### Listing 2.3 Creating an array
-dim1<-c("A1","A2")
-dim2<-c("B1","B2","B3")
-dim3<-c("C1","C2","C3","C4")
-z<-array(1:24,c(2,3,4),dimnames = list(dim1,dim2,dim3))#2*3*4 dims
+dim1 <- c("A1", "A2")
+dim2 <- c("B1", "B2", "B3")
+dim3 <- c("C1", "C2", "C3", "C4")
+z <-
+  array(1:24, c(2, 3, 4), dimnames = list(dim1, dim2, dim3))#2*3*4 dims
 z
 
 #Data frames:is more general than a matrix in that different columns
@@ -140,42 +151,42 @@ z
 
 
 #### 2.4 Creating a data frame
-patientID<-c(1,2,3,4)
-age<-c(25,34,28,52)
-diabets<-c("Type1","Type2","Type1","Type1")
-status<-c("Poor","Improved","Excellent","Poor")
-patientdata<-data.frame(patientID,age,diabets,status)
+patientID <- c(1, 2, 3, 4)
+age <- c(25, 34, 28, 52)
+diabets <- c("Type1", "Type2", "Type1", "Type1")
+status <- c("Poor", "Improved", "Excellent", "Poor")
+patientdata <- data.frame(patientID, age, diabets, status)
 patientdata
 
 
 #### 2.5 Specifying elements of a data frame
 patientdata[1:2]
 
-patientdata[c("diabets","status")]
+patientdata[c("diabets", "status")]
 
 patientdata$age
 
-table(patientdata$diabets,patientdata$status)#row,col:pivot table
+table(patientdata$diabets, patientdata$status)#row,col:pivot table
 
 summary(mtcars$mpg)
-plot(mtcars$mpg,mtcars$disp)
+plot(mtcars$mpg, mtcars$disp)
 
 attach(mtcars)
 summary(mpg)
-plot(mpg,disp)
-plot(mpg,wt)
+plot(mpg, disp)
+plot(mpg, wt)
 detach(mtcars)
 
-with(mtcars,{
+with(mtcars, {
   print(summary(mpg))
-  plot(mpg,disp)
-  plot(mpg,wt)
+  plot(mpg, disp)
+  plot(mpg, wt)
 })
 
 
-with(mtcars,{
-  nokeepstats<-summary(mpg)
-  keepstats<<-summary(mpg)
+with(mtcars, {
+  nokeepstats <- summary(mpg)
+  keepstats <<- summary(mpg)
   #operator <<- saves the object to the global environment
   #outside of the with() call
 })
@@ -185,29 +196,30 @@ keepstats
 
 #Factors:categorical and order categorical variables are called factors
 
-status<-c("Poor","Improved","Excellent","Poor")
-status<-factor(status,ordered = TRUE)
+status <- c("Poor", "Improved", "Excellent", "Poor")
+status <- factor(status, ordered = TRUE)
 #encode the vector as (3,2,1,3) and associate these values internally
 #as 1=Excellent,2=Improved,and 3=Poor
 status
 
 #By default,factor levels for character are created in alphabetical order.
 
-status<-factor(status,order=TRUE,
-               levels = c("Poor","Improved","Excellent"))
+status <- factor(status,
+                 order = TRUE,
+                 levels = c("Poor", "Improved", "Excellent"))
 status
 
 #Any data values not in the list will be set to missing
 
 
 #Listing 2.6 Using factors
-patientID<-c(1,2,3,4)
-age<-c(25,34,28,52)
-diabetes<-c("Type1","Type2","Type1","Type1")
-status<-c("Poor","Improved","Excellent","Poor")
-diabetes<-factor(diabetes)
-status<-factor(status,ordered = TRUE)
-patientdata<-data.frame(patientID,age,diabetes,status)
+patientID <- c(1, 2, 3, 4)
+age <- c(25, 34, 28, 52)
+diabetes <- c("Type1", "Type2", "Type1", "Type1")
+status <- c("Poor", "Improved", "Excellent", "Poor")
+diabetes <- factor(diabetes)
+status <- factor(status, ordered = TRUE)
+patientdata <- data.frame(patientID, age, diabetes, status)
 str(patientdata)
 summary(patientdata)
 
@@ -216,11 +228,11 @@ summary(patientdata)
 #allows to gather a variety of objects under one name
 
 #Listing 2.7 Creating a list
-g<-"My First List"
-h<-c(25,26,28,39)
-j<-matrix(1:10,nrow = 5)
-k<-c("one","two","three")
-mylist<-list(title=g,age=h,j,k)
+g <- "My First List"
+h <- c(25, 26, 28, 39)
+j <- matrix(1:10, nrow = 5)
+k <- c("one", "two", "three")
+mylist <- list(title = g, age = h, j, k)
 mylist
 
 mylist[[2]]
@@ -229,19 +241,23 @@ mylist["age"]#concluding index:$age
 
 
 #The file can be imported into a data frame:
-grades<-read.table("studentgrade.csv",header = TRUE,
-                   row.names = "StudentID",sep = ",")
+grades <- read.table(
+  "studentgrade.csv",
+  header = TRUE,
+  row.names = "StudentID",
+  sep = ","
+)
 
 install.packages("xlsx")
 library(xlsx)
-mydataframe<-read.xlsx("filename.xlsx",1)
+mydataframe <- read.xlsx("filename.xlsx", 1)
 
 library(RODBC)
-odbcConnect(dsn,uid = "",pwd="")
-sqlFetch(channel,sqltable)
-sqlQuery(channel,query)
-sqlSave(channel,mydf,tablename=sqltable,append = FALSE)
-sqlDrop(channel,sqltable)
+odbcConnect(dsn, uid = "", pwd = "")
+sqlFetch(channel, sqltable)
+sqlQuery(channel, query)
+sqlSave(channel, mydf, tablename = sqltable, append = FALSE)
+sqlDrop(channel, sqltable)
 close(channel)
 
 
@@ -252,22 +268,22 @@ str(object) #Give the structure of an object
 class(object) #Gives the class of an object
 mode(object) #Determines how an object is stored
 names(object) #Gives the names of components in an object
-c(object,object,...) 
-cbind(object,object,...)
-rbind(object,object,...)
+c(object, object, ...)
+cbind(object, object, ...)
+rbind(object, object, ...)
 object
 head(object)
 tail(object)
 ls()
-rm(object,object,...)
-newobject<-edit(object) #Edits object and saves it as newobject
+rm(object, object, ...)
+newobject <- edit(object) #Edits object and saves it as newobject
 fix(object) #Edits an object in place
 
 
 pdf("mygraph.pdf")
 attach(mtcars)
-plot(wt,mpg)
-abline(lm(mpg~wt))
+plot(wt, mpg)
+abline(lm(mpg ~ wt))
 title("Regression of MPG on Weight")
 detach(mtcars)
 dev.off()
@@ -279,7 +295,7 @@ dose <- c(20, 30, 40, 45, 60)
 drugA <- c(16, 20, 27, 40, 60)
 drugB <- c(15, 18, 25, 31, 40)
 
-plot(dose,drugA,type = "b") #both points and lines should be plotted
+plot(dose, drugA, type = "b") #both points and lines should be plotted
 
 
 #Graphical parameters
@@ -289,18 +305,22 @@ plot(dose,drugA,type = "b") #both points and lines should be plotted
 #will be in effect for the rest of the session or until they're
 #changed.
 #par(optionname=value,optionname=value,...)
-#Adding the no readonly=TRUE option produces a list of current 
+#Adding the no readonly=TRUE option produces a list of current
 #graphical settings that can be modified.
 
-opar<-par(no.readonly = TRUE)
+opar <- par(no.readonly = TRUE)
 #makes a copy of the current settings
-par(lty=2,pch=7)
+par(lty = 2, pch = 7)
 #changes the default line type to dashed and the default symbol for
 #plotting points to a solid triangle
-plot(dose,drugB,type = "b")
+plot(dose, drugB, type = "b")
 par(opar)
 
-plot(dose,drugA,type = "b",lty=2,pch=17)
+plot(dose,
+     drugA,
+     type = "b",
+     lty = 2,
+     pch = 17)
 
 
 #pch:Specifies the symbol to use when plotting points
@@ -338,22 +358,22 @@ plot(dose,drugA,type = "b",lty=2,pch=17)
 #install.packages("RColorBrewer")
 
 library(RColorBrewer)
-n<-7
-mycolors<-brewer.pal(n,"Set1")
-barplot(rep(1,n),col = mycolors)
+n <- 7
+mycolors <- brewer.pal(n, "Set1")
+barplot(rep(1, n), col = mycolors)
 #return a vector of seven colors in hexadecimal format from the Set1 palette
 
 #gray(1:10/10):produces 10 gray levels
-n<-10
-mycolors<-rainbow(n)
-pie(rep(1,n),labels=mycolors,col=mycolors)
-mygrays<-gray(0:n/n)
-pie(rep(1,n),labels = mygrays,col = mygrays)
+n <- 10
+mycolors <- rainbow(n)
+pie(rep(1, n), labels = mycolors, col = mycolors)
+mygrays <- gray(0:n / n)
+pie(rep(1, n), labels = mygrays, col = mygrays)
 
 
 #Text characteristics
 #Parameters specifying text size
-#cex:Number indicating the amount by which plotted text should be 
+#cex:Number indicating the amount by which plotted text should be
 #scaled relative to the default 1=default
 
 #cex.axis:Magnification of axis text relative to cex
@@ -362,7 +382,12 @@ pie(rep(1,n),labels = mygrays,col = mygrays)
 #cex.sub:Magnification of subtitles relative to cex
 
 
-par(font.lab=3,cex.lab=1.5,font.main=4,cex.main=2)
+par(
+  font.lab = 3,
+  cex.lab = 1.5,
+  font.main = 4,
+  cex.main = 2
+)
 
 #Parameters specifying font family,size,and style
 #font:Integer specifying the font to use for plotted text.
@@ -384,12 +409,676 @@ par(font.lab=3,cex.lab=1.5,font.main=4,cex.main=2)
 #On Windows,you can create this mapping via the windowsFont() function
 
 windowsFonts(
-  A=windowsFont("Arial Black"),
-  B=windowsFont("Bookman Old Style"),
-  C=windowsFont("Comic Sans MS")
+  A = windowsFont("Arial Black"),
+  B = windowsFont("Bookman Old Style"),
+  C = windowsFont("Comic Sans MS")
 )
 
-#page 54
+#If graphs will be output in PDF or PostScript format,changing the
+#font family is relatively straightforward.For PDFs,use names(pdfFonts())
+#to find out which fonts are available on your system and pdf(file=
+#"myplot.pdf",family="fontname") to generate the plots.
+
+
+#Graph and margin dimensions
+#pin:Plot dimensions(width,height) in inches
+#mai:Numerical vector indicating margin size,where c(bottom,left,
+#top,right) is expressed in inches
+#mar:Numerical vector indicating margin size,where c(bottom,left,
+#top,right) is expressed in lines.The default is c(5,4,4,2)+0.1
+
+
+#Listing 3.1 Using graphical parameters to control graph appearance
+dose <- c(20, 30, 40, 45, 60)
+drugA <- c(16, 20, 27, 40, 60)
+drugB <- c(15, 18, 25, 31, 40)
+
+opar <- par(no.readonly = TRUE)
+par(pin = c(2, 3))
+par(lwd = 2, cex = 1.5)
+par(cex.axis = .75, font.axis = 3)
+plot(
+  dose,
+  drugA,
+  type = "b",
+  pch = 19,
+  lty = 2,
+  col = "red",
+  ann = FALSE
+)
+plot(
+  dose,
+  drugB,
+  type = "b",
+  pch = 23,
+  lty = 6,
+  col = "blue",
+  bg = "green"
+)
+
+#Error in plot.new() : plot region too large
+par("mar")#default setting
+opar <- par(no.readonly = TRUE)
+par(mar = rep(4, 4))
+
+
+#Adding text,customized axes,and legends
+plot(
+  dose,
+  drugA,
+  type = "b",
+  col = "red",
+  lty = 2,
+  pch = 2,
+  lwd = 2,
+  main = "Clinical Trials for Drug A",
+  sub = "This is hypothetical data",
+  xlab = "Dosage",
+  ylab = "Drug Response",
+  xlim = c(0, 60),
+  ylim = c(0, 70)
+)
+
+#not all functions allow you to add these options
+#Some high-level plotting functions include default titles
+#and labels.You can remove them by adding ann=FALSE in the
+#plot() statement or in a separate par() statement.
+
+#Titles
+title(
+  main = "main title",
+  sub = "subtitle",
+  xlab = "x-axis label",
+  ylab = "y-axis label"
+)
+
+title(
+  main = "My Title",
+  col.main = "red",
+  sub = "My Subtitle",
+  col.sub = "blue",
+  xlab = "My X label",
+  ylab = "My Y label",
+  col.lab = "green",
+  cex.lab = 0.75
+)
+
+
+#Axes
+#axis(side,at=,labels=,pos=,lty=,col=,las=,tck=,...)
+#side:integer indicating the side of the graph on which to draw
+#the axis(1=bottom,2=left,3=top,4=right)
+#at:Numeric vector indicating where tick marks should be drawn
+#labels:Operacter vector of labels to be placed at the tick
+#marks(if null,the at values are used)
+#pos:Coordinate at which the axis line is to be drawn
+#lty:Line type
+#col:Line and tick mark color
+#las:Specifies that labels are parallel(=0) or perpendicular
+#(=2) to the axis
+#tck:Length of each tick mark as a fraction of the plotting
+#region (a negative number is outside the graph,a positive
+#number is inside, 0 suppresses ticks, and 1 creates gridlines)
+#The default is -0.01
+
+#When creating a custom axis,you should suppress the axis that's
+#automatically generated by the high-level plotting function.
+#The option axes=FALSE suppresses all axes (including all axis
+#frame lines,unless you add the option frame.plot=TRUE).The
+#options xaxt="n"  and yaxt="n" suppress the x-axis and y-axis,
+#respectively (leaving the frame lines,without ticks).
+
+
+#Listing 3.2 An example of custom axes
+x <- c(1:10)
+y <- x
+z <- 10 / x
+opar <- par(no.readonly = TRUE)
+
+par(mar = c(5, 4, 4, 8) + 0.1)
+
+plot(
+  x,
+  y,
+  type = "b",
+  pch = 21,
+  col = "red",
+  yaxt = "n",
+  lty = 3,
+  ann = FALSE
+)
+
+lines(
+  x,
+  z,
+  type = "b",
+  pch = 22,
+  col = "blue",
+  lty = 2
+)
+
+axis(
+  2,
+  at = x,
+  labels = x,
+  col.axis = "red",
+  las = 2
+)
+
+axis(
+  4,
+  at = z,
+  labels = round(z, digits = 2),
+  col.axis = "blue",
+  las = 2,
+  cex.axis = 0.7,
+  tck = -.01
+)
+
+mtext(
+  "y=1/x",
+  side = 4,
+  line = 3,
+  cex.lab = 1,
+  las = 2,
+  col = "blue"
+)
+
+title("An Example of Creative Axes",
+      xlab = "X Values",
+      ylab = "Y=X")
+
+par(opar)
+
+
+#Reference lines
+
+#The abline() function is used to add reference lines to a graph.
+#The format is abline(h=yvalues,v=xvalues)
+#Other graphical parameters (such as line type,color,and width)
+#can also be specified in the abline() function.For example,
+#abline(h=c(1,5,7)) adds solid horizontal lines at y=1,5,7,
+#whereas the code abline(v=seq(1,10,2),lty=2,col="blue") add
+#dashed blue vertical lines at x=1,3,5,7 and 9.
+
+#Legend
+legend(location, title, legend, ...)
+
+#location:There are several ways to indicate the location of the
+#legend.You can give an x,y coordinate for its upper-left corner.
+#You can use location(1),in which case you use the mouse to
+#indicate the legned's.You can also use the keyword bottom,
+#bottomleft,left,topleft,top,topright,right,bottomright,or center
+#to place the legend in the graph.If you use one of these keywords,
+#you can also use inset=to sepecify an amount to move the legend
+#into the graph.
+
+#Listing 3.3 Comparing drug A and drug B reponse by dose
+dose <- c(20, 30, 40, 45, 60)
+drugA <- c(16, 20, 27, 40, 60)
+drugB <- c(15, 18, 25, 31, 40)
+
+#modify settings:lwd,cex,font.lab
+opar <- par(no.readonly = TRUE)
+par(lwd = 2,
+    cex = 1.5,
+    font.lab = 2)
+
+#drwa a line
+plot(
+  dose,
+  drugA,
+  type = "b",
+  pch = 15,
+  lty = 1,
+  col = "red",
+  ylim = c(0, 60),
+  main = "Drug A vs. Drug B",
+  xlab = "Drug Dosage",
+  ylab = "Drug Response"
+)
+
+#draw another line
+lines(
+  dose,
+  drugB,
+  type = "b",
+  pch = 17,
+  lty = 2,
+  col = "blue"
+)
+
+#drwa a subline
+abline(
+  h = c(30),
+  lwd = 1.5,
+  lty = 2,
+  col = "gray"
+)
+
+library(Hmisc)
+#add minor ticks
+minor.tick(nx = 3,
+           ny = 3,
+           tick.ratio = 0.5)#3等分，长度一半
+
+#add legend
+legend(
+  "topleft",
+  inset = .05,
+  title = "Drug Type",
+  c("A", "B"),
+  lty = c(1, 2),
+  pch = c(15, 17),
+  col = c("red", "blue")
+)
+
+par(opar)
+
+
+#Text annotations
+#text(location,pos,side),mtext()
+#location:Location can be an x,y coordinate.Alternatively,
+#you can place the text interactively via mouse by specifying
+#location as locator(1)
+
+attach(mtcars)
+plot(
+  wt,
+  mpg,
+  main = "Mileage vs. Car Weight",
+  xlab = "Weight",
+  ylab = "Mileage",
+  pch = 18,
+  col = "blue"
+)
+text(
+  wt,
+  mpg,
+  row.names(mtcars),
+  cex = 0.6,
+  pos = 4,
+  col = "red"
+)
+detach(mtcars)
+
+#The text() function is usedd to add the car make to the
+#right of each data point.The point labels are shrunk by
+#40% and presented in red.
+
+
+opar <- par(no.readonly = TRUE)
+par(cex = 1.5)
+plot(1:7, 1:7, type = "n")
+text(3, 3, "Example of default text")
+text(4, 4, "Example of mono-spaced text")
+text(5, 5, family = "serif", "Example of serif text")
+par(opar)
+
+
+#The resulting plot will differ from platform to platform,
+#because plain,mono,and serif text are mapped to different
+#font families on different systems
+
+
+#Math annotations
+#x+y:x+y
+#x-y:x-y
+#x*y:xy
+#x/y:x/y
+#x%+-%y:x±y
+#x%/%y:x÷y
+#x%*%y:x×y
+#x%.%y:xy
+#sqrt(x,y)
+#x%~~%y
+#x%=~%y
+#x%==%y
+#x%prop%y
+#underline(x)
+
+#Combining graphs
+#With the par() function,you can include the graphical parameter
+#mfrow=c(nrows,ncols) to create a matrix of nrows x ncols plots
+#that are filled in by row.Alternatively,you can use mfool=c(nrows,
+#ncols) to fill the matrix by columns.
+
+attach(mtcars)
+opar <- par(no.readonly = TRUE)
+par(mfrow = c(2, 2))
+plot(wt, mpg, main = "Scatterplot of wt vs. mpg")
+plot(wt, disp, main = "Scatterplot of wt vs. disp")
+hist(wt, main = "Histogram of wt")
+boxplot(wt, main = "Boxplot of wt")
+par(opar)
+detach(mtcars)
+
+
+attach(mtcars)
+opar <- par(no.readonly = TRUE)
+par(mfrow = c(3, 1))
+hist(wt)
+hist(mpg)
+hist(disp)
+par(opar)
+detach(mtcars)
+
+
+attach(mtcars)
+layout(matrix(c(1, 1, 2, 3), 2, 2, byrow = TRUE))
+hist(wt)
+hist(mpg)
+hist(disp)
+detach(mtcars)
+
+
+attach(mtcars)
+layout(matrix(c(1, 1, 2, 3), 2, 2, byrow = TRUE),
+       widths = c(3, 1),
+       heights = c(1, 2))
+hist(wt)
+hist(mpg)
+hist(disp)
+detach(mtcars)
+
+
+#Listing 3.4 Fine placement of figures in a graph
+opar <- par(no.readonly = TRUE)
+par(fig = c(0, 0.8, 0, 0.8))
+plot(mtcars$wt, mtcars$mpg,
+     xlab = "Miles Per Gallon",
+     ylab = "Car weight")
+
+#c(x1,x2,y1,y2)
+par(fig = c(0, 0.8, 0.55, 1), new = TRUE)
+boxplot(mtcars$wt, horizontal = TRUE, axes = FALSE)
+
+par(fig = c(0.65, 1, 0, 0.8), new = TRUE)
+boxplot(mtcars$mpg, axes = FALSE)
+
+mtext(
+  "Enhanced Scatterplot",
+  side = 3,
+  outer = TRUE,
+  line = -3
+)
+
+par(opar)
+
+
+#Listing 4.1 Creating the leadership data frame
+manager <- c(1, 2, 3, 4, 5)
+date <- c("10/24/08", "10/28/08", "10/1/08", "10/12/08", "5/1/09")
+country <- c("US", "US", "UK", "UK", "UK")
+gender <- c("M", "F", "F", "M", "F")
+age <- c(32, 45, 25, 39, 99)
+q1 <- c(5, 3, 3, 3, 2)
+q2 <- c(4, 5, 5, 3, 2)
+q3 <- c(5, 2, 5, 4, 1)
+q4 <- c(5, 5, 5, NA, 2)
+q5 <- c(5, 5, 2, NA, 1)
+leadership <- data.frame(manager,
+                         date,
+                         country,
+                         gender,
+                         age,
+                         q1,
+                         q2,
+                         q3,
+                         q4,
+                         q5,
+                         stringsAsFactors = FALSE)
+leadership
+
+
+#Listing 4.2 Creating new variables
+mydata <- data.frame(x1 = c(2, 2, 6, 4),
+                     x2 = c(3, 4, 2, 8))
+mydata$sumx <- mydata$x1 + mydata$x2
+mydata$meanx <- (mydata$x1 + mydata$x2) / 2
+
+#or
+attach(mydata)
+mydata$sumx <- x1 + x2
+mydata$meanx <- (x1 + x2) / 2
+
+#or:prefer
+mydata <- transform(mydata,
+                    sumx = x1 + x2,
+                    means = (x1 + x2) / 2)
+
+#isTRUE(x):Tests whether x is TRUE
+
+names(leadership)[2] <- "testDate"
+names(leadership)
+names(leadership)[6:10] <- c("item1", "item2", "item3", "item4", "item5")
+
+library(plyr)
+leadership <- rename(leadership,
+                     c(manager = "managerID", testDate = "Date"))
+names(leadership)
+
+
+#Listing 4.3 Applying the is.na() function
+is.na(leadership[, 6:10])
+
+#First,missing values are considered noncomparable,even to themselves
+#This means you can't use comparison operators to test for the
+#presence of missing values.
+#Second,R doesn't represent infinite or impossible values as
+#missing values as missing values.
+
+x <- c(1, 2, NA, 3)
+y <- x[1] + x[2] + x[3] + x[4]
+z <- sum(x)
+z#return NA
+
+y <- sum(x, na.rm = TRUE)
+y#return 6
+
+#na.omit():delete any rows with missing data
+
+
+#Listing 4.4 Using na.omit() to delete incomplete observation
+leadership
+newdata <- na.omit(leadership)
+newdata
+
+
+#Date values
+#as.Date(x,"input_format")
+#%d:Day as a number 01-31
+#%a:Abbreviated weekday Mon
+#%A:Unabbreviated weekday Monday
+#%m:Month 00-12
+#%b:Abbreviated month Jan
+#%B:Unabbreviated month January
+#%y:Two-digit year 07
+#%Y:Four-digit year 2007
+
+
+strDates <- c("01/05/1965", "08/16/1975")
+dates <- as.Date(strDates, "%m/%d/%Y")#指明原格式是啥,然后转成标准的年月日格式
+dates
+
+myformat <- "%m/%d/%y"
+leadership
+leadership$Date <- as.Date(leadership$Date, myformat)
+
+Sys.Date()
+date()
+
+today <- Sys.Date()
+format(today, format = "%B %d %Y")#转成指定格式
+format(today, format = "%A")#星期二
+format(today, format = "%a")#周二
+
+
+startdate <- as.Date("2004-02-13")
+enddate <- as.Date("2011-01-22")
+days <- enddate - startdate
+days
+
+
+today <- Sys.Date()
+dob <- as.Date("1956-10-12")
+difftime(today, dob, units = "weeks")#return difference of weeks
+
+
+strDates <- as.character(dates)
+strDates
+
+
+#Test:is.numeric(),is.character(),is.vector(),is.matrix(),
+#is.data.frame(),is.factor(),is.logical()
+#Convert:as.numeric(),as.character(),as.vector(),as.matrix(),
+#as.data.frame(),as.factor(),as.logical()
+
+
+#Sorting data
+newdata <- leadership[order(leadership$age), ]#按age升序
+newdata
+
+attach(leadership)
+newdata <- leadership[order(gender, age), ]
+newdata
+detach(leadership)
+
+
+attach(leadership)
+newdata <- leadership[order(gender, -age), ]#按age降序排列
+newdata
+detach(leadership)
+
+
+#Merging datasets
+#Adding columns to a data frame
+
+total <- merge(dataframeA, dataframeB, by = c("ID", "Country"))
+
+total <- cbind(A, B)
+#must have the same number of rows and be sorted in the same order
+
+
+#Adding rows to a data frame
+total <- rbind(dataframeA, dataframeB)
+
+#two data frames must have the same variables,but don't have to be
+#in the same order.
+#Delete the extra variables in dataframeA
+#Create the additional variables in dataframeB,and set them to NA
+
+
+#Selecting variables
+newdata <- leadership[, c(6:10)]
+newdata
+
+myvars <- c("item1", "item2", "item3", "item4", "item5")
+newdata <- leadership[myvars]
+newdata
+
+
+myvars <- paste("item", 1:5, sep = "")
+newdata <- leadership[myvars]
+newdata
+
+
+#Excluding variables
+myvars <- names(leadership) %in% c("item3", "item4")
+newdata <- leadership[!myvars]
+newdata
+
+newdata <- leadership[c(-3, -4)]
+newdata
+
+leadership$item1 <- leadership$item2 <- NULL
+leadership
+
+
+#Listing 4.6 Selecting observations
+newdata <- leadership[1:3, ]
+newdata <- leadership[leadership$gender == "M" & leadership$age > 30, ]
+newdata
+
+
+#The subset() function
+newdata <- subset(leadership, age >= 35 | age < 24,
+                  select = c(item3, item5))
+newdata <- subset(leadership, gender == "M" & age > 25,
+                  select = gender:item4)
+
+
+#Random samples
+mysample <- leadership[sample(1:nrow(leadership), 3, replace = FALSE), ]
+mysample
+
+#Listing SQL statement to manipulate data frames
+#install.packages("sqldf")
+library(sqldf)
+newdf <- sqldf("select * from mtcars where carb=1 order by mpg",
+               row.names = TRUE)
+newdf
+
+sqldf(
+  "select avg(mpg) as avg_mpg,avg(disp) as avg_disp,gear
+  from mtcars where cyl in (4,6) group by gear"
+)
+
+
+#Statistical functions
+#mean(x),median(x),sd(x),var(x),mad(x)#绝对中位差
+#quantile(x,probs),range(x),sum(x),diff(x,lag=n)#滞后差分项
+#min(x),max(x),scale(x,center=TRUE,scale=TRUE)#
+
+
+#Listing 5.1 Calculting the mean and standard deviation
+x<-c(1,2,3,4,5,6,7,8)
+mean(x)
+sd(x)
+
+
+#Listing 5.2 Generating pseudo-random numbers from a uniform distribution
+#runif():generate pseudo-random numbers from a nuiform distribution
+#on the interval 0 to 1
+#set.seed()
+
+runif(5)
+set.seed(1234)
+runif(3)
+
+
+#Listing 5.3 Generating data from a multivariate normal distribution
+library(MASS)
+options(digits=3)#保留
+set.seed(1234)
+
+mean<-c(230.7,146.7,3.6)
+sigma <- matrix(c(15360.8, 6721.2, -47.1,
+                  6721.2, 4700.9, -16.5,
+                  -47.1, -16.5, 0.3), nrow=3, ncol=3)
+
+mydata <- mvrnorm(500, mean, sigma)
+mydata <- as.data.frame(mydata)
+names(mydata) <- c("y","x1","x2")
+
+dim(mydata)
+head(mydata,n=10)
+
+
+#Character functions
+#nchar(x):Counts the number of characters of x
+#substr(x,start,stop):Extracts or replaces substrings in a character vector
+
+#grep(pattern,x,ignore.case=FALSE,fixed=FALSE):Search for pattern
+#in x.If fixed=FALSE,then pattern is a regular expression.If fixed
+#=TRUE,then pattern is a text string.Return the matching indices.
+
+#sub(pattern,replacement,x,ignore.case=FALSE,fixed=FALSE)
+#strsplit(x,split,fixed=FALSE)
+#paste(...,sep="")
+#toupper(x)
+#tolower(x)
+
 
 
 
