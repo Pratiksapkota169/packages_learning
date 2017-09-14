@@ -1,0 +1,1708 @@
+{
+  "code": 0,
+  "data": {
+    "config": {
+      "showadmin": 1,
+      "showentry": 1
+    },
+    "hots": [
+      {
+        "rpid": 3506289,
+        "oid": 275017,
+        "type": 1,
+        "mid": 27645,
+        "root": 0,
+        "parent": 0,
+        "count": 2,
+        "rcount": 2,
+        "floor": 107,
+        "state": 0,
+        "fansgrade": 0,
+        "attr": 0,
+        "ctime": 1338184731,
+        "rpid_str": "3506289",
+        "root_str": "0",
+        "parent_str": "0",
+        "like": 14,
+        "action": 0,
+        "member": {
+          "mid": "27645",
+          "uname": "西行寺凹凹子",
+          "sex": "保密",
+          "sign": "世界末日前的最后一个情人节，和四个妹子一起开始了同居的生活……",
+          "avatar": "http://i1.hdslb.com/bfs/face/0dba7ce7d94f0b865a7dcc03a8479f890ee7ee97.png",
+          "rank": "10000",
+          "DisplayRank": "0",
+          "level_info": {
+            "current_level": 4,
+            "current_min": 4500,
+            "current_exp": 10333,
+            "next_exp": 10800
+          },
+          "pendant": {
+            "pid": 0,
+            "name": "",
+            "image": "",
+            "expire": 0
+          },
+          "nameplate": {
+            "nid": 0,
+            "name": "",
+            "image": "",
+            "image_small": "",
+            "level": "",
+            "condition": ""
+          },
+          "official_verify": {
+            "type": -1,
+            "desc": ""
+          },
+          "vip": {
+            "vipType": 1,
+            "vipDueDate": 1491235200000,
+            "dueRemark": "",
+            "accessStatus": 1,
+            "vipStatus": 0,
+            "vipStatusWarn": ""
+          },
+          "fans_detail": null
+        },
+        "content": {
+          "message": "花鸟风月的意思就是打算把花映塚，地灵殿，风神录，永夜抄一并坑掉了么。",
+          "plat": 1,
+          "device": "",
+          "members": []
+        },
+        "replies": [
+          {
+            "rpid": 3997104,
+            "oid": 275017,
+            "type": 1,
+            "mid": 79319,
+            "root": 3506289,
+            "parent": 3506289,
+            "count": 0,
+            "rcount": 0,
+            "floor": 1,
+            "state": 0,
+            "fansgrade": 0,
+            "attr": 0,
+            "ctime": 1343570618,
+            "rpid_str": "3997104",
+            "root_str": "3506289",
+            "parent_str": "3506289",
+            "like": 0,
+            "action": 0,
+            "member": {
+              "mid": "79319",
+              "uname": "sephiroth0719",
+              "sex": "",
+              "sign": "",
+              "avatar": "http://i1.hdslb.com/bfs/face/5d2c92beb774a4bb30762538bb102d23670ae9c0.gif",
+              "rank": "10000",
+              "DisplayRank": "0",
+              "level_info": {
+                "current_level": 3,
+                "current_min": 1500,
+                "current_exp": 1845,
+                "next_exp": 4500
+              },
+              "pendant": {
+                "pid": 0,
+                "name": "",
+                "image": "",
+                "expire": 0
+              },
+              "nameplate": {
+                "nid": 0,
+                "name": "",
+                "image": "",
+                "image_small": "",
+                "level": "",
+                "condition": ""
+              },
+              "official_verify": {
+                "type": -1,
+                "desc": ""
+              },
+              "vip": {
+                "vipType": 0,
+                "vipDueDate": 0,
+                "dueRemark": "",
+                "accessStatus": 1,
+                "vipStatus": 0,
+                "vipStatusWarn": ""
+              },
+              "fans_detail": null
+            },
+            "content": {
+              "message": "我突然发现这个才是真相啊！！！！！！！",
+              "plat": 1,
+              "device": "",
+              "members": []
+            },
+            "replies": null,
+            "assist": 0
+          },
+          {
+            "rpid": 227164470,
+            "oid": 275017,
+            "type": 1,
+            "mid": 11449421,
+            "root": 3506289,
+            "parent": 3506289,
+            "count": 0,
+            "rcount": 0,
+            "floor": 2,
+            "state": 0,
+            "fansgrade": 0,
+            "attr": 0,
+            "ctime": 1490967864,
+            "rpid_str": "227164470",
+            "root_str": "3506289",
+            "parent_str": "3506289",
+            "like": 0,
+            "action": 0,
+            "member": {
+              "mid": "11449421",
+              "uname": "找不到谜语的谜底",
+              "sex": "保密",
+              "sign": "",
+              "avatar": "http://i1.hdslb.com/bfs/face/2bdf79f2fb9411cceb301d2e073b9c0180e89117.jpg",
+              "rank": "10000",
+              "DisplayRank": "0",
+              "level_info": {
+                "current_level": 4,
+                "current_min": 4500,
+                "current_exp": 7051,
+                "next_exp": 10800
+              },
+              "pendant": {
+                "pid": 0,
+                "name": "",
+                "image": "",
+                "expire": 0
+              },
+              "nameplate": {
+                "nid": 0,
+                "name": "",
+                "image": "",
+                "image_small": "",
+                "level": "",
+                "condition": ""
+              },
+              "official_verify": {
+                "type": -1,
+                "desc": ""
+              },
+              "vip": {
+                "vipType": 0,
+                "vipDueDate": 0,
+                "dueRemark": "",
+                "accessStatus": 1,
+                "vipStatus": 0,
+                "vipStatusWarn": ""
+              },
+              "fans_detail": null
+            },
+            "content": {
+              "message": "我来考古，顺便说一句。永夜抄坑出来了",
+              "plat": 2,
+              "device": "",
+              "members": []
+            },
+            "replies": null,
+            "assist": 0
+          }
+          ],
+        "assist": 0
+      },
+      {
+        "rpid": 28087533,
+        "oid": 275017,
+        "type": 1,
+        "mid": 3853579,
+        "root": 0,
+        "parent": 0,
+        "count": 0,
+        "rcount": 0,
+        "floor": 616,
+        "state": 0,
+        "fansgrade": 0,
+        "attr": 0,
+        "ctime": 1427733743,
+        "rpid_str": "28087533",
+        "root_str": "0",
+        "parent_str": "0",
+        "like": 3,
+        "action": 0,
+        "member": {
+          "mid": "3853579",
+          "uname": "陷于幻想的闲者",
+          "sex": "男",
+          "sign": "大概是缺失了精神力量。",
+          "avatar": "http://i0.hdslb.com/bfs/face/418afdca58c9a026fcbd1d3874d5cac01ac7d48c.jpg",
+          "rank": "10000",
+          "DisplayRank": "1001",
+          "level_info": {
+            "current_level": 4,
+            "current_min": 4500,
+            "current_exp": 9595,
+            "next_exp": 10800
+          },
+          "pendant": {
+            "pid": 0,
+            "name": "",
+            "image": "",
+            "expire": 0
+          },
+          "nameplate": {
+            "nid": 0,
+            "name": "",
+            "image": "",
+            "image_small": "",
+            "level": "",
+            "condition": ""
+          },
+          "official_verify": {
+            "type": -1,
+            "desc": ""
+          },
+          "vip": {
+            "vipType": 1,
+            "vipDueDate": 1490371200000,
+            "dueRemark": "",
+            "accessStatus": 1,
+            "vipStatus": 0,
+            "vipStatusWarn": ""
+          },
+          "fans_detail": null
+        },
+        "content": {
+          "message": "洛阳铲！(╯°口°)╯(┴—┴",
+          "plat": 1,
+          "device": "",
+          "members": []
+        },
+        "replies": [],
+        "assist": 0
+      }
+      ],
+    "notice": null,
+    "page": {
+      "acount": 638,
+      "count": 609,
+      "num": 1,
+      "size": 20
+    },
+    "replies": [
+      {
+        "rpid": 375000653,
+        "oid": 275017,
+        "type": 1,
+        "mid": 12816203,
+        "root": 0,
+        "parent": 0,
+        "count": 0,
+        "rcount": 0,
+        "floor": 630,
+        "state": 0,
+        "fansgrade": 0,
+        "attr": 0,
+        "ctime": 1502628694,
+        "rpid_str": "375000653",
+        "root_str": "0",
+        "parent_str": "0",
+        "like": 0,
+        "action": 0,
+        "member": {
+          "mid": "12816203",
+          "uname": "御灵喵",
+          "sex": "女",
+          "sign": "啦啦啦德玛西亚",
+          "avatar": "http://i1.hdslb.com/bfs/face/12cc32c990297954c6e3ee4401772862aca56536.jpg",
+          "rank": "10000",
+          "DisplayRank": "0",
+          "level_info": {
+            "current_level": 4,
+            "current_min": 4500,
+            "current_exp": 4849,
+            "next_exp": 10800
+          },
+          "pendant": {
+            "pid": 0,
+            "name": "",
+            "image": "",
+            "expire": 0
+          },
+          "nameplate": {
+            "nid": 0,
+            "name": "",
+            "image": "",
+            "image_small": "",
+            "level": "",
+            "condition": ""
+          },
+          "official_verify": {
+            "type": -1,
+            "desc": ""
+          },
+          "vip": {
+            "vipType": 0,
+            "vipDueDate": 0,
+            "dueRemark": "",
+            "accessStatus": 1,
+            "vipStatus": 0,
+            "vipStatusWarn": ""
+          },
+          "fans_detail": null
+        },
+        "content": {
+          "message": "考古\r2017.8.13",
+          "plat": 3,
+          "device": "phone",
+          "members": []
+        },
+        "replies": [],
+        "assist": 0
+      },
+      {
+        "rpid": 359251467,
+        "oid": 275017,
+        "type": 1,
+        "mid": 13849664,
+        "root": 0,
+        "parent": 0,
+        "count": 0,
+        "rcount": 0,
+        "floor": 629,
+        "state": 0,
+        "fansgrade": 0,
+        "attr": 0,
+        "ctime": 1501646507,
+        "rpid_str": "359251467",
+        "root_str": "0",
+        "parent_str": "0",
+        "like": 0,
+        "action": 0,
+        "member": {
+          "mid": "13849664",
+          "uname": "大葱茏",
+          "sex": "保密",
+          "sign": "",
+          "avatar": "http://i0.hdslb.com/bfs/face/2832d6480f1039d238542375a70f1891e447711b.jpg",
+          "rank": "10000",
+          "DisplayRank": "0",
+          "level_info": {
+            "current_level": 4,
+            "current_min": 4500,
+            "current_exp": 8056,
+            "next_exp": 10800
+          },
+          "pendant": {
+            "pid": 0,
+            "name": "",
+            "image": "",
+            "expire": 0
+          },
+          "nameplate": {
+            "nid": 0,
+            "name": "",
+            "image": "",
+            "image_small": "",
+            "level": "",
+            "condition": ""
+          },
+          "official_verify": {
+            "type": -1,
+            "desc": ""
+          },
+          "vip": {
+            "vipType": 1,
+            "vipDueDate": 1487779200000,
+            "dueRemark": "",
+            "accessStatus": 1,
+            "vipStatus": 0,
+            "vipStatusWarn": ""
+          },
+          "fans_detail": null
+        },
+        "content": {
+          "message": "考古\n2017-08-02",
+          "plat": 2,
+          "device": "",
+          "members": []
+        },
+        "replies": [],
+        "assist": 0
+      },
+      {
+        "rpid": 356225967,
+        "oid": 275017,
+        "type": 1,
+        "mid": 9394008,
+        "root": 0,
+        "parent": 0,
+        "count": 0,
+        "rcount": 0,
+        "floor": 627,
+        "state": 0,
+        "fansgrade": 0,
+        "attr": 0,
+        "ctime": 1501463825,
+        "rpid_str": "356225967",
+        "root_str": "0",
+        "parent_str": "0",
+        "like": 0,
+        "action": 0,
+        "member": {
+          "mid": "9394008",
+          "uname": "倾城の珠儿",
+          "sex": "男",
+          "sign": "首先，水平有限。其次，无法发挥，第三，0智商。\n第四，只会躺赢发滑稽。\n看了别说我菜，我是真的菜，视频里的操作和正常是不一样的。",
+          "avatar": "http://i0.hdslb.com/bfs/face/5794ed4a9533563a42eb507e81353f8aa98f1ccb.jpg",
+          "rank": "10000",
+          "DisplayRank": "0",
+          "level_info": {
+            "current_level": 4,
+            "current_min": 4500,
+            "current_exp": 5370,
+            "next_exp": 10800
+          },
+          "pendant": {
+            "pid": 0,
+            "name": "",
+            "image": "",
+            "expire": 0
+          },
+          "nameplate": {
+            "nid": 0,
+            "name": "",
+            "image": "",
+            "image_small": "",
+            "level": "",
+            "condition": ""
+          },
+          "official_verify": {
+            "type": -1,
+            "desc": ""
+          },
+          "vip": {
+            "vipType": 0,
+            "vipDueDate": 0,
+            "dueRemark": "",
+            "accessStatus": 1,
+            "vipStatus": 0,
+            "vipStatusWarn": ""
+          },
+          "fans_detail": null
+        },
+        "content": {
+          "message": "起来考古\n2017-07-31",
+          "plat": 2,
+          "device": "",
+          "members": []
+        },
+        "replies": [],
+        "assist": 0
+      },
+      {
+        "rpid": 266221402,
+        "oid": 275017,
+        "type": 1,
+        "mid": 31358323,
+        "root": 0,
+        "parent": 0,
+        "count": 0,
+        "rcount": 0,
+        "floor": 626,
+        "state": 6,
+        "fansgrade": 0,
+        "attr": 4,
+        "ctime": 1495563428,
+        "rpid_str": "266221402",
+        "root_str": "0",
+        "parent_str": "0",
+        "like": 1,
+        "action": 0,
+        "member": {
+          "mid": "31358323",
+          "uname": "莉莉今晚留下来",
+          "sex": "保密",
+          "sign": "",
+          "avatar": "http://i2.hdslb.com/bfs/face/d13bc6fc7f759add83ada39256e3df144c8fb601.jpg",
+          "rank": "10000",
+          "DisplayRank": "0",
+          "level_info": {
+            "current_level": 2,
+            "current_min": 200,
+            "current_exp": 883,
+            "next_exp": 1500
+          },
+          "pendant": {
+            "pid": 0,
+            "name": "",
+            "image": "",
+            "expire": 0
+          },
+          "nameplate": {
+            "nid": 0,
+            "name": "",
+            "image": "",
+            "image_small": "",
+            "level": "",
+            "condition": ""
+          },
+          "official_verify": {
+            "type": -1,
+            "desc": ""
+          },
+          "vip": {
+            "vipType": 0,
+            "vipDueDate": 0,
+            "dueRemark": "",
+            "accessStatus": 1,
+            "vipStatus": 0,
+            "vipStatusWarn": ""
+          },
+          "fans_detail": null
+        },
+        "content": {
+          "message": "能量传递:急需30qb,qq1319869755,谢谢！谢谢好心人士帮忙一下，感激不尽。",
+          "plat": 2,
+          "device": "",
+          "members": []
+        },
+        "replies": [],
+        "assist": 0
+      },
+      {
+        "rpid": 251890698,
+        "oid": 275017,
+        "type": 1,
+        "mid": 46880417,
+        "root": 0,
+        "parent": 0,
+        "count": 0,
+        "rcount": 0,
+        "floor": 625,
+        "state": 0,
+        "fansgrade": 0,
+        "attr": 0,
+        "ctime": 1493986324,
+        "rpid_str": "251890698",
+        "root_str": "0",
+        "parent_str": "0",
+        "like": 1,
+        "action": 0,
+        "member": {
+          "mid": "46880417",
+          "uname": "圣子求贤---露米娅",
+          "sex": "保密",
+          "sign": "东方一入深似海，从此节操是路人。",
+          "avatar": "http://i2.hdslb.com/bfs/face/1500a337e2d0b896a7867bd2864a51bb106c634d.jpg",
+          "rank": "10000",
+          "DisplayRank": "0",
+          "level_info": {
+            "current_level": 3,
+            "current_min": 1500,
+            "current_exp": 3093,
+            "next_exp": 4500
+          },
+          "pendant": {
+            "pid": 0,
+            "name": "",
+            "image": "",
+            "expire": 0
+          },
+          "nameplate": {
+            "nid": 0,
+            "name": "",
+            "image": "",
+            "image_small": "",
+            "level": "",
+            "condition": ""
+          },
+          "official_verify": {
+            "type": -1,
+            "desc": ""
+          },
+          "vip": {
+            "vipType": 0,
+            "vipDueDate": 0,
+            "dueRemark": "",
+            "accessStatus": 1,
+            "vipStatus": 0,
+            "vipStatusWarn": ""
+          },
+          "fans_detail": null
+        },
+        "content": {
+          "message": "前来考古",
+          "plat": 2,
+          "device": "",
+          "members": []
+        },
+        "replies": [],
+        "assist": 0
+      },
+      {
+        "rpid": 187911202,
+        "oid": 275017,
+        "type": 1,
+        "mid": 15652024,
+        "root": 0,
+        "parent": 0,
+        "count": 0,
+        "rcount": 0,
+        "floor": 624,
+        "state": 0,
+        "fansgrade": 0,
+        "attr": 0,
+        "ctime": 1484827149,
+        "rpid_str": "187911202",
+        "root_str": "0",
+        "parent_str": "0",
+        "like": 0,
+        "action": 0,
+        "member": {
+          "mid": "15652024",
+          "uname": "忘却的坚持",
+          "sex": "男",
+          "sign": "难过",
+          "avatar": "http://i0.hdslb.com/bfs/face/9470bda1bfbad0335dff29cfe15f55abc995eb15.jpg",
+          "rank": "10000",
+          "DisplayRank": "0",
+          "level_info": {
+            "current_level": 4,
+            "current_min": 4500,
+            "current_exp": 5877,
+            "next_exp": 10800
+          },
+          "pendant": {
+            "pid": 0,
+            "name": "",
+            "image": "",
+            "expire": 0
+          },
+          "nameplate": {
+            "nid": 0,
+            "name": "",
+            "image": "",
+            "image_small": "",
+            "level": "",
+            "condition": ""
+          },
+          "official_verify": {
+            "type": -1,
+            "desc": ""
+          },
+          "vip": {
+            "vipType": 0,
+            "vipDueDate": 0,
+            "dueRemark": "",
+            "accessStatus": 1,
+            "vipStatus": 0,
+            "vipStatusWarn": ""
+          },
+          "fans_detail": null
+        },
+        "content": {
+          "message": "顶一顶(｀・ω・´)",
+          "plat": 2,
+          "device": "",
+          "members": []
+        },
+        "replies": [],
+        "assist": 0
+      },
+      {
+        "rpid": 180631732,
+        "oid": 275017,
+        "type": 1,
+        "mid": 36770822,
+        "root": 0,
+        "parent": 0,
+        "count": 0,
+        "rcount": 0,
+        "floor": 623,
+        "state": 2,
+        "fansgrade": 0,
+        "attr": 8,
+        "ctime": 1483365676,
+        "rpid_str": "180631732",
+        "root_str": "0",
+        "parent_str": "0",
+        "like": 0,
+        "action": 0,
+        "member": {
+          "mid": "36770822",
+          "uname": "四季映姬亚玛萨娜度",
+          "sex": "男",
+          "sign": "",
+          "avatar": "http://i1.hdslb.com/bfs/face/6591ff0a36d30f1fc4f4c1c6f3810b3b25593f29.jpg",
+          "rank": "10000",
+          "DisplayRank": "0",
+          "level_info": {
+            "current_level": 3,
+            "current_min": 1500,
+            "current_exp": 2845,
+            "next_exp": 4500
+          },
+          "pendant": {
+            "pid": 0,
+            "name": "",
+            "image": "",
+            "expire": 0
+          },
+          "nameplate": {
+            "nid": 0,
+            "name": "",
+            "image": "",
+            "image_small": "",
+            "level": "",
+            "condition": ""
+          },
+          "official_verify": {
+            "type": -1,
+            "desc": ""
+          },
+          "vip": {
+            "vipType": 0,
+            "vipDueDate": 0,
+            "dueRemark": "",
+            "accessStatus": 1,
+            "vipStatus": 0,
+            "vipStatusWarn": ""
+          },
+          "fans_detail": null
+        },
+        "content": {
+          "message": "***",
+          "plat": 2,
+          "device": "",
+          "members": []
+        },
+        "replies": [],
+        "assist": 0
+      },
+      {
+        "rpid": 162630285,
+        "oid": 275017,
+        "type": 1,
+        "mid": 7070474,
+        "root": 0,
+        "parent": 0,
+        "count": 0,
+        "rcount": 0,
+        "floor": 622,
+        "state": 2,
+        "fansgrade": 0,
+        "attr": 0,
+        "ctime": 1479051407,
+        "rpid_str": "162630285",
+        "root_str": "0",
+        "parent_str": "0",
+        "like": 0,
+        "action": 0,
+        "member": {
+          "mid": "7070474",
+          "uname": "刀山火海赵子龍",
+          "sex": "男",
+          "sign": "",
+          "avatar": "http://i0.hdslb.com/bfs/face/edbee9198410d56a2308a205c8ea85b1c53e954e.jpg",
+          "rank": "10000",
+          "DisplayRank": "0",
+          "level_info": {
+            "current_level": 4,
+            "current_min": 4500,
+            "current_exp": 9101,
+            "next_exp": 10800
+          },
+          "pendant": {
+            "pid": 0,
+            "name": "",
+            "image": "",
+            "expire": 0
+          },
+          "nameplate": {
+            "nid": 0,
+            "name": "",
+            "image": "",
+            "image_small": "",
+            "level": "",
+            "condition": ""
+          },
+          "official_verify": {
+            "type": -1,
+            "desc": ""
+          },
+          "vip": {
+            "vipType": 1,
+            "vipDueDate": 1488988800000,
+            "dueRemark": "",
+            "accessStatus": 1,
+            "vipStatus": 0,
+            "vipStatusWarn": ""
+          },
+          "fans_detail": null
+        },
+        "content": {
+          "message": "***！",
+          "plat": 3,
+          "device": "",
+          "members": []
+        },
+        "replies": [],
+        "assist": 0
+      },
+      {
+        "rpid": 104367833,
+        "oid": 275017,
+        "type": 1,
+        "mid": 2240830,
+        "root": 0,
+        "parent": 0,
+        "count": 0,
+        "rcount": 0,
+        "floor": 621,
+        "state": 0,
+        "fansgrade": 0,
+        "attr": 0,
+        "ctime": 1464453741,
+        "rpid_str": "104367833",
+        "root_str": "0",
+        "parent_str": "0",
+        "like": 0,
+        "action": 0,
+        "member": {
+          "mid": "2240830",
+          "uname": "利威尔兵长Levi",
+          "sex": "女",
+          "sign": "爱萝莉 爱冷番佳作 爱治愈系少女漫",
+          "avatar": "http://i0.hdslb.com/bfs/face/2caa1f553716569a6cf90106373883eeb9600df9.jpg",
+          "rank": "10000",
+          "DisplayRank": "0",
+          "level_info": {
+            "current_level": 4,
+            "current_min": 4500,
+            "current_exp": 6095,
+            "next_exp": 10800
+          },
+          "pendant": {
+            "pid": 0,
+            "name": "",
+            "image": "",
+            "expire": 0
+          },
+          "nameplate": {
+            "nid": 0,
+            "name": "",
+            "image": "",
+            "image_small": "",
+            "level": "",
+            "condition": ""
+          },
+          "official_verify": {
+            "type": -1,
+            "desc": ""
+          },
+          "vip": {
+            "vipType": 1,
+            "vipDueDate": 1490630400000,
+            "dueRemark": "",
+            "accessStatus": 0,
+            "vipStatus": 0,
+            "vipStatusWarn": ""
+          },
+          "fans_detail": null
+        },
+        "content": {
+          "message": "( ・᷄ ᵌ・᷅ )",
+          "plat": 3,
+          "device": "",
+          "members": []
+        },
+        "replies": [],
+        "assist": 0
+      },
+      {
+        "rpid": 102870164,
+        "oid": 275017,
+        "type": 1,
+        "mid": 28131579,
+        "root": 0,
+        "parent": 0,
+        "count": 0,
+        "rcount": 0,
+        "floor": 620,
+        "state": 0,
+        "fansgrade": 0,
+        "attr": 0,
+        "ctime": 1463876193,
+        "rpid_str": "102870164",
+        "root_str": "0",
+        "parent_str": "0",
+        "like": 0,
+        "action": 0,
+        "member": {
+          "mid": "28131579",
+          "uname": "Galaxien",
+          "sex": "女",
+          "sign": "正在前往耐克特……",
+          "avatar": "http://i2.hdslb.com/bfs/face/47fd4cd91ddd2182df913b1c528ed264f224d60d.jpg",
+          "rank": "10000",
+          "DisplayRank": "0",
+          "level_info": {
+            "current_level": 4,
+            "current_min": 4500,
+            "current_exp": 6894,
+            "next_exp": 10800
+          },
+          "pendant": {
+            "pid": 0,
+            "name": "",
+            "image": "",
+            "expire": 0
+          },
+          "nameplate": {
+            "nid": 0,
+            "name": "",
+            "image": "",
+            "image_small": "",
+            "level": "",
+            "condition": ""
+          },
+          "official_verify": {
+            "type": -1,
+            "desc": ""
+          },
+          "vip": {
+            "vipType": 0,
+            "vipDueDate": 0,
+            "dueRemark": "",
+            "accessStatus": 1,
+            "vipStatus": 0,
+            "vipStatusWarn": ""
+          },
+          "fans_detail": null
+        },
+        "content": {
+          "message": "然而现在看到青蛙和青蛙子第一反应居然是膜 ( ´_ゝ｀) 猝不及防啊(´･_･`)",
+          "plat": 3,
+          "device": "",
+          "members": []
+        },
+        "replies": [],
+        "assist": 0
+      },
+      {
+        "rpid": 84077430,
+        "oid": 275017,
+        "type": 1,
+        "mid": 3729244,
+        "root": 0,
+        "parent": 0,
+        "count": 0,
+        "rcount": 0,
+        "floor": 619,
+        "state": 0,
+        "fansgrade": 0,
+        "attr": 0,
+        "ctime": 1455330210,
+        "rpid_str": "84077430",
+        "root_str": "0",
+        "parent_str": "0",
+        "like": 0,
+        "action": 0,
+        "member": {
+          "mid": "3729244",
+          "uname": "艾菲莉亚",
+          "sex": "",
+          "sign": "",
+          "avatar": "http://i2.hdslb.com/bfs/face/056ae42c1a89769d880f4c70c8914f29141e076c.jpg",
+          "rank": "10000",
+          "DisplayRank": "0",
+          "level_info": {
+            "current_level": 5,
+            "current_min": 10800,
+            "current_exp": 12196,
+            "next_exp": 28800
+          },
+          "pendant": {
+            "pid": 0,
+            "name": "",
+            "image": "",
+            "expire": 0
+          },
+          "nameplate": {
+            "nid": 0,
+            "name": "",
+            "image": "",
+            "image_small": "",
+            "level": "",
+            "condition": ""
+          },
+          "official_verify": {
+            "type": -1,
+            "desc": ""
+          },
+          "vip": {
+            "vipType": 0,
+            "vipDueDate": 0,
+            "dueRemark": "",
+            "accessStatus": 1,
+            "vipStatus": 0,
+            "vipStatusWarn": ""
+          },
+          "fans_detail": null
+        },
+        "content": {
+          "message": "洛阳铲！！",
+          "plat": 0,
+          "device": "",
+          "members": []
+        },
+        "replies": [],
+        "assist": 0
+      },
+      {
+        "rpid": 77045865,
+        "oid": 275017,
+        "type": 1,
+        "mid": 435735,
+        "root": 0,
+        "parent": 0,
+        "count": 0,
+        "rcount": 0,
+        "floor": 618,
+        "state": 0,
+        "fansgrade": 0,
+        "attr": 0,
+        "ctime": 1452689186,
+        "rpid_str": "77045865",
+        "root_str": "0",
+        "parent_str": "0",
+        "like": 0,
+        "action": 0,
+        "member": {
+          "mid": "435735",
+          "uname": "神隐之兰",
+          "sex": "男",
+          "sign": "一入茫茫绅（hen)士(tai)海，节操，你在？\r\n",
+          "avatar": "http://i0.hdslb.com/bfs/face/df598725c449785f79c182a76f0703b978b079ad.jpg",
+          "rank": "10000",
+          "DisplayRank": "0",
+          "level_info": {
+            "current_level": 4,
+            "current_min": 4500,
+            "current_exp": 9050,
+            "next_exp": 10800
+          },
+          "pendant": {
+            "pid": 0,
+            "name": "",
+            "image": "",
+            "expire": 0
+          },
+          "nameplate": {
+            "nid": 0,
+            "name": "",
+            "image": "",
+            "image_small": "",
+            "level": "",
+            "condition": ""
+          },
+          "official_verify": {
+            "type": -1,
+            "desc": ""
+          },
+          "vip": {
+            "vipType": 1,
+            "vipDueDate": 1486224000000,
+            "dueRemark": "",
+            "accessStatus": 1,
+            "vipStatus": 0,
+            "vipStatusWarn": ""
+          },
+          "fans_detail": null
+        },
+        "content": {
+          "message": "洛阳铲！！",
+          "plat": 1,
+          "device": "",
+          "members": []
+        },
+        "replies": [],
+        "assist": 0
+      },
+      {
+        "rpid": 31599903,
+        "oid": 275017,
+        "type": 1,
+        "mid": 7910000,
+        "root": 0,
+        "parent": 0,
+        "count": 0,
+        "rcount": 0,
+        "floor": 618,
+        "state": 0,
+        "fansgrade": 0,
+        "attr": 0,
+        "ctime": 1432549702,
+        "rpid_str": "31599903",
+        "root_str": "0",
+        "parent_str": "0",
+        "like": 0,
+        "action": 0,
+        "member": {
+          "mid": "7910000",
+          "uname": "托卡列夫魔炮",
+          "sex": "保密",
+          "sign": "",
+          "avatar": "http://i0.hdslb.com/bfs/face/7ed2043a13686d2edc2744e563f70edb3152dbed.jpg",
+          "rank": "10000",
+          "DisplayRank": "0",
+          "level_info": {
+            "current_level": 4,
+            "current_min": 4500,
+            "current_exp": 6780,
+            "next_exp": 10800
+          },
+          "pendant": {
+            "pid": 0,
+            "name": "",
+            "image": "",
+            "expire": 0
+          },
+          "nameplate": {
+            "nid": 0,
+            "name": "",
+            "image": "",
+            "image_small": "",
+            "level": "",
+            "condition": ""
+          },
+          "official_verify": {
+            "type": -1,
+            "desc": ""
+          },
+          "vip": {
+            "vipType": 0,
+            "vipDueDate": 0,
+            "dueRemark": "",
+            "accessStatus": 1,
+            "vipStatus": 0,
+            "vipStatusWarn": ""
+          },
+          "fans_detail": null
+        },
+        "content": {
+          "message": "还没更？",
+          "plat": 1,
+          "device": "",
+          "members": []
+        },
+        "replies": [],
+        "assist": 0
+      },
+      {
+        "rpid": 31243269,
+        "oid": 275017,
+        "type": 1,
+        "mid": 5928137,
+        "root": 0,
+        "parent": 0,
+        "count": 0,
+        "rcount": 0,
+        "floor": 617,
+        "state": 0,
+        "fansgrade": 0,
+        "attr": 0,
+        "ctime": 1432072053,
+        "rpid_str": "31243269",
+        "root_str": "0",
+        "parent_str": "0",
+        "like": 0,
+        "action": 0,
+        "member": {
+          "mid": "5928137",
+          "uname": "国津神无法驾驶迈凯轮",
+          "sex": "保密",
+          "sign": "这家伙很懒什么都没留下",
+          "avatar": "http://i2.hdslb.com/bfs/face/eb648609718a8e656384cb0255bf7063e74cc12c.jpg",
+          "rank": "10000",
+          "DisplayRank": "0",
+          "level_info": {
+            "current_level": 4,
+            "current_min": 4500,
+            "current_exp": 5740,
+            "next_exp": 10800
+          },
+          "pendant": {
+            "pid": 0,
+            "name": "",
+            "image": "",
+            "expire": 0
+          },
+          "nameplate": {
+            "nid": 0,
+            "name": "",
+            "image": "",
+            "image_small": "",
+            "level": "",
+            "condition": ""
+          },
+          "official_verify": {
+            "type": -1,
+            "desc": ""
+          },
+          "vip": {
+            "vipType": 0,
+            "vipDueDate": 0,
+            "dueRemark": "",
+            "accessStatus": 1,
+            "vipStatus": 0,
+            "vipStatusWarn": ""
+          },
+          "fans_detail": null
+        },
+        "content": {
+          "message": "终于要更新了",
+          "plat": 4,
+          "device": "",
+          "members": []
+        },
+        "replies": [],
+        "assist": 0
+      },
+      {
+        "rpid": 28087533,
+        "oid": 275017,
+        "type": 1,
+        "mid": 3853579,
+        "root": 0,
+        "parent": 0,
+        "count": 0,
+        "rcount": 0,
+        "floor": 616,
+        "state": 0,
+        "fansgrade": 0,
+        "attr": 0,
+        "ctime": 1427733743,
+        "rpid_str": "28087533",
+        "root_str": "0",
+        "parent_str": "0",
+        "like": 3,
+        "action": 0,
+        "member": {
+          "mid": "3853579",
+          "uname": "陷于幻想的闲者",
+          "sex": "男",
+          "sign": "大概是缺失了精神力量。",
+          "avatar": "http://i0.hdslb.com/bfs/face/418afdca58c9a026fcbd1d3874d5cac01ac7d48c.jpg",
+          "rank": "10000",
+          "DisplayRank": "1001",
+          "level_info": {
+            "current_level": 4,
+            "current_min": 4500,
+            "current_exp": 9595,
+            "next_exp": 10800
+          },
+          "pendant": {
+            "pid": 0,
+            "name": "",
+            "image": "",
+            "expire": 0
+          },
+          "nameplate": {
+            "nid": 0,
+            "name": "",
+            "image": "",
+            "image_small": "",
+            "level": "",
+            "condition": ""
+          },
+          "official_verify": {
+            "type": -1,
+            "desc": ""
+          },
+          "vip": {
+            "vipType": 1,
+            "vipDueDate": 1490371200000,
+            "dueRemark": "",
+            "accessStatus": 1,
+            "vipStatus": 0,
+            "vipStatusWarn": ""
+          },
+          "fans_detail": null
+        },
+        "content": {
+          "message": "洛阳铲！(╯°口°)╯(┴—┴",
+          "plat": 1,
+          "device": "",
+          "members": []
+        },
+        "replies": [],
+        "assist": 0
+      },
+      {
+        "rpid": 27968951,
+        "oid": 275017,
+        "type": 1,
+        "mid": 1885082,
+        "root": 0,
+        "parent": 0,
+        "count": 0,
+        "rcount": 0,
+        "floor": 615,
+        "state": 0,
+        "fansgrade": 0,
+        "attr": 0,
+        "ctime": 1427590676,
+        "rpid_str": "27968951",
+        "root_str": "0",
+        "parent_str": "0",
+        "like": 2,
+        "action": 0,
+        "member": {
+          "mid": "1885082",
+          "uname": "Keharo",
+          "sex": "保密",
+          "sign": "一人一笔一个晚上一个奇迹",
+          "avatar": "http://i1.hdslb.com/bfs/face/d816e2f2f3fbc0fcc0292ddaec3ac0036dc22cd9.jpg",
+          "rank": "10000",
+          "DisplayRank": "0",
+          "level_info": {
+            "current_level": 4,
+            "current_min": 4500,
+            "current_exp": 8115,
+            "next_exp": 10800
+          },
+          "pendant": {
+            "pid": 0,
+            "name": "",
+            "image": "",
+            "expire": 0
+          },
+          "nameplate": {
+            "nid": 0,
+            "name": "",
+            "image": "",
+            "image_small": "",
+            "level": "",
+            "condition": ""
+          },
+          "official_verify": {
+            "type": -1,
+            "desc": ""
+          },
+          "vip": {
+            "vipType": 0,
+            "vipDueDate": 0,
+            "dueRemark": "",
+            "accessStatus": 1,
+            "vipStatus": 0,
+            "vipStatusWarn": ""
+          },
+          "fans_detail": null
+        },
+        "content": {
+          "message": "吃我一剂洛阳铲！",
+          "plat": 1,
+          "device": "",
+          "members": []
+        },
+        "replies": [],
+        "assist": 0
+      },
+      {
+        "rpid": 27435592,
+        "oid": 275017,
+        "type": 1,
+        "mid": 4510791,
+        "root": 0,
+        "parent": 0,
+        "count": 0,
+        "rcount": 0,
+        "floor": 614,
+        "state": 0,
+        "fansgrade": 0,
+        "attr": 0,
+        "ctime": 1426826446,
+        "rpid_str": "27435592",
+        "root_str": "0",
+        "parent_str": "0",
+        "like": 0,
+        "action": 0,
+        "member": {
+          "mid": "4510791",
+          "uname": "清明煮茶",
+          "sex": "男",
+          "sign": "",
+          "avatar": "http://i1.hdslb.com/bfs/face/38de1574c52b88e71202394caaa4be52aef52900.jpg",
+          "rank": "10000",
+          "DisplayRank": "1001",
+          "level_info": {
+            "current_level": 5,
+            "current_min": 10800,
+            "current_exp": 12346,
+            "next_exp": 28800
+          },
+          "pendant": {
+            "pid": 0,
+            "name": "",
+            "image": "",
+            "expire": 0
+          },
+          "nameplate": {
+            "nid": 0,
+            "name": "",
+            "image": "",
+            "image_small": "",
+            "level": "",
+            "condition": ""
+          },
+          "official_verify": {
+            "type": -1,
+            "desc": ""
+          },
+          "vip": {
+            "vipType": 0,
+            "vipDueDate": 0,
+            "dueRemark": "",
+            "accessStatus": 1,
+            "vipStatus": 0,
+            "vipStatusWarn": ""
+          },
+          "fans_detail": null
+        },
+        "content": {
+          "message": "(｀・ω・´)",
+          "plat": 1,
+          "device": "",
+          "members": []
+        },
+        "replies": [],
+        "assist": 0
+      },
+      {
+        "rpid": 26878075,
+        "oid": 275017,
+        "type": 1,
+        "mid": 2966758,
+        "root": 0,
+        "parent": 0,
+        "count": 0,
+        "rcount": 0,
+        "floor": 613,
+        "state": 0,
+        "fansgrade": 0,
+        "attr": 0,
+        "ctime": 1425902795,
+        "rpid_str": "26878075",
+        "root_str": "0",
+        "parent_str": "0",
+        "like": 0,
+        "action": 0,
+        "member": {
+          "mid": "2966758",
+          "uname": "星光☆咸鱼",
+          "sex": "保密",
+          "sign": "电光皇已经过时啦！用十二兽......带来微笑！",
+          "avatar": "http://i0.hdslb.com/bfs/face/7aa02cf4beab13c7044569069fa5a37367043920.jpg",
+          "rank": "10000",
+          "DisplayRank": "1041",
+          "level_info": {
+            "current_level": 5,
+            "current_min": 10800,
+            "current_exp": 14182,
+            "next_exp": 28800
+          },
+          "pendant": {
+            "pid": 0,
+            "name": "",
+            "image": "",
+            "expire": 0
+          },
+          "nameplate": {
+            "nid": 38,
+            "name": "学生卡",
+            "image": "http://i1.hdslb.com/bfs/face/21fdd1bcd9ad1b52d5725026d71c185a68681644.png",
+            "image_small": "http://i0.hdslb.com/bfs/face/250cf2b3d0ac2585d2176c0701075984f995df5c.png",
+            "level": "普通勋章",
+            "condition": "直播用户等级>=25级"
+          },
+          "official_verify": {
+            "type": -1,
+            "desc": ""
+          },
+          "vip": {
+            "vipType": 1,
+            "vipDueDate": 1485100800000,
+            "dueRemark": "",
+            "accessStatus": 1,
+            "vipStatus": 0,
+            "vipStatusWarn": ""
+          },
+          "fans_detail": null
+        },
+        "content": {
+          "message": "日常任务达成",
+          "plat": 1,
+          "device": "",
+          "members": []
+        },
+        "replies": [],
+        "assist": 0
+      },
+      {
+        "rpid": 26038163,
+        "oid": 275017,
+        "type": 1,
+        "mid": 4120306,
+        "root": 0,
+        "parent": 0,
+        "count": 0,
+        "rcount": 0,
+        "floor": 612,
+        "state": 0,
+        "fansgrade": 0,
+        "attr": 0,
+        "ctime": 1424845991,
+        "rpid_str": "26038163",
+        "root_str": "0",
+        "parent_str": "0",
+        "like": 0,
+        "action": 0,
+        "member": {
+          "mid": "4120306",
+          "uname": "隙間妖怪八云紫",
+          "sex": "保密",
+          "sign": "",
+          "avatar": "http://i0.hdslb.com/bfs/face/6ebeb50b6be35d02a72bdd924db49659a6fdd680.jpg",
+          "rank": "10000",
+          "DisplayRank": "0",
+          "level_info": {
+            "current_level": 5,
+            "current_min": 10800,
+            "current_exp": 13902,
+            "next_exp": 28800
+          },
+          "pendant": {
+            "pid": 0,
+            "name": "",
+            "image": "",
+            "expire": 0
+          },
+          "nameplate": {
+            "nid": 0,
+            "name": "",
+            "image": "",
+            "image_small": "",
+            "level": "",
+            "condition": ""
+          },
+          "official_verify": {
+            "type": -1,
+            "desc": ""
+          },
+          "vip": {
+            "vipType": 1,
+            "vipDueDate": 1486742400000,
+            "dueRemark": "",
+            "accessStatus": 1,
+            "vipStatus": 0,
+            "vipStatusWarn": ""
+          },
+          "fans_detail": null
+        },
+        "content": {
+          "message": "吃我一记洛阳铲~",
+          "plat": 1,
+          "device": "",
+          "members": []
+        },
+        "replies": [],
+        "assist": 0
+      },
+      {
+        "rpid": 24605607,
+        "oid": 275017,
+        "type": 1,
+        "mid": 4139413,
+        "root": 0,
+        "parent": 0,
+        "count": 0,
+        "rcount": 0,
+        "floor": 611,
+        "state": 0,
+        "fansgrade": 0,
+        "attr": 0,
+        "ctime": 1423024698,
+        "rpid_str": "24605607",
+        "root_str": "0",
+        "parent_str": "0",
+        "like": 0,
+        "action": 0,
+        "member": {
+          "mid": "4139413",
+          "uname": "witchcraft_fish",
+          "sex": "",
+          "sign": "真是个废物呢\n自嘲道",
+          "avatar": "http://i2.hdslb.com/bfs/face/c5bf6845b930fb3afc5788700b4c1a1cc2dd3086.jpg",
+          "rank": "10000",
+          "DisplayRank": "1023",
+          "level_info": {
+            "current_level": 4,
+            "current_min": 4500,
+            "current_exp": 6987,
+            "next_exp": 10800
+          },
+          "pendant": {
+            "pid": 0,
+            "name": "",
+            "image": "",
+            "expire": 0
+          },
+          "nameplate": {
+            "nid": 0,
+            "name": "",
+            "image": "",
+            "image_small": "",
+            "level": "",
+            "condition": ""
+          },
+          "official_verify": {
+            "type": -1,
+            "desc": ""
+          },
+          "vip": {
+            "vipType": 1,
+            "vipDueDate": 1485273600000,
+            "dueRemark": "",
+            "accessStatus": 0,
+            "vipStatus": 0,
+            "vipStatusWarn": ""
+          },
+          "fans_detail": null
+        },
+        "content": {
+          "message": "挖坟(｡･ω･｡)",
+          "plat": 1,
+          "device": "",
+          "members": []
+        },
+        "replies": [],
+        "assist": 0
+      }
+      ],
+    "top": null,
+    "upper": {
+      "mid": 222438,
+      "top": null
+    }
+  },
+  "message": "0",
+  "ttl": 1
+}

@@ -1212,9 +1212,180 @@ library(reshape2)
 install.packages("vcd")
 library(vcd)
 
-counts<-table()
+counts<-table(Arthritis$Improved)
+counts
 
-#page 118
+barplot(counts,main="Simple Bar Plot",
+        xlab="Improvement",ylab="Frequency")
+barplot(counts,main = "Horizontal Bar Plot",
+        xlab = "Frequency",ylab = "Improvement",
+        horiz = TRUE)
+
+#If the categorical variable to be plotted is a factor or ordered factor
+plot(Arthritis$Improved, main="Simple Bar Plot",
+     xlab="Improved", ylab="Frequency")
+plot(Arthritis$Improved, horiz=TRUE, main="Horizontal Bar Plot",
+     xlab="Frequency", ylab="Improved")
+
+
+counts<-table(Arthritis$Improved,Arthritis$Treatment)
+counts
+names(Arthritis)
+
+#Listing 6.2 Stacked and grouped bar plots
+barplot(counts,main = "Stacked Bar Plot",
+        xlab = "Treatment",ylab = "Frequency",
+        col = c("red","yellow","green"),
+        legend=rownames(counts))
+barplot(counts,main="Grouped Bar Plot",
+        xlab = "Treatment",ylab = "Frequency",
+        col = c("red","yellow","green"),
+        legend=rownames(counts),beside = TRUE)
+
+
+#Listing 6.3 Bar Plot for sorted mean values
+states<-data.frame(state.region,state.x77)
+View(states)
+means<-aggregate(states$Illiteracy,by=list(state.region),FUN=mean)
+means
+means<-means[order(means$x),]
+means
+barplot(means$x,names.arg = means$Group.1)
+title("Mean Illiteracy Rate")
+
+
+#Listing 6.4 Fitting labels In a bar plot
+par(mar=c(5,8,4,2))#increases the size of the y margin
+
+par(las=2)#rotates the FL bar labels
+
+counts<-table(Arthritis$Improved)
+barplot(counts,main = "Treatment Outcome",
+        horiz = TRUE,
+        cex.names = 0.8,
+        names.arg = c("No Improvement","Some Improvement","Marked Improvement"))
+
+#Spinograms:脊髓造影图
+library(vcd)
+attach(Arthritis)
+counts<-table(Treatment,Improved)
+spine(counts,main = "Spinogram Example")
+detach(Arthritis)
+
+
+#Listing 6.5 Pie charts
+par(mfrow=c(2,2))
+slices<-c(10,12,4,16,8)
+lbls<-c("US","UK","Australia","Germany","France")
+pie(slices,labels = lbls,main="Simple Pie Chart")
+
+pct<-round(slices/sum(slices)*100)
+lbls2<-paste(lbls," ",pct,"%",sep = "")
+pie(slices,labels = lbls,col = rainbow(length(lbls2)),
+    main = "Pie Chart with Percentages")
+
+#install.packages("plotrix")
+library(plotrix)
+pie3D(slices,labels = lbls,explode = 0.1,
+      main="3D Pie Chart")
+mytable<-table(state.region)
+lbls3<-paste(names(mytable),"\n",mytable,sep = "")
+pie(mytable,labels = lbls3,
+    main = "Pie Chart from a Table\n (with sample sizes)")
+
+
+library(plotrix)
+slices<-c(10,12,4,16,8)
+lbls<-c("US","UK","Australia","Germany","France")
+fan.plot(slices,labels = lbls,main = "Fan Plot")
+
+
+#Listing 6.6 Histograms
+par(mfrow=c(2,2))
+
+#default plot,five bins 
+hist(mtcars$mpg)
+
+#12 bins,red fill for the bars
+hist(mtcars$mpg,breaks = 2,col = "red",
+     xlab = "Miles Per Gallon",
+     main = "Colored histogram with 12 bins")
+
+#a density curve and rug-plot overlay
+#the density curve is a kernel density estimate
+#a rug plot is a one-dimensional representation of the actual data values
+#if there are many tied values:
+#rug(jitter(mtcars$mpg,amount=0.01))
+hist(mtcars$mpg,freq = FALSE,
+     breaks = 12,col = "red",
+     xlab = "Miles Per Gallon",
+     main = "Histogram,rug plot,density curve")
+
+rug(jitter(mtcars$mpg))#加上x轴子坐标须
+
+lines(density(mtcars$mpg),col="blue",lwd=2)
+
+#a superimposed normal curve and a box around the figure
+x<-mtcars$mpg
+h<-hist(x,
+        breaks = 12,col = "red",
+        xlab = "Miles Per Gallon",
+        main = "Histogram with normal curve and box")
+xfit<-seq(min(x),max(x),length=40)
+yfit<-dnorm(xfit,mean = mean(x),sd=sd(x))
+yfit<-yfit*diff(h$mids[1:2])*length(x)
+lines(xfit,yfit,col="blue",lwd=2)
+box()
+
+
+#Listing 6.7 Kernael density plots
+par(mfrow=c(2,1))
+d<-density(mtcars$mpg)
+plot(d)
+
+d<-density(mtcars$mpg)
+plot(d,main = "Kernel Density of Miles Per Gallon")
+polygon(d,col="red",border="blue")
+rug(mtcars$mpg,col = "brown")#polygon多边形
+
+
+#Listing 6.8 Comparative kernel density plots
+# install.packages("sm")
+library(sm)
+attach(mtcars)
+cyl.f<-factor(cyl,levels = c(4,6,8),
+              labels = c("4 cylinder","6 cylinder","8 cylinder"))
+sm.density.compare(mpg,cyl,xlab="Miles Per Gallon")
+title(main = "MPG Distribution by Car Cylinders")
+
+colfill<-c(2:(1+length(levels(cyl.f))))
+legend(locator(1),levels(cyl.f),fill = colfill)
+#locator(1) option:click in the graph where you want to appear
+
+detach(mtcars)
+
+boxplot(mtcars$mpg,main="Box plot",ylab="Miles per Gallon")
+
+boxplot(mpg~cyl,data = mtcars,
+        main="Car Mileage Data",
+        xlab="Number of Cylinders",
+        ylab="Miles Per Gallon")
+
+boxplot(mpg~cyl,data = mtcars,
+        notch=TRUE,
+        varwidth=TRUE,
+        col="red",
+        main="Car Mileage Data",
+        xlab="Number of Cylinders",
+        ylab="Miles Per Gallon")
+
+#varwidth
+
+#page 131
+
+
+
+
 
 
 
