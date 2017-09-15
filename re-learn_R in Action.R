@@ -1371,6 +1371,7 @@ boxplot(mpg~cyl,data = mtcars,
         xlab="Number of Cylinders",
         ylab="Miles Per Gallon")
 
+#notched box:缺口箱图
 boxplot(mpg~cyl,data = mtcars,
         notch=TRUE,
         varwidth=TRUE,
@@ -1381,7 +1382,134 @@ boxplot(mpg~cyl,data = mtcars,
 
 #varwidth
 
-#page 131
+#Listing 6.9 Box plots for two crossed factors
+mtcars$cyl.f<-factor(mtcars$cyl,levels = c(4,6,8),
+                     labels = c("4","6","8"))
+mtcars$am.f<-factor(mtcars$am,levels = c(0,1),
+                    labels = c("auto","standard"))
+boxplot(mpg~am.f*cyl.f,
+        data = mtcars,
+        varwidth=TRUE,
+        col=c("gold","darkgreen"),
+        main="MPG Distribution by Auto Type",
+        xlab="Auto Type",ylab="Miles Per Gallon")
+
+
+#Listing 6.10 Violin plots
+install.packages("vioplot")
+library(vioplot)
+
+x1<-mtcars$mpg[mtcars$cyl==4]
+x2<-mtcars$mpg[mtcars$cyl==6]
+x3<-mtcars$mpg[mtcars$cyl==8]
+vioplot(x1,x2,x3,
+        names = c("4 cyl","6 cyl","8 cyl"),
+        col = "gold")
+
+#Dot plots
+dotchart(mtcars$mpg,labels = row.names(mtcars),cex = .7,
+         main = "Gas Mileage for Car Models",
+         xlab = "Miles Per Gallon")
+
+#Listing 6.11 Dot plot grouped,sorted,and colored
+x<-mtcars[order(mtcars$mpg),]
+x$cyl<-factor(x$cyl)
+
+x$color[x$cyl==4]<-"red"
+x$color[x$cyl==6]<-"blue"
+x$color[x$cyl==8]<-"darkgreen"
+
+dotchart(x$mpg,
+         labels = row.names(x),
+         cex = .7,
+         groups = x$cyl,
+         gcolor = "black",
+         color = x$color,
+         pch = 19,
+         main = "Gas Mileage for Car Models\ngrouped by cylinder",
+         xlab = "Miles Per Gallon")
+
+
+#Listing 7.1 Descriptive statistics via summary()
+myvars<-c("mpg","hp","wt")
+head(mtcars[myvars])
+summary(mtcars[myvars])
+
+#Listing 7.2 Description statistics via sapply()
+mystats<-function(x,na.omit=FALSE){
+  if(na.omit)
+    x<-x[!is.na(x)]
+  m<-mean(x)
+  n<-length(x)
+  s<-sd(x)
+  skew<-sum((x-m)^3/s^3)/n
+  kurt<-sum((x--m)^4/s^4)/n - 3
+  return(c(n=n,mean=m,stdev=s,skew=skew,kurtosis=kurt))
+}
+
+myvars<-c("mpg","hp","wt")
+sapply(mtcars[myvars],mystats)
+
+
+#Listing 7.3 Description statisticcs via describe() in the Hmisc package
+library(Hmisc)
+myvars<-c("mpg","hp","wt")
+describe(mtcars[myvars])
+
+
+#Listing 7.4 Descriptive statistics via stat.desc() in the pastecs package
+install.packages("pastecs")
+library(pastecs)
+myvars<-c("mpg","hp","wt")
+stat.desc(mtcars[myvars])
+
+
+#Listing 7.5 Descriptive statistics via describe() in the psych package
+install.packages("psych")
+library(psych)
+myvars<-c("mpg","hp","wt")
+describe(mtcars[myvars])
+
+
+#Listing 7.6 Descriptive statistics by group using aggregate()
+myvars<-c("mpg","hp","wt")
+aggregate(mtcars[myvars],by=list(am=mtcars$am),mean)
+aggregate(mtcars[myvars],by=list(mtcars$am),mean)#label=Group.1
+
+aggregate(mtcars[myvars],by=list(am=mtcars$am),sd)
+
+
+#Listing 7.7 Descriptive statistics by group using by()
+dstats<-function(x) sapply(x,mystats)
+myvars<-c("mpg","hp","wt")
+by(mtcars[myvars],mtcars$am,dstats)
+
+
+#Listing7.8 Summary statistics by group using summaryBy() in the doBy package
+#install.packages("doBy")
+library(doBy)
+summaryBy(mpg+hp+wt~am,data = mtcars,FUN = mystats)
+
+
+#Listing 7.9 Summary statistics by group using describee.by() in the psych package
+library(psych)
+myvars<-c("mpg","hp","wt")
+describeBy(mtcars[myvars],list(am=mtcars$am))
+
+
+library(vcd)
+mytable<-with(Arthritis,table(Improved))
+mytable
+
+prop.table(mytable)*100
+
+
+
+
+
+
+
+
 
 
 
