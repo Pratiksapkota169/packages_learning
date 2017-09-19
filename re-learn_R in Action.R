@@ -1498,16 +1498,78 @@ describeBy(mtcars[myvars],list(am=mtcars$am))
 
 
 library(vcd)
+
+#one-way tables
 mytable<-with(Arthritis,table(Improved))
 mytable
-
 prop.table(mytable)*100
 
+#two-way tables
+mytable<-xtabs(~Treatment+Improved,data=Arthritis)
+mytable
+margin.table(mytable,1)#marginal frequencies
+
+prop.table(mytable,2)#marginal proportions
+
+#index(1) refer to the first variable in the table() statement
 
 
+#add marginal sums to the table
+addmargins(mytable)
+addmargins(prop.table(mytable))
+addmargins(prop.table(mytable,1),2)#sum column alone,2:加列
+addmargins(prop.table(mytable,2),1)#sum row alone,1:加行
 
 
+#Listing 7.10 Two-way table using CrossTable
+#install.packages("gmodels")
+library(gmodels)
 
+CrossTable(Arthritis$Treatment,Arthritis$Improved)
+
+#Listing 7.11 Three-way contingency table
+mytable<-xtabs(~Treatment+Sex+Improved,data=Arthritis)
+mytable
+ftable(mytable)
+
+margin.table(mytable,1)
+margin.table(mytable,2)
+margin.table(mytable,c(1,3))
+
+ftable(prop.table(mytable,c(1,2)))
+
+ftable(addmargins(prop.table(mytable,c(1,2)),3))
+
+#Listing 7.12 Chi-sequare test of Independence
+library(vcd)
+mytable<-xtabs(~Treatment+Improved,data = Arthritis)
+chisq.test(mytable)#Treatment and Improved aren't Independent
+
+
+#Listing 7.13 Measures of association for a two-way table
+mytable<-xtabs(~Treatment+Improved,data = Arthritis)
+assocstats(mytable)
+
+
+#Listing 7.14 Covariances and correlations
+states<-state.x77[,1:6]
+cov(states)#协方差
+cor(states)#相关系数
+cor(states,method = "spearman")
+
+
+#install.packages("ggm")
+library(ggm)
+
+colnames(states)
+#partial correlations
+pcor(c(1,5,2,3,6),cov(states))
+#0.346 is the correlation between population(variable 1) and murder
+#rate(variable 5),controllin for the influence of income,illiteracy
+#rate,and high school graduation rate(variablee 2,3 and 6)
+
+
+#Listing 7.15 Testing a correlation 
 
 
 
