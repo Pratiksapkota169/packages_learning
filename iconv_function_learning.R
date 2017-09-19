@@ -1,6 +1,6 @@
 library(RMySQL)
 con1 <- dbConnect(MySQL(), user = 'fin_huangying',password = 'huangying1231', host = '112.126.86.232',dbname='innotree_finance')
-mydata <- dbGetQuery(conn = con1, statement = "SELECT * from admin_status;")
+mydata <- dbGetQuery(conn = con1, statement = "SELECT * from admin_status where Name like '%事实表%';")
 
 #step 1:读取数据，转换乱码
 mydata$Name<-iconv(mydata$Name,"UTF8","GBK")
