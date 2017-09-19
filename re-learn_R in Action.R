@@ -1570,6 +1570,88 @@ pcor(c(1,5,2,3,6),cov(states))
 
 
 #Listing 7.15 Testing a correlation 
+cor.test(states[,3],states[,5])
+
+#Listing 7.16 Correlation matrix and tests of significance via corr.test()
+library(psych)
+corr.test(states,use = "complete")
+
+
+library(MASS)
+t.test(Prob~So,data = UScrime)
+#can reject the hypothesis that Southern states and non-Southern
+#states have equal probabilities of imprisonment (p<.001)
+
+
+sapply(UScrime[c("U1","U2")],function(x)(c(mean=mean(x),sd=sd(x))))
+
+with(UScrime,t.test(U1,U2,paired = TRUE))
+
+
+with(UScrime,by(Prob,So,median))
+
+wilcox.test(Prob~So,data = UScrime)
+#can reject the hypothesis that incarceration rates are the same
+#in Southern and non-Southern states (p<.001)
+
+
+#The Wilcoxon(秩和检验) signed rank test provides a nonparametric alternative
+#to the dependent sample t-test.
+
+
+sapply(UScrime[c("U1","U2")],median)
+
+with(UScrime,wilcox.test(U1,U2,paired = TRUE))
+
+
+#Listing 7.17 Nonparametric multiple comparisons
+source("http://www.statmethods.net/RiA/wmc.txt")
+states<-data.frame(state.region,state.x77)
+wmc(Illiteracy~state.region,data = states,method = "holm")
+
+
+#Listing 8.1 Simple Linear regression
+fit<-lm(weight~height,data = women)
+summary(fit)
+
+women$weight
+fitted(fit)
+residuals(fit)#残差
+
+plot(women$height,women$weight,
+     xlab = "Height (in inches)",
+     ylab = "Weight (in pounds)")
+abline(fit)
+#Weight=-87.52+3.45xHeight
+
+
+#Listing 8.2 Polynomial regression
+fit2<-lm(weight~height+I(height^2),data = women)
+summary(fit2)
+
+#Weight=261.88-7.35xHeight+0.083xHeight^2
+
+fit3<-lm(weight~height+I(height^2)+I(height^3),data = women)
+summary(fit3)
+
+plot(women$height,women$weight)
+lines(women$height,fitted(fit3))#lines(x,y)
+
+
+#install.packages("car")
+library(car)
+scatterplot(weight~height,data = women,
+            spread=FALSE,smoother.args=list(lty=2),pch=19,
+            main="Women Age 30-39",
+            xlab = "Height (inches)",
+            ylab = "Weight (lbs.)")#散点图
+
+#Listing 8.3 Examining bivariate relationships
+states<-
+
+
+
+
 
 
 
