@@ -1647,11 +1647,141 @@ scatterplot(weight~height,data = women,
             ylab = "Weight (lbs.)")#散点图
 
 #Listing 8.3 Examining bivariate relationships
-states<-
+states<-as.data.frame(state.x77[,c("Murder","Population","Illiteracy","Income","Frost")])
+cor(states)
 
 
+library(car)
+
+scatterplotMatrix(states,spread = FALSE,smoother.args = list(lty=2),
+                  main="Scatter Plot Matrix")
 
 
+#Listing 8.4 Multiple linear regression
+states<-as.data.frame(state.x77[,c("Murder","Population",
+                                   "Illiteracy","Income","Frost")])
+fit<-lm(Murder~Population+Illiteracy+Income+Frost,data = states)
+summary(fit)
+
+
+#Listing 8.5 Multiple linear regression with a significant Interaction term
+fit<-lm(mpg~hp+wt+hp:wt,data = mtcars)
+summary(fit)
+
+
+install.packages("effects")
+library(effects)
+plot(effect("hp:wt", fit, list(wt=c(2.2,3.2,4.2))), multiline=TRUE)
+
+
+states <- as.data.frame(state.x77[,c("Murder", "Population",
+                                       "Illiteracy", "Income", "Frost")])
+fit <- lm(Murder ~ Population + Illiteracy + Income + Frost, data=states)
+confint(fit)
+
+#The result suggest that you can be 95% confident that the interval
+#[2.38,5.90] contains the true change in murder rate for a 1% change
+#in illiteracy rate.
+
+
+fit <- lm(weight ~ height, data=women)
+par(mfrow=c(2,2))
+plot(fit)
+
+
+library(car)
+states<-as.data.frame(state.x77[,c("Murder","Population",
+          "Illiteracy","Income","Frost")])
+fit<-lm(Murder~Population+Illiteracy+Income+Frost,data = states)
+qqPlot(fit,labels = row.names(states),id.method = "identify",
+       simulate = TRUE,main = "Q-Q Plot")
+
+
+states["Nevada",]
+fitted(fit)["Nevada"]
+residuals(fit)["Nevada"]
+rstudent(fit)["Nevada"]
+
+
+#Listing 8.6 Function for plotting studentized residuals
+residplot<-function(fit,nbreaks=10){
+  z<-rstudent(fit)
+  hist(z,breaks = nbreaks,freq = FALSE,
+       xlab = "Studentized Residual",
+       main = "Distribution of Errors")
+  rug(jitter(z),col = "brown")
+  curve(dnorm(x,mean = mean(z),sd=sd(z)),
+        add = TRUE,col="blue",lwd=2)
+  lines(density(z)$x,density(z)$y,
+        col="red",lwd=2,lty=2)
+  legend("topright",
+         legend = c("Normal Curve","Kernel Density Curve"),
+         lty=1:2,col = c("blue","red"),cex=.7)
+}
+
+residplot(fit)
+
+
+#Listing 8.7 Assessing homoscedasticity(同方差)
+library(car)
+ncvTest(fit)
+spreadLevelPlot(fit)
+
+
+#Listing 8.8 Global test of linear model assumptions
+install.packages("gvlma")
+library(gvlma)
+gvmodel<-gvlma(fit)
+summary(gvmodel)
+
+
+#Listing 8.9 Evaluating multicollinearity
+library(car)
+vif(fit)
+
+sqrt(vif(fit))>2
+
+
+hat.plot <- function(fit) {
+  p <- length(coefficients(fit))
+  n <- length(fitted(fit))
+  plot(hatvalues(fit), main="Index Plot of Hat Values")
+  abline(h=c(2,3)*p/n, col="red", lty=2)
+  identify(1:n, hatvalues(fit), names(hatvalues(fit)))
+}
+hat.plot(fit)
+
+
+#Listing 8.12 Comparing models with the AIC
+fit1<-lm(Murder~Population+Illiteracy+Income+Frost,
+         data=states)
+fit2<-lm(Murder~Population+Illiteracy,data = states)
+AIC(fit1,fit2)#越小越好
+
+
+#Listing 8.13 Backward stepwise selection
+library(MASS)
+
+states<-as.data.frame(state.x77[,c("Murder","Population",
+          "Illiteracy","Income","Frost")])
+fit<-lm(Murder~Population+Illiteracy+Income+Frost,
+        data = states)
+stepAIC(fit,direction = "backward")
+
+
+#Listing 8.14 All subsets regression
+install.packages("leaps")
+library(leaps)
+states<-as.data.frame(state.x77[,c("Murder","Population",
+                                   "Illiteracy","Income","Frost")])
+
+leaps<-regsubsets(Murder~Population+Illiteracy+Income+Frost,
+                  data = states,nbest = 4)
+plot(leaps,scale = "adjr2")
+library(car)
+subsets(leaps,statistic = "cp",
+        main="Cp Plot for All Subsets Regression")
+abline(1,1,lty=2,col="red")
 
 
 
