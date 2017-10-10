@@ -257,6 +257,7 @@ stringdist('abcd','abdc',method = 'jw',p=0.25)
 #parser.The Maxent Chunk annotator(块注释器) function computes the chunk
 #annotation using the Maxent chunker provided by OpenNLP.
 
+#Rweka
 #
 
 
