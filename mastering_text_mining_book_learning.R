@@ -258,7 +258,134 @@ stringdist('abcd','abdc',method = 'jw',p=0.25)
 #annotation using the Maxent chunker provided by OpenNLP.
 
 #Rweka
-#
+#Different data-mining activities,such as data processing,supervised
+#and unsupervised learning,association mining
+#For natural language processing,RWeka provides tokenization(词语切分)
+#and stemming(词干提取)functions.
+
+
+#RcmdrPlugin.temis
+#The Import function in this package processes the corpus and generates
+#a term-document matrix.(文档矩阵)
+#The package provides differnet functions to summarize and visualize the
+#corpus statistics.
+#Correspondence analysis and hierarchical clustering (分层聚类)
+#can be performed on the corpus.
+
+#tm
+#It has methods for importing data,handling corpus,metadata(原数据)
+#management,creation of term document matrices,and preprocessing methods.
+#There are two types of implementation,volatile corpus(VCorpus不稳定语料库)
+#and permanent corpus(PCropus永久语料库)。
+
+
+#languageR
+#This package contains functions for vocabulary richness,vocabulary
+#growth,frequency spectrum(频率光谱)
+#this package can also be used for correlation,collinearity 
+#diagnostic(共线性诊断),diagnostic visualization of logistic models
+
+
+#koRpus
+#The koRpus package is a versatile(多功能的)tool for text mining which
+#implements many functions for text readability and lexical 
+#variation(词汇多样性).
+
+
+#RKEA
+#The RKEA package provides an interface to KEA,which is a tool for
+#keyword extraction(关键词提取) from texts.REKA requires a keyword
+#extraction model,which can be created by manually indexing a small
+#set of texts,using which it extracts keywords from the document.
+
+
+#maxent
+#The maxent package provides tools for low-memory implementation of 
+#multinomial(多项式) logistic regression,which is also called the 
+#maximum entropy model.(最大熵模型)
+#This package is quite helpful for classification processes involving 
+#sparse term-document matrices,and low memory consumption on huge datasets.
+
+
+#Isa
+#Truncated singular vector decomposition (截断的奇异向量分解)can help
+#overcome the variability in a term-document matrix by deriving the 
+#latent features statistically.(潜在特征统计)
+#The Isa package provides an implementation of latent semantic
+#analysis.(潜在语义分析)
+
+
+
+#Chapter 2:Processing Text
+
+#A significant part of the time spent on any modeling or analysis
+#activity goes into accessing,preprocessing and cleaning data.We
+#should have the capability to access data from diverse sources,load
+#them in our statistical analysis environment and process them in a
+#manner conducive for advanced analysis.
+
+#Accessing texts from diverse sources
+#Processing texts using regular expressions
+#Normalizing texts
+#Lexical diversity
+#Language detection
+
+
+#Accessing text from diverse sources
+#JSON,XML,HTTP,HTTPS
+
+#File system
+#.doc,.txt,.pdf,.csv,.xml
+#The tm package provides a framework to access and perform a wide
+#variety of analysis on text.
+
+install.packages("tm")
+library(tm)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
