@@ -343,16 +343,13 @@ install.packages("tm")
 library(tm)
 
 
+#PDF documents
 
+#install.packages("pdftools") 支持中文！
+library(pdftools)
 
-
-
-
-
-
-
-
-
+info<-pdf_text("E:/workspace_r/test/test.pdf")
+info
 
 
 
