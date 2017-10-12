@@ -348,19 +348,114 @@ library(tm)
 #install.packages("pdftools") 支持中文！
 library(pdftools)
 
-info<-pdf_text("E:/workspace_r/test/test.pdf")
+info<-pdf_text("E:/workspace_r/test/test1.pdf")
 info
 
+write(info,"E:/workspace_r/test/result.txt")
 
 
+#HTML
+library(RCurl)
+library(XML)
+library(selectr)
 
 
+URL <- "http://www.w3schools.com/html/html_tables.asp"
+webpage<-getURL(URL)
+table <- querySelector(pagetree, '.reference')
+
+name <- xpathApply(table, "./tr/td[2]")
 
 
+#JSON
+library(jsonlite)
+library(curl)
+hadley_orgs<-fromJSON("https://api.github.com/users/hadley/orgs")
+View(hadley_orgs)
+
+json<-toJSON(hadley_orgs)
+json
 
 
+#Processing text using regular expressions
+
+#Word tokenization
+#When we do quantitative analysis on the text we consider it a bag of
+#words and extract the key words,frequency of occurrence,and the 
+#importance of each word in the text.
+#Tokenizing provides various kind of information about text,like the 
+#number of words or tokens in a text,the vocabulary or the type of words.
+
+#Sentence:Unit of written language
+#Utterance:Unit of spoken language
+#Word form:The inflected form as it actually appears in the corpus
+#Lemma:An abstract form,shared by word forms having the same stem and part of speech
+#Word Sense:Stands for the class of words with stem
+#Type:Number of distinct words in a corpus(vocabulary size)
+#Tokens:Total number of words
+
+#all the data sets available in:
+data(package=.packages(all.available = TRUE))
 
 
+library(tm)
+data("acq")
+tdm<-TermDocumentMatrix(acq)
+tdm
+
+Docs(tdm)
+nDocs(tdm)
+nTerms(tdm)
+Terms(tdm)
+
+
+#Operations on a document-term matrix
+#Frequent terms:From the document-term matrix created in previous section,
+#try to find out the number of terms occuring more than or equal 30 times.
+findFreqTerms(tdm,30)
+
+
+#Term association:Correlation is a quantitative measure of the co-occurrence
+#of words in multiple documents,so we need to provide a term document
+#matrix as the input to the function and a correlation limit;for 
+#example if we provide cottelation limit as 0.70 that function will 
+#return terms that have a search term co-occurance of at least 70% and more.
+
+findAssocs(tdm,"stock",0.70)
+
+
+#Sentence segmentation
+#Sentence segmentation is the process of determining the longest until
+#of words.This task involves determining sentence boundaries,and we know
+#most languages have punctuation to define the end of sentence.Sentence
+#segmentation is also referred as sentence boundary disambiguation,
+#sentence boundary detection.Some of the factors that effects Sentence
+#segmentation is language,character set,algorithm,application,data
+#source.Sentence in most of the languages are delimited by punctuation
+#marks(标点符号),but the rules for punctuation can vary drammatically.
+#Sentences and sub sentences are punctuated differently in differently
+#languages.So for successful sentence segmentation understanding uses
+#of punctuation in that language is important.
+
+#Let's consider english as the language,recognizing boundaries must
+#be fairly simple since it has a rich punctuation system like periods,
+#question marks,exclamation(感叹词).But a period can become quite
+#ambiguous since period can also be used for abbreviations(缩写词)
+#like Mr.,representing decimal(小数) numbers like 1.2.
+
+
+install.packages("openNLP")
+library(openNLP)
+
+s <- "I am learning text mining. This is exciting.lot to explore Mr.Paul!"
+# s<-"你好!我是A.你真好." 不支持中文
+sentence.boundaries <- annotate(s,Maxent_Sent_Token_Annotator(language =
+    "en", probs = FALSE, model = NULL))
+sentence.boundaries
+
+
+#Normalizing texts
+#Normalization in text basically refers to 
 
 
 
