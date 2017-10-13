@@ -455,7 +455,65 @@ sentence.boundaries
 
 
 #Normalizing texts
-#Normalization in text basically refers to 
+#Normalization in text basically refers to standardization or 
+#canonicalization(规范化) of tokens,which we derived from documents in the 
+#previous step.The simplest scenario(情景) possible could be the case
+#where query tokens are an exact match to the list of tokens in the 
+#document,however there can be cases when that is not true.The intent
+#of normalization is to have the query and index terms in the same
+#form.For instance,if you query U.K.,you might also be expecting U.K.
+
+#Token normalization can be performed either by implicitly(隐藏的)
+#creating equivalence classes or by maintaining the relations 
+#between unnormalized tokens.There might be cases where we find
+#superficial(表面的) differences in character sequences of tokens,
+#in such cases query and index term matching becomes difficult.
+#If both theses words get mapped into one term named after one of the
+#members of the set for example anti-disciplinary,text retrieval(检索)
+#would become so efficient.Query on one of the terms would fetch the 
+#documents containing either of the terms.
+
+
+#Lemmatization and stemming:词形还原，词干提取
+#Grammar in every language allows usage of derivationally related
+#words with similar meaning, which are nothing but different forms
+#of the same word.Such as develop,developing,developed.The intent of
+#performing lemmatization and stemming revolves around a similar
+#objective of reducing inflectional forms and map derived words
+#to the common base form.
+
+#Stemming is a process of chopping off(切掉) the ends of words,
+#mostly derivational affixes(派生词缀).Lemmatization is a more
+#efficient process,which uses vocabulary and morphological(形态学)
+#analysis of words and removes only the inflectional endings to
+#return the base form of word as output.
+
+
+#Stemming
+#RWeka provides stemming functions to remove the common derivational affixes:
+install.packages("RWeka")
+library(RWeka)
+IteratedLovinsStemmer("cars",control = NULL)
+IteratedLovinsStemmer("ponies",control = NULL)
+
+
+#Lemmatization词形还原
+install.packages("wordnet")
+library(wordnet)
+
+
+#Synonyms:同义词
+
+
+
+
+
+
+
+
+
+
+
 
 
 
