@@ -505,21 +505,85 @@ library(wordnet)
 #Synonyms:同义词
 
 
+#Lexical diversity
+#Lexical diversity is widely believed to be an important parameter to
+#rate a document in terms of textual richness and effectiveness.
+
+
+#Analyse lexical diversity
+
+#Language detection:语言识别
+
+install.packages("textcat")
+library(textcat)
+my.profiles<-TC_byte_profiles[names(TC_byte_profiles)]
+my.profiles
+
+my.text<-c("This book is in English language",
+           "Das ist ein deutscher Satz.",
+           "Il s'agit d'une phrase française.",
+           "Esta es una frase en espa~nol.")
+textcat(my.text,p=my.profiles)
 
 
 
+#Chapter 3 Categorizing and Tagging Text
+
+#In corpus linguistics,text categorization or tagging into various word
+#classes or lexical categories is considered to be the second step in
+#NLP pipeline after tokenization.
+
+#Parts of speech tagging
+#Hidden Markov Models for POS tagging
+#Collection and contigency tables：固定搭配和偶然表
+#Feature extraction
+#Log-linear models
+#Textual entailment:文字蕴含
 
 
+#Parts of speech tagging:词性标记
+#In text mining we tend to view free text as a bag of tokens.In order
+#to do various quantitative analyses,searching and information 
+#retrieval(检索),this approach is quite useful.However,when we take a
+#bag of tokens approach,we tend to lose lots of information contained
+#in the free text,such as sentence structure,word order,and context.
+#These are some of the attributes of natural language processing which
+#humans use to interpret(翻译) the meaning of given text.NLP is a field
+#focused on understanding free text.It attempts to understand a document
+#completely like a human reader.
+
+#POS tagging is a prerequisite and one of the most important steps in
+#text analysis.POS tagging is the annotation of the words with the 
+#right POS tags,based on the context in which 
 
 
+a<-data.frame(x=c(1,1,2,3),y="z")
+a
+library(xlsx)
+write.xlsx(a,"./test_1014.xlsx",sheetName = "sheet1")
+
+wb<-createWorkbook()
+sheet<-createSheet(wb,sheetName = "addDataFrame1")
+addDataFrame(a,"./test_1014.xlsx", col.names=TRUE, row.names=TRUE,
+             startRow=2, startColumn=3, colStyle=NULL, colnamesStyle=NULL,
+             rownamesStyle=NULL, showNA=FALSE, characterNA="", byrow=FALSE)
 
 
+wb <- createWorkbook()
+sheet  <- createSheet(wb, sheetName="addDataFrame1")
+data <- data.frame(mon=month.abb[1:10], day=1:10, year=2000:2009,
+                   date=seq(as.Date("1999-01-01"), by="1 year", length.out=10),
+                   bool=c(TRUE, FALSE), log=log(1:10),
+                   rnorm=10000*rnorm(10),
+                   datetime=seq(as.POSIXct("2011-11-06 00:00:00", tz="GMT"), by="1 hour",
+                                length.out=10))
+cs1 <- CellStyle(wb) + Font(wb, isItalic=TRUE)           # rowcolumns
+cs2 <- CellStyle(wb) + Font(wb, color="blue")
+cs3 <- CellStyle(wb) + Font(wb, isBold=TRUE) + Border()  # header
+addDataFrame(data, sheet, startRow=3, startColumn=2, colnamesStyle=cs3,
+             rownamesStyle=cs1, colStyle=list(`2`=cs2, `3`=cs2))
 
-
-
-
-
-
+saveWorkbook(wb,"./test1014.xlsx")
 
 
 
