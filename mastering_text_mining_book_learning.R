@@ -665,6 +665,18 @@ head(annotate(s,chunkAnnotator,posTaggedSentence))
 
 
 #Chunk tags块标记
+#The chunk tags contain the name of the chunk type,for example,I-NP for
+#noun phrase words and I-VP for verb phrase words.Most chunk types has
+#two types of chunk tags:B-CHUNK for the first word of the chunk and 
+#I-CHUNK for each other word in th chunk.A chunk tag like B-NP is made
+#up of two parts:
+
+#1.First part:
+#B:Marks the beginning of a chunk
+#I:Marks the continuation of a chunk
+#E:Marks the end of a chunk
+
+#A chunk may be only one word long or may contain multiple words
 
 
 
