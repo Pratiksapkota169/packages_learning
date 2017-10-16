@@ -554,43 +554,117 @@ textcat(my.text,p=my.profiles)
 
 #POS tagging is a prerequisite and one of the most important steps in
 #text analysis.POS tagging is the annotation of the words with the 
-#right POS tags,based on the context in which 
+#right POS tags,based on the context in which they appear,POS taggers
+#categorize words based on what they mean in a sentence or in the order
+#they appear.POS taggers provide information about the semantic meaning
+#of the word.POS taggers use some basic categories to tag different
+#words——some basic tags are noun,verb,adjective,number and proper noun.
+#POS tagging is also important for information extraction and sentiment analysis.
 
 
-a<-data.frame(x=c(1,1,2,3),y="z")
-a
-library(xlsx)
-write.xlsx(a,"./test_1014.xlsx",sheetName = "sheet1")
+#POS tagging with R packages
+#The parts of speech Tagger tags each token with their corresponding
+#parts of speech,utilizing lexical statistics,context,meaning,and their
+#relative position with respect to adjacent相邻的 tokens.The same token
+#may be labeled with multiple syntactic语法 labels based on the context.
+#Or some word tokens may be labeled with X POS tag to denote short-hand
+#for common words or misspelled words.POS tagging helps a great deal
+#in resolving lexical ambiguity.R has an OpenNLP package that provides
+#POS tagger functions,leveraging maximum entropy model:利用最大熵模型
 
-wb<-createWorkbook()
-sheet<-createSheet(wb,sheetName = "addDataFrame1")
-addDataFrame(a,"./test_1014.xlsx", col.names=TRUE, row.names=TRUE,
-             startRow=2, startColumn=3, colStyle=NULL, colnamesStyle=NULL,
-             rownamesStyle=NULL, showNA=FALSE, characterNA="", byrow=FALSE)
+library("NLP")
+library("openNLP")
+library("openNLPdata")
 
+s <- "Pierre Vinken , 61 years old , will join the board as a nonexecutive director Nov. 29 .Mr. Vinken is chairman of Elsevier N.V., the Dutch publishing group ."
+str<-as.String(s)
+str
 
-wb <- createWorkbook()
-sheet  <- createSheet(wb, sheetName="addDataFrame1")
-data <- data.frame(mon=month.abb[1:10], day=1:10, year=2000:2009,
-                   date=seq(as.Date("1999-01-01"), by="1 year", length.out=10),
-                   bool=c(TRUE, FALSE), log=log(1:10),
-                   rnorm=10000*rnorm(10),
-                   datetime=seq(as.POSIXct("2011-11-06 00:00:00", tz="GMT"), by="1 hour",
-                                length.out=10))
-cs1 <- CellStyle(wb) + Font(wb, isItalic=TRUE)           # rowcolumns
-cs2 <- CellStyle(wb) + Font(wb, color="blue")
-cs3 <- CellStyle(wb) + Font(wb, isBold=TRUE) + Border()  # header
-addDataFrame(data, sheet, startRow=3, startColumn=2, colnamesStyle=cs3,
-             rownamesStyle=cs1, colStyle=list(`2`=cs2, `3`=cs2))
+#First,we will annotate the sentence using the function 
+#Maxent_Sent_Token_Annottor();we can use different models for different
+#language.The default language used by the function is en language="en",
+#which will use the default model under the language en that is under
+#OpenNLPdata,that is ,en-sent.bin:
 
-saveWorkbook(wb,"./test1014.xlsx")
+sentAnnotator<-Maxent_Sent_Token_Annotator(language = "en",probs = TRUE,
+                                           model = NULL)
 
-
-
-
-
+#The value for the model is a character string giving the path to the
+#Maxent model file to be used,NULL indicating the use of a default
+#model file for the given language.
 
 
+annotated_sentence<-annotate(s,sentAnnotator)
+annotated_sentence
+
+#The features columns tells us the confidence level or the probability
+#of the detected sentences.
+
+actualSentence<-str
+actualSentence[annotated_sentence]
+
+
+#Once we have annotated the sentence we can go to the next step of 
+#annotating the words.We can annotate each word by passing the annotated
+#sentence to a word annotator Maxent_Word_Token_Annotator() as shown
+#in the following code.We can use different models for different languages.
+#The default language is en.This uses the model that is under OpenNLPdata,
+
+wordAnnotator<-Maxent_Word_Token_Annotator(language = "en",probs = TRUE,
+                                           model = NULL)
+annotated_word<-annotate(s,wordAnnotator,annotated_sentence)
+annotated_word
+
+
+#Hidden Markov Models for POS tagging
+#Hidden Markov Models(HMM) are conducive to solving classification 
+#problems with generative sequences.In natural language processing,
+#HMM can be used for a variety of tasks such as phrase chunking,parts
+#of speech tagging,and information extraction from documents.If we
+#consider words as input,while any prior information on the input can be
+#considered as states,and estimated conditional probabilities can be
+#considered as the output,then POS tagging can be categorized as a 
+#typical sequence classification problem that can be solved using HMM.
+
+
+#Basic definitions and notations
+
+#Implementing HMMs
+#When implementing an HMM,floating-point underflow浮点下溢 is a significant
+#problem.When we apply the Viterbi or forward algorithms to long 
+#sequences,the resultant probability values are very small,which can
+#underflow on most machines.We solve this problem differently for 
+#each algorithm
+
+#Viterbi underflow维特比下溢
+#As the Viterbi algorithm only multiplies probilities,a simple solution
+#to underflow is to log all the probability values and then add values
+#instead of multiplying. In fact,if all the values in the model matrices
+#are logged,then at runtime only addition operations are needed.
+
+#Forward algorithm underflow
+#The forward algorithm sums probability values,so it is not a viable
+#soltuion to log the values in order to avoid underflow.The most common
+#solution to this problem is to scaling coefficients that keep the 
+#probability values in the dynamic range of the machine,and that are
+#dependent only on t.The coefficient ct is defined as:
+
+
+#OpenNLP chunking
+#The process of chunking consists of dividing a text into syntactically
+#correlated parts of words,like noun groups,and verb groups,but does
+#not specify their internal structure,or their role in the main sentence.
+#We can use Maxent_Chunk_Annotator() for the OpenNLP R package to accomplish this.
+
+#Before we can use this method,we have to POS tag the sentence.We can use
+#the same steps performed previously for POS tagging:
+
+chunkAnnotator<-Maxent_Chunk_Annotator(language = "en",probs = FALSE,model=NULL)
+annotate(s,chunkAnnotator,posTaggedSentence)
+head(annotate(s,chunkAnnotator,posTaggedSentence))
+
+
+#Chunk tags块标记
 
 
 
