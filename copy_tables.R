@@ -973,6 +973,32 @@ rm(list=ls())
 
 gc();gc();gc();gc();gc();gc();gc();gc();gc();gc()
 
+
+#create database tables status log
+con1<- dbConnect(MySQL(), user = 'fin_huangying',password = 'huangying1231', host = '10.51.120.107', dbname='innotree_finance')
+
+dbSendQuery(con1,'SET NAMES utf8')
+
+status_yesterday<-dbGetQuery(con1,statement = "select * from admin_status;")
+
+status_today<-dbGetQuery(conn = con1,statement = "show table status;")
+
+status_today<-select(status_today,Name,Update_time,Rows,Engine)
+
+status<-left_join(status_today,status_yesterday,by="Name") %>% 
+  select(Name,Update_time.x,Rows,Rows_today,Engine.x)
+
+names(status)<-c("Name","Update_time","Rows_today","Rows_yesterday","Engine")
+
+status<-mutate(status,Rows_difference=Rows_today-Rows_yesterday) %>% 
+  select(Name,Update_time,Rows_today,Rows_yesterday,Rows_difference,Engine)
+
+dbGetQuery(conn = con1,statement = "delete from admin_status;")
+
+dbWriteTable(con1, "admin_status", status, append=TRUE,row.names=FALSE,col.names=FALSE,overwrite=FALSE)
+
+dbDisconnect(con1)
+
 #Finally:when finished the program ,send a email to me
 library(mailR)
 #email to

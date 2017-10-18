@@ -677,6 +677,219 @@ head(annotate(s,chunkAnnotator,posTaggedSentence))
 #E:Marks the end of a chunk
 
 #A chunk may be only one word long or may contain multiple words
+#The O chunk tag is used for tokens which are not part of any chunk.
+#NP:Noun chunk
+#VP:Verb chunk
+
+
+#Collecation and contingency tables
+#When we look into a corpus,some words tend to appear in combination;
+#Word combination that are considered collocations can be compound nouns,
+#definition is defined by terms such as multi-word expressions,
+#wulti-word units,bigrams双字母组 and idioms成语.
+
+#Collocations can be observed in corpora and can be quantified.Multi-
+#word expression have to be stored as units in order to understand
+#their complete meaning.Three characteristic properties emerge as a
+#common theme in the linguistic treatment of collocations:semantic语义
+#non-compositionality非结构性,syntactic non-modifiability非可变性,and 
+#the non-substitutability非可替代性 of components by semantically 
+#similar words.Collocations are words that show mutual expectancy互相影响,
+#in other words,a tendency to occur near each other.Collocations can 
+#also be understood as statistically salient统计显著性 patterns that 
+#can be exploited by language learners.
+
+
+#Extracting co-occurrences
+#There are basically three types of co-occurrences found in lexical
+#data.The attraction or statistical association in words that co-occur
+#is quantified by co-occurrence frequency.
+
+#Surface Co-occurrence
+#While extracting co-occurrences using this methodology,the criteria
+#is that the surface distance is measured in word tokens.
+#In the preceding span,umbrella is the node word,L stands for left,
+#R's stand for right and numbers stand for distance.The words in the
+#collocation that span around the node word can be symmetric对称(L2,R2)
+#or asymmetric非对称(L2,R1).This is the traditional approach in corpus 
+#linguistics语言学 and lexicography词典学.
+
+#Textual co-occurrence
+#While extracting co-occurrences using this methodology,some of the
+#criteria we take into account are that words co-occur if they are in
+#the same segment,for example in the same sentence,paragraph,or document.
+
+#Syntactic co-occurrence
+#In this type of co-occurrence,words have a specific syntactic relation.
+#Usually,they are word combinations of a chosen syntactic pattern,
+#like adjective+noun,or verb+preposition,depending on the preferred
+#multi-word expression structural type.In order to do this,corpus is
+#lemmatized归类,POS-tagged and parsed解析,since these steps are 
+#independent of any language.Word w1 and w2 are said to co-occur only
+#if there is a syntatic relation between them.This type of co-occurrence
+#can help to cluster nouns that are used as objects of the same verb,
+#such as tea,water,and cola,which are all used with the verb drink.
+
+
+#Co-occurrence in a document
+#If two words w1 and w2 are seen in the same document,they are usually
+#related by topic.In this form of co-occurrence,how near or far away
+#from each other the words are in the document or the order of their
+#appearance is irrelevant.Document-wise co-occurrence has been successful
+#used in NLP.
+
+#Co-occurrence in a single document may talk about multiple topics,so
+#we can investigate the word co-occurrence in a smaller segment of text
+#such as sentence.In contrast to the document-wise model,sentence-wise
+#co-occurrence does not consider the whole document,and only considers
+#the number of times those two words occur in the same sentence.
+
+#Quantifying the relation between words
+#Incorpus linguistics,the statistical association or attraction between
+#words is expressed in the form of a contingency table.Significance 
+#testing is applied to estimate the degree of association or difference
+#between two words.An independence model is hypothesized between the 
+#words and is tested for a good fit.The worse the fit,the more
+#associated the words are.
+
+#Contingency tables
+#Contigency tables are basically used to demonstrate the relationship
+#between categorical variables.We can even call it a categorical
+#equivalent of scatterplots.
+
+#For measuring association in contingency tables,we can apply a statistical
+#hypothesis test with null hypothesis H0:independence of rows and columns.
+#H0 implies there is no association between w1 and w2 and the association
+#score is equal to the test statistic or p-value
+
+
+
+#Detailed analysis on textual collocations
+text <- "Customer value proposition has become one of the most widely  used terms in business markets in recent years. Yet our managementpractice research reveals that there is no agreement as to what constitutes a customer value proposition—or what makes one persuasive. Moreover, we find that most value propositions make claims of savings and benefits to the customer without backing them up. An offering may actually provide superior value—but if the supplier doesn't demonstrate and document that claim, a customer manager will likely dismiss it as marketing puffery. Customer managers, increasingly held accountable for reducing costs, don't have the luxury of simply believing suppliers' assertions.Customer managers, increasingly held accountable for reducing costs, don't have the luxury of simply believing suppliers' assertions. Take the case of a company that makes integrated circuits (ICs). It hoped to supply 5 million units to an electronic device manufacturer for its next-generation product. In the course of negotiations, the supplier's salesperson learned that he was competing against a company whose price was 10 cents lower per unit. The customer asked each salesperson why his company's offering was superior. This salesperson based his value proposition on the service that he, personally, would provide. Unbeknownst to the salesperson, the customer had built a customer value model, which found that the company's offering, though 10 cents higher in price per IC, was actually worth 15.9 cents more. The electronics engineer who was leading the development project had recommended that the purchasing manager buy those ICs, even at the higher price. The service was, indeed, worth something in the model—but just 0.2 cents! Unfortunately, the salesperson had overlooked the two elements of his company's IC offering that were most valuable to the customer, evidently unaware how much they were worth to that customer and, objectively, how superior they made his company's offering to that of the competitor. Not surprisingly, when push came to shove, perhaps suspecting that his service was not worth the difference in price, the salesperson offered a 10-cent price concession to win the business—consequently leaving at least a half million dollars on the table. Some managers view the customer value proposition as a form of spin their marketing departments develop for advertising and promotional copy. This shortsighted view neglects the very real contribution of value propositions to superior business performance. Properly constructed, they force companies to rigorously focus on what their offerings are really worth to their customers. Once companies become disciplined about understanding customers, they can make smarter choices about where to allocate scarce company resources in developing new offerings."
+
+library(tm)
+# install.packages("SnowballC")
+library(SnowballC)
+text.corpus<-Corpus(VectorSource(text))
+
+
+#Few standard text preprocessing:
+text.corpus<-tm_map(text.corpus,stripWhitespace)
+text.corpus<-tm_map(text.corpus,tolower)
+text.corpus<-tm_map(text.corpus,removePunctuation)
+text.corpus<-tm_map(text.corpus,removeWords,stopwords("english"))
+text.corpus<-tm_map(text.corpus,stemDocument)
+text.corpus<-tm_map(text.corpus,removeNumbers)
+
+#Tokenizer for n-grams and passed on to the term-document matrix constructor:
+library(RWeka)
+length<-2 #how many words either side of word of interest
+length1<-1+length*2
+ngramTokenizer<-function(x) NGramTokenizer(x,Weka_control(min=length,
+                                                          max=length1))
+text.corpus<-tm_map(text.corpus,PlainTextDocument)
+dtm<-TermDocumentMatrix(text.corpus,control = 
+                          list(tokenize=ngramTokenizer))
+inspect(dtm)
+
+
+#Explore the term document matrix for all ngrams that have the node
+#value in them:
+word<-'value'
+part_ngrams<-dtm$dimnames$Terms[grep(word,dtm$dimnames$Terms)]
+part_ngrams
+
+#Keep only the ngrams of interest:
+part_ngrams <- part_ngrams[sapply(part_ngrams, function(i) {
+  tmp <- unlist(strsplit(i, split=" "))
+  tmp <- tmp[length(tmp) - length]
+  tmp} == word)]
+
+#Find the collocated word in the ngrams:
+col_word<-'customer'
+part_ngrams<-part_ngrams[grep(col_word,part_ngrams)]
+part_ngrams
+
+#Count the collocations:
+length(part_ngrams)
+
+#Find collocations on both sides of the collocation of interest within
+#the span specified:
+alwords<-paste(part_ngrams,collapse = " ")
+uniques<-unique(unlist(strsplit(alwords,split = " ")))
+
+
+#Feature extraction
+#Feature extraction is a very important and valuable step in text
+#mining.A system that can extract features from text has potential to
+#be used in lots of applications.The initial step for feature extraction
+#would be tagging the document;this tagged document is then processed
+#to extract the required entities that are meaningful.
+
+#The elements that can be extracted from the text are:
+#Entities:These are some of the pieces of meaningful information that
+#can be found in the document,for example,location,companies,people
+#Attributes:These are the features of the extracted entities,for example
+#the title of the person,type of organization
+#Events:These are the activities in which the entities participate,for
+#example,dates
+
+#Textual Entailment Human communication is diverse in terms of the 
+#useage of different expressions to communicate the same message.This
+#proves to be quite a challenging problem in natural language processing.
+
+
+#Semantic similarity based methods:语义相似性
+#The synatactic similarity based approach:句法相似性
+#The logic based method:逻辑相似性
+#The vector space model approach:空间向量模型
+#The surfaace string similarity based approach:字符串相似性
+#Machine learning based methods
+
+
+#Among the various approaches of textual entailment,semantic similarity
+#is the most common.This method utilizes the similarity between concepts
+#/sense to conclude whether the hypothesis can truly be inferred from
+#the text.Similarity measures can quantify how alike the two concept
+#are.An auto can be considered more like a car than a house,since auto
+#and car share vehicle as a common ancestor with an is-a hierarchy层级.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
