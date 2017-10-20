@@ -854,6 +854,214 @@ uniques<-unique(unlist(strsplit(alwords,split = " ")))
 #are.An auto can be considered more like a car than a house,since auto
 #and car share vehicle as a common ancestor with an is-a hierarchy层级.
 
+#Synonymy and similarity:同义和相似
+#The lexical unit S entails S' if they are synonyms as per WordNet,or if
+#there is any association of similarity between them.
+
+
+#Multiwords一词多义,negation反义词,and antonymy反义词组
+#WordNet contains many multi-words which have useful semantic relations
+#with other words,but it may require additional processing to normalize
+#them in order to use them effectively.There can be variation due to 
+#lemmatization,acronym首字母缩写 dot or different spellings.In order
+#to accurately measure the similarity,fuzzy matching is implemented
+#using levenshtein distance between the WordNet words and the candidate
+#word.Matching is allowed if the two compared words differ by less than 10%
+
+#In the dependency tree,if there is any negation relation between the
+#leaves and the father,the negation is spread across the tree until
+#the root node.
+
+#Concept similarity
+#In concept similarity we measure the similarity between two concepts,
+#for example,if we consider car as one concept then it is more related
+#to the concept vehicle than some other concept such as food.Similarity
+#is measured by information contained in a is-a hierarchy.WordNet is 
+#a lexical database that is well suited for this purpose,since nouns
+#and verbs are organized in an is-a hierarchy.
+
+
+#Path length
+#The elementary idea of estimating similarity based on the path length
+#is that the similarity between concepts can be expressed as a function
+#of path length between concepts and concept position.There are different
+#variants of path length calculation to quantify the concept similarity
+#as a function of path length:
+
+#Shortest Path length:The shorter the path between the words/senses in
+#a hierarchy graph,the more similar the words are:
+#Path length between two word S = number of edges in shortest path
+#Shortest path length with depth:
+#Similarity path(c1,c2)=2*deep_max-len(c1,c2)
+#C1,C2 are the concepts
+#len(C1,C2) is the shortest path function between two concepts C1,C2
+#deep_max is a fixed value for the specific version of WordNet.
+
+#This measure expresses the similarity between two words in terms of a
+#linear combination of the shortest path and depth of the sub-tree,
+#which holds very useful information about the features of the words.
+#The lower the sub-tree is in the hierarchy层级,the lesser the abstract
+#meaning shared by the two words:
+
+
+#Resnik similarity
+#Resnik similarity estimates the similarity between relatedness of
+#words in terms of information content.The proportion of the amount
+#of information content shared by two concept determines the semantic
+#between them.Resnik considers the position of the nouns in the is-a
+#hierarchy.Let C be the concepts in taxonomy分类,allowing several 
+#inheritances.The key to finding similarity between concepts lies in
+#the edge count of the hierarchy graph and the proportion of the 
+#information shared between the concepts with respect to a highly
+#specific concept,which is higher in the hierarchy and consumes both 
+#of them.
+
+
+#If P(concept) is the probability of encountering a councept,and entity
+#A belongs to the is-a hierarchy under B,then P(A)<=P(B):
+#Similarity resnik(c1,c2)=-log p(lso(c1,c2))=2IC(lso(c1,c2))
+
+#C1,C2 are the concepts
+#IC(C1) Information content based measure of concept C1
+#IC(C2) Information content based measure of concept C2
+#lso(C1,C2) is the lowest common subsume of C1 C2
+
+
+#Lin similarity
+#Lin similarity estimates the semantic association between two-concepts
+#/senses in terms of the ratio of the amount of information shared 
+#between two concepts to the total amount of information stored in the
+#two concepts.It uses both the information required to describe the
+#association between concepts and the information required to completely
+#describe both of them:
+#Similarity Lin(c1,c2) = 2*IC(lso(c1,c2)) / IC(c1)+IC(c2)
+
+
+#Jiang-Conrath distance
+#To calculate the distance between two concepts,Jiang-Conrath considers
+#the information content of the concepts,along with the information
+#content of the most specific subsumer:
+#distance jiang(c1,c2) = (IC(c1)+IC(c2)) - 2IC(lso(c1,c2))
+
+
+#Chapter 4 Dimensionality Reduction
+
+#Data volume and high dimensions pose an astounding challenge in 
+#text-mining tasks.Inherent内在的 noise and the computational cost of 
+#processing huge amount of datasets make it even more arduous艰巨.
+#The science of dimensionality reduction lies in the art of losing
+#out on only a commensurately small numbers of information and
+#still being able to reduce the high dimension space into a manageable
+#proportion.
+
+
+#For classification and clustering techniques to be applies to text
+#data,for different natural language processing activities,we need
+#to reduce the dimensions and noise in the data so that each document
+#can be represented using fewer dimensions,thus significantly 
+#reducing the noise that can hinder the performance.
+
+#The curse of dimensionality:维度灾难
+#Dimensionality reduction:降维
+#Correspondence analysis:相关分析
+#Singular vector decomposition:矩阵的奇异值分解
+#ISOMAP-moving toward non-linearity:等距映射
+
+
+#The curse of dimensionality
+#Topic modeling and document clustering are common text mining activities,
+#but the text data can be very high-dimensional,which can cause a 
+#phenomenon called the curse of dimensionality.Some literature also
+#calls it the concentration集中度 of measure:
+
+
+#Distance is attributed to all the dimensions and assumes each of
+#them to have the same effect on the distance.The higher the dimensions,
+#the more similar things appear to each other.
+
+
+#The similarity measures do not take into account the association of
+#attributes which may result in inaccurate distance estimation.
+
+#The number of samples required per attribute increases 
+#exponentially指数 with the increase in dimensions.
+
+#A lot of dimensions might be highly correlated with each other,thus
+#causing multi-collinearity多重共线性.
+
+#Extra dimensions cause a rapid volume increase that can result in
+#high sparsity稀疏,which is a major issue in any method that requires
+#statistical significance.Also,it causes huge variance in estimates,
+#near duplicates,and poor predictors.
+
+#Distance concentration and computational infeasibility
+#Distance concentration is a phenomenon associated with high-dimensional
+#space wherein pairwise distances or dissimilarity between points appear
+#indistinguishable.All the vectors in high dimensions appear to be
+#orthogonal正交 to each other.The distance between each datapoint to
+#its neighbors,farthest or nearest,become equal.This totally 
+#jeopardizes危害 the utility of methods that use distance based measures
+
+
+#Let's consider that the number of samples is n and the number of 
+#dimensions is d.If d is very large,the number of samples may prove
+#to be insufficient to accurately estimate the parameters.For the 
+#datasets with number of dimensions d,the number of parameters in
+#the covariance matrix will be d^2.In an ideal scenario,n should be
+#much larger than d^2,to avoid overfitting.
+
+#In general,there is an optimal number of dimensions to use for a 
+#given fixed number of samples.While it may feel like a good idea to
+#engineer more features,if we are not able to solve a problem with
+#less number of features.But the computational cost and model complexity
+#increases with the rise in number of dimensions.for instance,if n
+#number of samples look to be dense enough for a one-dimensional 
+#feature space.For a k-dimensional feature space,n^k samples would
+#be required.
+
+
+#Dimensionality reduction
+#Complex and noisy characteristics of textual data with high dimensions
+#can be handled by dimensionality reduction techniques.These techniques
+#reduce the dimension of the textual data while still preserving its
+#underlying statistics.Though the dimensions are reduced,it is important
+#to preserve the inter-document relationships.The idea is to have 
+#minimum number of dimensions,which can preserve the intrinsic内在的
+#dimensionality of the data.
+
+
+#A textual collection is mostly represented in the form of a term
+#document matrix wherein we have the importance of each term in a 
+#document.The dimensionality of such a collection increases with
+#the number of unique terms.If we were to suggest the simplest possible
+#dimensionality reduction method,that would be to specify the limit
+#or boundary on the distribution of different terms in the collection.
+#Andy term that occurs with a significantly high frequency is not
+#going to be informative for us,and the barely present terms can 
+#undoubtedly be ignored and considered as noise.Some example of stop
+#words are is ,was,then ,and the.
+
+#Words that generally occur with high frequency and have no particular
+#meaning are referred to as stop words.Words that occur just once or
+#twice are more likely to be spelling errors or complicated words,and
+#hence both these and stop words should not be considered for modeling
+#the document in the Term Document Matrix(TDM).
+
+
+#Principal component analysis:主成份分析
+#Principal component analysis(PCA) reveals the internal structure of
+#a dataset in a way that best explains the variance within the data.
+#PCA identifies patterns to reduce the dimensions of the dataset
+#without significant loss of information.
+
+
+
+
+
+
+
+
+
 
 
 
