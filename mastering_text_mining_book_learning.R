@@ -1052,24 +1052,71 @@ uniques<-unique(unlist(strsplit(alwords,split = " ")))
 #Principal component analysis(PCA) reveals the internal structure of
 #a dataset in a way that best explains the variance within the data.
 #PCA identifies patterns to reduce the dimensions of the dataset
-#without significant loss of information.
+#without significant loss of information.The main aim of PCA is to
+#project a high-dimensional feature space into a smaller subset to 
+#decrease computational cost.PCA helps in computing new features,which
+#are called principal components;these principal components are
+#uncorrelated linear combinations of the original features projected
+#in the direction of higher variability.The important point is to
+#map the set of features into a matrix,M,and compute the eigenvalues
+#and Eigenvectors特征向量 provide simpler solutions to problems 
+#that can be modeled using linear transformations along axes by
+#stretching,compressing,or flipping.Eigenvalues provide the length
+#and magnitude of eigenvectors where such transformations occur.
+#Eigenvectors with greater eigenvalues are selected in the new
+#feature space because they enclose more information than eigenvectors
+#with lower eigenvalues for a data distribution.The first principle
+#component has the greatest possible variance,that is, the largest
+#eigenvalues compared with the next principal component uncorrelated,
+#relative to the first PC.The nth PC is the linear combination of 
+#the maximum variance that is uncorrelated with all previous PCs.
+
+#PCA comprises the following steps:
+#1.Compute the n-dimensional mean of the given dataset.
+#2.Compute the covariance matrix of the features.
+#3.Compute the eigenvectors and eigenvalues of the covariance matrix
+#4.Rank/sort the eigenvectors by descending eigenvalue
+#5.Choose x eigenvectors with the largest eigenvalues
+
+#Eigenvector values represent the contribution of each variable to
+#the principal component axis.Principal component are oriented in
+#the direction of maximum variance in m-dimensional space.
+
+#PCA is one of the most widely used multivariate methods for discovering
+#meaningful,new,informative,and uncorrelated features.This methodology
+#also reduces dimensionality by rejecting low-variance features and
+#is useful in reducing the computational requirements for classification
+#and regression analysis.
 
 
+install.packages("FactoMineR")
+library(FactoMineR)
+data<-replicate(10,rnorm(1000))
+result.pca=PCA(data[,1:9],scale.unit = TRUE,graph = T)
+print(result.pca$svd)
 
 
+#The analysis was performed on 1000 individuals,described by nine variables.
 
 
+#Amap package
+#Amap is another package in the R environment that provides tools for
+#clustering and PCA.One of the most widely used functions in this
+#package is acp(),which does PCA on a data frame.
 
 
+#Proportion of variance比例方差
+#We look to construct components and to choose from them,the minimum
+#number of components,which explains the variance of data with high confidence.
 
 
+#Scree plot:碎石图
+screeplot(pca_base)
 
 
-
-
-
-
-
+#Reconstruction error:重构误差
+#The components are estimated in such a way that the variance across
+#each component is maximized while the 
 
 
 
