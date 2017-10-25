@@ -183,6 +183,15 @@ data3<-spread(data = data1,key = Year,value = Sale)
 data3
 
 
+# 3.因子变量与分类重编码
+#无序因子，有序因子
+#定类变量，定序变量，定距变量，定比变量
+#因子变量从信息量上来看，要笔单纯的定性变量（文本变量）所包含的描述信息
+#多一些，但又比数值型变量（定距变量和定比变量）所表达的信息含量少一些
+#数值型变量可以转换为因子变量，因子变量可以转换为文本型变量，但是顺序是不可逆
+#的（信息含量多的变量可以放弃信息量）
+
+
 #通常使用factor直接生成因子变量，仅需一个向量（原则上可以是文本型，也可以是数字型，
 #但是通常从实际意义上来说，被转换的应该是一个含有多类别的类别型文本变量）
 #factor(x,levels,labels=levels,ordered=)
@@ -216,12 +225,18 @@ scale<-runif(100,0,100)
 #right:设定分割带是左开右闭或者左闭右开(默认左开右闭)
 #include.lowest则根据right的设定，决定是否应该包含端点值(如果right为TRUE,左开右闭区间，
 #则包含最小值，如果right为FALSE，左闭右开区间则包含最大值)，默认为FALSE
-factor1<-cut(scale,br)
+scale
+(factor1<-cut(scale,breaks = c(0,20,40,60,80,100),
+  labels = c("0~20","20~40","40~60","60~80","80~100"),
+  include.lowest=TRUE,ordered=TRUE))
 
 
-
-
-
+#另一种分割场景是使用分位数函数进行分割
+qa<-quantile(scale,c(0,0.2,0.4,0.6,0.8,1.0))
+qa
+(cut(scale,breaks = qa,
+    labels=c("0%~20%","20%~40%","40%~60%","60%~80%","80%~100%"),
+    include.lowest = TRUE,ordered=TRUE))
 
 
 
