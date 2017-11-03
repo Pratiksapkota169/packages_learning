@@ -78,19 +78,81 @@ glm_fit1<-h2o.glm(x=x,
 #自动自动寻找的方法是通过在【验证集】上指定一个lambda，验证集上
 #的最优lambda即我们要找的lambda
 
+glm_fit2<-h2o.glm(x=x,
+                  y=y,
+                  training_frame=train,
+                  model_id = "glm_fit2",
+                  family="binomial",
+                  validation_frame = valid,
+                  lambda_search = TRUE)
 
+#在测试集上看2个GLM模型的表现
+glm_perf1<-h2o.performance(model=glm_fit1,newdata = test)
+glm_perf2<-h2o.performance(model=glm_fit2,newdata = test)
 
+#如果不想输出模型全部的评测对象，只输出想要的那个评测
+h2o.auc(glm_perf1)
+h2o.auc(glm_perf2)
 
+#比较测试集训练集验证集上的AUC
+h2o.auc(glm_fit2,train = TRUE)
+h2o.auc(glm_fit2,train = TRUE)
 
-
-
-
-
-
-
+glm_fit2$model$validation_metrics
 
 
 #2.随机森林模型（RF）
+#H2O的随机森林算法实现了标准随机森林算法的分布式和变量重要性的度量，
+#首先使用一个默认参数来训练一个基础的随机森林模型，随机森林模型将
+#从因变量编码推断因变量分布
+
+rf_fit1<-h2o.randomForest(x=x,
+                          y=y,
+                          training_frame = train,
+                          model_id = "rf_fit1",
+                          seed=1)
+
+#通过设置参数ntrees=100来增加树的大小，在H2O中树的默认大小为50
+#通常来说增加树的大小RF的表现会更好。相比较GBM模型，RF通常更加
+#不易过拟合。在GBM中需要额外的设置early stopping来防止过拟合
+
+#当参数stopping_rounds>0时，检验集使用valid
+rf_fit2<-h2o.randomForest(x=x,y=y,
+                          training_frame = train,
+                          model_id = "rf_fit2",
+                          ntrees = 100,
+                          seed = 1)
+
+#比较2个RF模型的性能
+rf_perf1<-h2o.performance(model=rf_fit1,
+                          newdata = test)
+rf_perf2<-h2o.performance(model=rf_fit2,
+                          newdata = test)
+
+rf_perf1
+rf_perf2
+
+#提取测试集AUC
+h2o.auc(rf_perf1)
+h2o.auc(rf_perf2)
+
+
+#有时候会不设定验证集，而直接使用交叉验证来看模型的表现。
+#使用随机森林作为例子，来展示使用H2O进行交叉验证。不需要自定义
+#代码或循环，只需在nfolds参数中指定所需折的数量。注意K-折交叉
+#验证将会训练k个模型，故时间是原来的k倍：
+rf_fit3<-h2o.randomForest(x=x,y=x,
+                          training_frame = train,
+                          model_id = "rf_fit3",
+                          seed = 1,
+                          nfolds = 5)
+
+#评估交叉训练的AUC
+h2o.auc(rf_fit3,xval = TRUE)
+
+
+
+
 #3.GBM（GBDT）
 #4.深度学习（DL）
 #5.朴素贝叶斯（NB）
