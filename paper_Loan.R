@@ -111,3 +111,4 @@ newloandata$LoanStatus[newloandata$LoanStatus %in% PastDue] %>% "PastDue"
 
 
 
+
