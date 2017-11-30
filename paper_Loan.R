@@ -76,15 +76,69 @@ PastDue <- c("Past Due (1-15 days)","Past Due (16-30 days)",
              "Past Due (31-60 days)","Past Due (61-90 days)",
              "Past Due (91-120 days)","Past Due (>120 days)")
 
-newloandata$LoanStatus[newloandata$LoanStatus %in% PastDue] %>% "PastDue"
+newloandata$LoanStatus[newloandata$LoanStatus %in% PastDue] <- "PastDue"
 
 #Cancelled归类到Current中
-
-
+newloandata$LoanStatus[newloandata$LoanStatus == "Cancelled"] <- "Current"
 
 #Defaulted归类到Chargedoff中
+newloandata$LoanStatus[newloandata$LoanStatus == "Defaulted"] <- "Chargedoff"
 
 #FinalPaymentInProgress归类为Completed
+newloandata$LoanStatus[newloandata$LoanStatus == "FinalPaymentInProgress"] <- "Completed"
+
+#查看数据
+table(newloandata$LoanStatus)
+
+
+#将PastDue归类到completed中，属于还款状态
+newloandata$LoanStatus[newloandata$LoanStatus=="PastDue"]<-"Completed"
+
+#将正在进行中的数据删除，也就是current数据删除
+newloandata <- newloandata[!(newloandata$LoanStatus=="Current"),]
+
+#再次查看数据
+table(newloandata$LoanStatus)
+
+
+#将LoanStatus用0和1表示未还款、已还款：
+#将Completed赋值为1，属于已还款状态
+newloandata$LoanStatus[newloandata$LoanStatus == "Completed"]<-"1"
+
+#将Chargedoff赋值为0，属于未还款状态
+newloandata$LoanStatus[newloandata$LoanStatus == "Chargedoff"]<-"0"
+
+#再次查看数据
+table(newloandata$LoanStatus)
+
+
+#查看是否有缺失值
+data<-sapply(newloandata, function(x) sum(is.na(x)))
+data1<-data[data!=0]
+data1
+
+#install.packages("Amelia")
+library(Amelia)
+missmap(newloandata,main="Missing Value of Loandata")
+
+#缺失值排在前三的是CreditGrade、ProsperRating.Alpha、EmploymentStatusDuration
+#其中前两个是信用等级，是由于2009年7月后prosper平台对评级名词产生了变化，第三个
+#是受雇佣状态保持时间，这三个指标都对贷款状态有影响，所以需要对缺失值进行补全
+
+
+#补全缺失值
+#EmploymentStatusDuration补全数值
+
+
+
+
+
+
+
+
+
+
+
 
 
 
