@@ -128,18 +128,63 @@ missmap(newloandata,main="Missing Value of Loandata")
 
 #补全缺失值
 #EmploymentStatusDuration补全数值
+#首先找到缺失值的位置：
+which(newloandata$EmploymentStatusDuration %in% NA)
+
+#查看相对应的EmploymentStatus的情况
+newloandata$EmploymentStatus[which(newloandata$EmploymentStatusDuration %in% NA)]
+
+#此处的EmploymentStatus不是"NA"，就是"Not available"，因此可以将缺失的
+#EmploymentStatusDuration以"0"补全：
+newloandata$EmploymentStatusDuration[which(newloandata$EmploymentStatusDuration %in% NA)] <- "0"
+
+#查找EmploymentStatusDuration是否有缺失值
+sapply(newloandata,function(x) sum(is.na(x)))
+#EmploymentStatusDuration为0，说明缺失值已完全补充
 
 
+#EmploymentStatus补全数值
+table(loandata$EmploymentStatus)
+
+#用"Not available"补全EmploymentStatus数值:
+newloandata$EmploymentStatus[which(newloandata$EmploymentStatus %in% NA)]<-"Not available"
+#查找EmploymentStatus是否有缺失值
+sapply(newloandata,function(x) sum(is.na(x)))
+
+#将CreditScoreRangeLower/CreditScoreRangeUpper取两者平均值作为一个新的变量
+newloandata$CreditScore<-(newloandata$CreditScoreRangeLower+newloandata$CreditScoreRangeUpper)/2
+
+#查看CreditScore的缺失值：
+sapply(newloandata, function(x) sum(is.na(x)))
+#返回590
+#缺失值还是存在，由于属于消费评分，因此可以考虑用中位数补充缺失值
+
+#首先绘图查看是否可以用中位数补充数值：
+library(ggplot2)
+#install.packages("ggthemes")
+library(ggthemes)
+ggplot(newloandata,aes(x=CreditScore,))+
+  geom_density(fill="pink",alpha=0.4)+
+  geom_vline(aes(xintercept=median(CreditScore,na.rm = T)),colour="red",linetype="dashed",lwd=1)+
+  theme_few()+ggtitle("The density of CreditScore")
+
+#从图中可以看出数值大部分集中在500到750之间，因此可以用中位数补充缺失值：
+newloandata$CreditScore[which(newloandata$CreditScore %in% NA)] <- median(newloandata$CreditScore,na.rm = T)
+  
+sapply(newloandata, function(x) sum(is.na(x)))  
 
 
+#用中位数补全InquiriesLast6Months
+ggplot(newloandata,aes(x=InquiriesLast6Months,))+
+  geom_density(fill="skyblue",alpha=0.4)+
+  geom_vline(aes(xintercept=median(InquiriesLast6Months,na.rm = T)),
+             colour="red",linetype="dashed",lwd=1)+
+  theme_few()+ggtitle("The density of InquiriesLast6Months")
 
+#从图中可以看出数值大部分集中在0到20之间，因此可以用中位数补充缺失值：
+newloandata$InquiriesLast6Months[which(newloandata$InquiriesLast6Months %in% NA)] <- median(newloandata$InquiriesLast6Months,na.rm = T)
 
-
-
-
-
-
-
+sapply(newloandata, function(x) sum(is.na(x)))
 
 
 
