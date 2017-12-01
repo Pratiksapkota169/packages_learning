@@ -187,6 +187,45 @@ newloandata$InquiriesLast6Months[which(newloandata$InquiriesLast6Months %in% NA)
 sapply(newloandata, function(x) sum(is.na(x)))
 
 
+#DekubqyebcuesLast7Years补全数值
+#绘图查看是否可用中位数补全数值
+ggplot(newloandata,aes(x=DelinquenciesLast7Years,))+
+  geom_density(fill="blue",alpha=0.4)+
+  geom_vline(aes(xintercept=median(DelinquenciesLast7Years,na.rm = T)),
+             colour="red",linetype="dashed",lwd=1)+
+  theme_few()+ggtitle("The density of DelinquenciesLast7Years")
+
+#从图中可以看出数值大部分集中在0到10之间，因此可以用中位数补充缺失值
+newloandata$DelinquenciesLast7Years[which(newloandata$DelinquenciesLast7Years %in% NA)] <- median(newloandata$DelinquenciesLast7Years,na.rm = T)
+
+sapply(newloandata,function(x) sum(is.na(x)))
+
+
+#绘图查看是否可以用中位数补充BankcardUtilization数值
+ggplot(newloandata,aes(x=BankcardUtilization,))+
+  geom_density(fill="grey",alpha=0.4)+
+  geom_vline(aes(xintercept=median(BankcardUtilization,na.rm = T)),
+             colour="red",linetype="dashed",lwd=1)+
+  theme_few()+ggtitle("The density of BankcardUtilization")
+
+newloandata$BankcardUtilization[which(newloandata$BankcardUtilization %in% NA)] <- median(newloandata$BankcardUtilization,na.rm = T)
+
+sapply(newloandata,function(x) sum(is.na(x)))
+
+table(newloandata$BankcardUtilization)
+#对BankcardUtilization的数值进行分类：
+newloandata$BankcardUse[newloandata$BankcardUtilization < quantile(newloandata$BankcardUtilization),
+                        
+                        ]
+
+
+
+
+
+
+
+
+
 
 
 
