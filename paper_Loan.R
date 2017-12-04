@@ -214,9 +214,125 @@ sapply(newloandata,function(x) sum(is.na(x)))
 
 table(newloandata$BankcardUtilization)
 #对BankcardUtilization的数值进行分类：
-newloandata$BankcardUse[newloandata$BankcardUtilization < quantile(newloandata$BankcardUtilization),
-                        
-                        ]
+newloandata$BankcardUse[newloandata$BankcardUtilization < quantile(newloandata$BankcardUtilization, 0.25,"na.rm"=TRUE)]<-"Mild Use"
+
+newloandata$BankcardUse[(newloandata$BankcardUtilization>=quantile(newloandata$BankcardUtilization,0.25,na.rm = TRUE))&
+                         (newloandata$BankcardUtilization<quantile(newloandata$BankcardUtilization,0.5,na.rm = TRUE))]<-"Medium Use"
+
+newloandata$BankcardUse[(newloandata$BankcardUtilization>=quantile(newloandata$BankcardUtilization,0.5,na.rm = TRUE))&
+                         (newloandata$BankcardUtilization<1)]<-"Heavy Use"
+newloandata$BankcardUse[newloandata$BankcardUtilization>=1]<-"Super Use"
+
+newloandata$BankcardUse<-as.factor(newloandata$BankcardUse)
+table(newloandata$BankcardUse)
+
+
+#DebtToIncomeRatio补全
+loandata_1<-newloandata[which(newloandata$DebtToIncomeRatio %in% NA),]
+names(loandata_1)
+loandata_1<-loandata_1[,c(2,17)]
+table(loandata_1$LoanStatus)
+#0:1496  1:2960
+
+#未还款的比例比较大，可以考虑用四分位对缺失值进行补充
+summary(newloandata$DebtToIncomeRatio,na.rm=T)
+#Q1是0.13，Q3是0.3
+#四分位补充缺失值
+newloandata$DebtToIncomeRatio[which(newloandata$DebtToIncomeRatio %in% NA)]<-
+  runif(nrow(loandata_1),0.13,0.3)
+sapply(newloandata, function(x) sum(is.na(x)))
+
+
+#Occupation补全数值
+table(newloandata$EmploymentStatus[which(newloandata$Occupation %in% NA)])
+#Not available:2252   Other:29
+#可用Other补充
+
+newloandata$Occupation[which(newloandata$Occupation %in% NA)]<-"Other"
+sapply(newloandata, function(x) sum(is.na(x)))
+
+
+#BorrowerState补全数值
+loandata_2<-newloandata[which(newloandata$BorrowerState %in% NA),]
+names(loandata_2)
+loandata_2<-loandata_2[,c(2,20)]
+table(loandata_2$LoanStatus)
+#0:1629  1:3883
+
+#未还款占的比例较大，且这是贷款人所在州的标签，因此可以用一个因子代替缺失值
+#以"None"补全
+newloandata$BorrowerState[which(newloandata$BorrowerState %in% NA)]<-"None"
+sapply(newloandata, function(x) sum(is.na(x)))
+
+
+#CreditGrade/ProsperRating.Alpha补全
+#由于这两个值是2009年7月1日前后客户信用等级，因此需要对数据按照2009年7月1日来分割
+
+#CreditGrade缺失值补充，按照2009年7月1日将数据进行分割
+newloandata$ListingCreationDate<-as.Date(newloandata$ListingCreationDate)
+loandata_before<-newloandata[newloandata$ListingCreationDate<"2009-7-1",]
+sapply(loandata_before, function(x) sum(is.na(x)))
+#CreditGrade:131
+
+#共有131个缺失值，由于数据量较小，可以忽略不计，因此删除缺失值:
+loandata_before<-filter(loandata_before,!is.na(CreditGrade))
+sapply(loandata_before, function(x) sum(is.na(x)))
+
+
+#ProsperRating.Alpha缺失值补充
+#按照2009年7月1日将数据进行分割
+loandata_after<-newloandata[newloandata$ListingCreationDate>="2009-7-1",]
+sapply(loandata_after, function(x) sum(is.na(x)))
+
+##########全部缺失值处理好##########
+
+
+#第四步：数据计算&显示
+#1.受雇佣状态持续时间与贷款状态的关系？
+#2.借款人是否有房屋和贷款状态的关系？
+#3.消费信用分与贷款状态的关系？
+#4.征信记录查询次数与贷款状态的关系？
+#5.信用等级与贷款状态的关系？
+#6.客户的职业、月收入、年收入与贷款状态的关系？
+#7.客户7年内违约次数与贷款状态的关系？
+#8.信用卡使用情况与贷款状态的关系？
+#9.在Prosper平台是否借款与贷款状态的关系？
+#10.债务收入比例与贷款状态的关系？
+#11.借款标利率与贷款状态的关系？
+
+
+#1.受雇佣状态持续时间与贷款状态的关系？
+
+
+
+
+
+
+
+
+
+
+
+#2.借款人是否有房屋和贷款状态的关系？
+#3.消费信用分与贷款状态的关系？
+#4.征信记录查询次数与贷款状态的关系？
+#5.信用等级与贷款状态的关系？
+#6.客户的职业、月收入、年收入与贷款状态的关系？
+#7.客户7年内违约次数与贷款状态的关系？
+#8.信用卡使用情况与贷款状态的关系？
+#9.在Prosper平台是否借款与贷款状态的关系？
+#10.债务收入比例与贷款状态的关系？
+#11.借款标利率与贷款状态的关系？
+
+
+
+
+
+
+
+
+
+
 
 
 
