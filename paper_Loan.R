@@ -302,10 +302,18 @@ sapply(loandata_after, function(x) sum(is.na(x)))
 
 
 #1.受雇佣状态持续时间与贷款状态的关系？
+#雇佣时间越长，是不是具备还款能力越好
+library(ggplot2)
+newloandata$EmploymentStatusDuration<-as.integer(newloandata$EmploymentStatusDuration)
+ggplot(data=newloandata,aes(x=EmploymentStatusDuration,color=LoanStatus))+
+  geom_line(aes(label=..count..),stat='bin')+
+  labs(title="The LoanStatus By EmploymentStatusDuration",
+       x="EmploymentStatusDuration",
+       y="Count",
+       fill="LoanStatus")
 
-
-
-
+#从图中可以看出随着受雇佣时间越长，贷款未还款率降低，到了后期，基本上不存在毁约
+#现象，也就是说，一个有稳定工作收入的人，不容易出现贷款毁约，不还款
 
 
 
