@@ -163,7 +163,7 @@ sapply(newloandata, function(x) sum(is.na(x)))
 library(ggplot2)
 #install.packages("ggthemes")
 library(ggthemes)
-ggplot(newloandata,aes(x=CreditScore,))+
+ggplot(newloandata,aes(x=CreditScore))+
   geom_density(fill="pink",alpha=0.4)+
   geom_vline(aes(xintercept=median(CreditScore,na.rm = T)),colour="red",linetype="dashed",lwd=1)+
   theme_few()+ggtitle("The density of CreditScore")
@@ -528,9 +528,10 @@ test_before<-loandata_before[-tain_before1,]
 
 #利用随机森林建立模型
 library(randomForest)
-before_mode<-randomForest(LoanStatus~EmploymentStatusDuration+CreditScore+
-            CreditGrade+DelinquenciesLast7Years+BankcardUse+DebtToIncomeRatio+BorrowerRate,
-            data = tain_before,importance=TRUE)
+before_mode <- randomForest(LoanStatus~EmploymentStatusDuration+CreditScore+
+        CreditGrade+DelinquenciesLast7Years+BankcardUse+
+        DebtToIncomeRatio+BorrowerRate,
+        data=tain_before,importance=TRUE,na.action=na.omit)
 
 #由于建模的变量需要因子化，且因子水平不宜很多，所以对各个因子进行分组，减少因子水平
 #数量。对EmploymentStatusDuration、CreditScore、DelinquenciesLast7Years、
@@ -555,11 +556,6 @@ rankImportance<-varImportance %>%
 
 #使用ggplot绘制重要变量相关系图
 ggplot(rankImportance,aes(x=reorder()))
-
-
-
-
-
 
 
 
