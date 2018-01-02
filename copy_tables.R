@@ -1002,9 +1002,10 @@ dbDisconnect(con1)
 #Finally:when finished the program ,send a email to me
 library(mailR)
 #email to
-recipients <- "ying.huang@innotree.cn" 
+# recipients <- "ying.huang@innotree.cn" 
+recipients <- "yinghuang@jieyuechina.com" 
 #email from
-sender = "18810600277@163.com"  
+sender = "493970240@qq.com"  
 #email title
 title = "Daily Report"  
 #print time
@@ -1018,10 +1019,10 @@ send.mail(
   encoding = "utf-8",
   html = TRUE,
   smtp = list(
-    host.name = "smtp.163.com",
-    port = 587,
+    host.name = "smtp.qq.com",
+    port = 465,
     user.name = sender,  
-    passwd = "root123456",
+    passwd = "btoqpfheeprlbgje",
     ssl = TRUE
   ),  
   authenticate = TRUE,  
